@@ -46,6 +46,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    daemon_controller (1.2.0)
     debug_inspector (0.0.2)
     devise (3.4.0)
       bcrypt (~> 3.0)
@@ -77,6 +78,10 @@ GEM
     minitest (5.4.2)
     multi_json (1.10.1)
     orm_adapter (0.5.0)
+    passenger (4.0.50)
+      daemon_controller (>= 1.2.0)
+      rack
+      rake (>= 0.8.1)
     pg (0.17.1)
     polyamorous (1.1.0)
       activerecord (>= 3.0)
@@ -166,6 +171,7 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.0)
   jquery-rails
+  passenger
   pg
   quiet_assets
   rails (= 4.1.5)
