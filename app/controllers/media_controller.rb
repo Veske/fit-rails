@@ -5,7 +5,7 @@ class MediaController < ApplicationController
 	end
 
 	def new
-		@media = Media.new
+		@medium = Media.new
 	end
 
 	def show
@@ -13,8 +13,8 @@ class MediaController < ApplicationController
 	end
 
 	def create
-		@media = Media.new(media_params)
-		@media.save
+		@medium = Media.new(media_params)
+		@medium.save
 		redirect_to media_path
 	end
 
