@@ -6,5 +6,5 @@ class Media < ActiveRecord::Base
 	validates_attachment_content_type :image_video, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 	validates_with AttachmentSizeValidator, :attributes => :image_video, :less_than => 1.megabytes
 
-
+	belongs_to :user
 end

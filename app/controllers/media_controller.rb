@@ -5,7 +5,7 @@ class MediaController < ApplicationController
 	end
 
 	def new
-		@medium = Media.new
+		@medium = current_user.medias.build
 	end
 
 	def show
@@ -13,15 +13,23 @@ class MediaController < ApplicationController
 	end
 
 	def create
-		@medium = Media.new(media_params)
-		@medium.save
-		redirect_to media_path
+		@medium = current_user.medias.build(media_params)
+
+		if @medium.save
+			redirect_to medium_path(@medium), notice: 'New file uploaded'
+		else
+			redirect_to new_medium_path, alert: "Could not upload File: #{@medium.errors.full_messages}"
+		end
 	end
 
 	def destroy
-		Media.find(params[:id]).destroy
-		flash[:success] = "Medium removed."
-		redirect_to media_path
+		@medium = Media.find(params[:id]).destroy
+
+		if @medium.destroy
+			redirect_to media_path, notice: 'File removed.'
+		else
+			redirect_to new_medium_path, alert: "Couldn't delete File: #{@medium.errors.full_messages}"
+		end
 	end
 
 	private
