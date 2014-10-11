@@ -1,0 +1,8 @@
+<h1>Media#new</h1>
+<p>Find me in app/views/media/new.html.erb</p>
+
+
+<%= form_for @media, :url => media_path, :html => { :multipart => true } do |form| %>
+    <%= form.file_field :image_video %><br>
+	<%= form.submit 'Upload media' %>
+<% end %>

@@ -1,0 +1,11 @@
+<h1>Media#index</h1>
+<p>Lists all the media uploaded</p>
+
+<% @media.each do |media| %>
+    <%= link_to medium_path(media) do %>
+        <%= image_tag media.image_video.url(:thumb) %>
+        <%= link_to 'Delete', medium_path(media), method: :delete, data: { confirm: 'Are you sure?' } %><br>
+    <% end %>
+<% end %>
+
+<br><%= link_to 'Upload new media', new_medium_path %>

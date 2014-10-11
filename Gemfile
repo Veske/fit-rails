@@ -14,6 +14,7 @@ gem 'devise'
 gem 'pg'
 gem 'upmin-admin'
 gem 'passenger'
+gem "paperclip", "~> 4.2"
 
 group :development do
 	gem 'better_errors'
