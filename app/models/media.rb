@@ -13,6 +13,6 @@ class Media < ActiveRecord::Base
 	private
 		def randomize_file_name
 			extension = File.extname(image_video_file_name).downcase
-			self.image_video.instance_write(:file_name, "#{SecureRandom.hex(8)}#{extension}}")
+			self.image_video.instance_write(:file_name, "#{SecureRandom.hex(8)}#{extension}")
 		end
 end
