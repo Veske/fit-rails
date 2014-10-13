@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+	validates :name, presence: true, length: {maximum: 50}
+
 	enum role: [:user, :moderator, :admin]
 	after_initialize :set_default_role, :if => :new_record?
 

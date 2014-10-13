@@ -17,6 +17,7 @@ class MediaController < ApplicationController
 		@medium = current_user.medias.build(media_params)
 
 		if @medium.save
+			logger.info "INFO: New media uploaded: #{@medium.image_video_file_name}"
 			redirect_to medium_path(@medium), notice: 'New file uploaded'
 		else
 			redirect_to new_medium_path, alert: "Could not upload File: #{@medium.errors.full_messages}"
@@ -27,6 +28,7 @@ class MediaController < ApplicationController
 		@medium = Media.find(params[:id]).destroy
 
 		if @medium.destroy
+			logger.info "INFO: Media removed: #{@medium.image_video_file_name}"
 			redirect_to media_path, notice: 'File removed.'
 		else
 			redirect_to new_medium_path, alert: "Couldn't delete File: #{@medium.errors.full_messages}"
