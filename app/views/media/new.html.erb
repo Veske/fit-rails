@@ -3,6 +3,8 @@
 
 
 <%= form_for @medium, :url => media_path, :html => { :multipart => true } do |form| %>
+	<%= label_tag 'Text: ' %>
+	<%= text_field :media, :text %>
     <%= form.file_field :image_video %><br>
 	<%= form.submit 'Upload media' %>
 <% end %>

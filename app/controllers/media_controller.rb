@@ -35,6 +35,6 @@ class MediaController < ApplicationController
 
 	private
 		def media_params
-			params.require(:media).permit(:image_video)
+			params.require(:media).permit(:image_video, :text)
 		end
 end

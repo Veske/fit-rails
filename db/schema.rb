@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20141011112248) do
     t.string   "image_video_content_type"
     t.integer  "image_video_file_size"
     t.datetime "image_video_updated_at"
+    t.string   "text",                     default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
