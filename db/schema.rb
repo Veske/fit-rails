@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141009063317) do
+ActiveRecord::Schema.define(version: 20141011112248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "media", force: true do |t|
+    t.string   "image_video_file_name"
+    t.string   "image_video_content_type"
+    t.integer  "image_video_file_size"
+    t.datetime "image_video_updated_at"
+    t.string   "text",                     default: ""
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "media", ["user_id"], name: "index_media_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -29,7 +42,7 @@ ActiveRecord::Schema.define(version: 20141009063317) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
+    t.string   "name",                   default: "", null: false
     t.integer  "role"
   end
 
