@@ -1,0 +1,28 @@
+<%# TODO: Move the querys to a helper %>
+
+<h2></h2>
+
+<div class="container">
+    <div class="row">
+        <h3>Comments:</h3>
+        <div class="column">
+            <table class="table">
+                <tbody>
+                <% Comment.all.each do |comment| %>
+                    <tr>
+                        <td>
+                            <p><%= User.find_by(id: comment.user_id).name %> wrote:</p>
+                        </td>
+	                    <td>
+	                        <p><%= comment.text %></p>
+	                    </td>
+                        <td>
+                            <%= link_to 'Delete', comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+                        </td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

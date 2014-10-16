@@ -1,30 +1,38 @@
 class CommentsController < ApplicationController
 
 	def index
-
+		@comments = Comment.all
 	end
 
 	def show
 
 	end
 
-	def new
-		#@comment = current_user.comments.build
-	end
-
 	def create
+		@comment = current_user.comments.build(comment_params)
 
+		if @comment.save
+			logger.info "INFO: New post created with id #{@comment.id}."
+			render json: Comment.find_by(media_id: params[:comment][:media_id])
+		else
+			logger.debug "ERROR: failed to create new comment #{@comment.errors.full_messages}."
+		end
 	end
 
 	def destroy
-		@medium = Media.find(params[media_id])
-		@comment = @medium.comments.find(params[:id]).destroy
+		@comment = Comment.find(params[:id]).destroy
 
 		if @comment.destroy
-			logger.info "INFO: Comment removed: #{@comment}"
-			redirect_to root_path, notice: 'File removed.'
+			logger.info "INFO: Comment with id: #{@comment.id} removed."
+			redirect_to medium_path(@comment.media_id), notice: 'Comment deleted!'
 		else
-			redirect_to root_path, alert: "Couldn't delete comment: #{@comment.errors.full_messages}"
+			logger.debug "ERROR: failed to remove comment with id #{@comment.id}, Thrown errors: #{@comment.errors.full_messages}."
+			redirect_to medium_path(@comment.media_id), alert: "Couldn't delete comment: #{@comment.errors.full_messages}."
 		end
 	end
+
+	private
+		def comment_params
+			params.require(:comment).permit(:text, :user_id, :media_id)
+		end
 end

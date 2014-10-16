@@ -11,6 +11,7 @@ class MediaController < ApplicationController
 
 	def show
 		@medium = Media.find(params[:id])
+		@comment = Comment.new
 	end
 
 	def create
