@@ -15,4 +15,6 @@ class Media < ActiveRecord::Base
 			extension = File.extname(image_video_file_name).downcase
 			self.image_video.instance_write(:file_name, "#{SecureRandom.hex(8)}#{extension}")
 		end
+
+	has_many :comments, dependent: destroy
 end

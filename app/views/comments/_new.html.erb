@@ -1,0 +1,7 @@
+<p>Create new comment</p>
+
+<%= form_for(@comment) do |comment| %>
+	<%= comment.label_tag 'Text: ' %>
+	<%= comment.text_field :post, :text %>
+	<%= comment.submit_tag 'New comment' %>
+<% end %>
