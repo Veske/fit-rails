@@ -2,13 +2,11 @@ class MediaController < ApplicationController
 	before_filter :authenticate_user!, except: :show
 
 	def index
-		media = Media.all
-		render 'index', locals: {media: media}
+		locals media: Media.all
 	end
 
 	def new
-		medium = current_user.medias.build
-		render 'new', locals: { medium: medium }
+		locals medium: current_user.medias.build
 	end
 
 	def show

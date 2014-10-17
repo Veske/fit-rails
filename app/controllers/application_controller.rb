@@ -11,4 +11,12 @@ class ApplicationController < ActionController::Base
 		rescue ActionController::RedirectBackError
 		redirect_to root_path, :alert => "Access denied."
 	end
+
+	private
+		# Render corresponding view with values passed to the method as params
+		# Example usage: locals users: User.all
+		# Now you can use the user variable in User index
+		def locals(values)
+			render locals: values
+		end
 end
