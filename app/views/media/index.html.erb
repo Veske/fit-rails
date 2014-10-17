@@ -4,7 +4,7 @@
         <div class="column">
             <table class="table">
                 <tbody>
-	                <% @media.each do |media| %>
+	                <% media.each do |media| %>
 	                    <tr>
 		                    <td>
 		                        <%= link_to medium_path(media) do %>
@@ -12,7 +12,10 @@
 	                            <% end %>
 		                    </td>
 		                    <td>
-		                        <%= link_to 'Delete', medium_path(media), method: :delete, data: { confirm: 'Are you sure?' } %>
+		                        <% if current_user.id == media.user_id %>
+		                            <%= link_to 'Delete', medium_path(media), method: :delete, data: { confirm: 'Are you sure?' } %>
+		                        <% end %>
+
 		                    </td>
 	                    </tr>
 	                <% end %>
