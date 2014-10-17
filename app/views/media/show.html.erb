@@ -3,7 +3,7 @@
 <%= image_tag @medium.image_video.url(:big) %>
 
 <div id="comments">
-	<%= render partial: 'comments/show', comments: @comments  %>
+	<%= render partial: 'comments/show' %>
 </div>
 
 <%= render 'comments/form', comment: Comment.new %>

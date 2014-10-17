@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 	resources :users
 	# only: will be changed later to go with user owned media
     resources :media, only: [:index, :new, :create, :show, :destroy]
-	resources :comments, only: [:index, :create, :destroy]
+	resources :comments, only: [:create, :destroy]
 
 	root to: 'visitors#index'
 end

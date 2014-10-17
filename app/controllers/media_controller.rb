@@ -22,6 +22,7 @@ class MediaController < ApplicationController
 			logger.info "INFO: New media uploaded: #{@medium.image_video_file_name}"
 			redirect_to medium_path(@medium), notice: 'New file uploaded'
 		else
+			logger.info "ERROR: Uploading new media file #{@medium.errors.full_messages}"
 			redirect_to new_medium_path, alert: "Could not upload File: #{@medium.errors.full_messages}"
 		end
 	end
@@ -33,6 +34,7 @@ class MediaController < ApplicationController
 			logger.info "INFO: Media removed: #{@medium.image_video_file_name}"
 			redirect_to media_path, notice: 'File removed.'
 		else
+			logger.info "ERROR: Removing new medi with id: #{@medium.id}, reason(s): #{@medium.errors.full_messages}"
 			redirect_to new_medium_path, alert: "Couldn't delete File: #{@medium.errors.full_messages}"
 		end
 	end

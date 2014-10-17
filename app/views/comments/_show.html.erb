@@ -4,12 +4,10 @@
         <div class="column">
             <table class="table">
                 <tbody>
-	                <% @comments.each do |comment| %>
+	                <% @comments.zip(@users) do |comment, user| %>
 	                    <tr>
 	                        <td>
-	                            <% if comment.user_id %>
-	                                <p><%= comment.user_id %> wrote:</p>
-	                            <% end %>
+	                            <p><%= user.name %> wrote:</p>
 	                        </td>
 	                        <td>
 	                            <p><%= comment.text %></p>
@@ -26,8 +24,3 @@
         </div>
     </div>
 </div>
-
-
-<% @users.each do |f| %>
-	<%= f.name %>
-<% end %>
