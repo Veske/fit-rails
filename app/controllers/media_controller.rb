@@ -11,7 +11,8 @@ class MediaController < ApplicationController
 
 	def show
 		@medium = Media.find(params[:id])
-		@comment = Comment.new
+		@comments = @medium.comments
+		@users = User.joins(comments: :media).where(comments: {media_id: @medium.id})
 	end
 
 	def create

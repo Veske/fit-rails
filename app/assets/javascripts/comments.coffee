@@ -6,14 +6,14 @@ $(document).on 'ready page:load', ->
 
   # Seems that doing this by just using CScript will be troublesome. Wait for AngularJS implementation
 
-  $('form').submit ->
-    $.ajax '/comments',
-      type: 'GET'
-      data:  { media_id: 1 }
-      dataType: "JSON"
-      error: (jqXHR, textStatus, errorThrown) ->
-        $('h2').append "AJAX Error: #{textStatus}"
-      success: (data, textStatus, jqXHR) ->
-        for f in data
-          console.log(f.text)
-        $('h2').append "Successful AJAX call: #{data}"
+ # $('form').submit ->
+  #  $.ajax '/media/2',
+   #   type: 'GET'
+    #  data:  { media_id: 1 }
+     # dataType: "HTML"
+     # error: (jqXHR, textStatus, errorThrown) ->
+      #  $('h2').append "AJAX Error: #{textStatus}"
+      #success: (data, textStatus, jqXHR) ->
+       # $('#comments').load('/media/2')
+
+  #setInterval (=> $('#comments').load('/media')), 5000

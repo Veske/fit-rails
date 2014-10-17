@@ -2,6 +2,9 @@
 <p style="text-align: center"><%= @medium.text %></p>
 <%= image_tag @medium.image_video.url(:big) %>
 
-<%= render 'comments/index', :locals => { :comments => Comment.all} %>
+<div id="comments">
+	<%= render partial: 'comments/show', comments: @comments  %>
+</div>
 
-<%= render 'comments/form', :locals => { :comment => Comment.new } %>
+<%= render 'comments/form', comment: Comment.new %>
+

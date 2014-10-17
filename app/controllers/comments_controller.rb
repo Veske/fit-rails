@@ -1,10 +1,5 @@
 class CommentsController < ApplicationController
-
-	def index
-		@comments = Comment.all
-		render :json => Comment.where(media_id: params[:media_id])
-		#redirect_to medium_path(params[:media_id]), alert: 'Your comment was created!'
-	end
+	before_filter :authenticate_user!
 
 	def create
 		@comment = current_user.comments.build(comment_params)
