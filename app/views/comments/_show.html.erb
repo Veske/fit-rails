@@ -14,7 +14,7 @@
 	                        </td>
 	                        <td>
 	                            <% if current_user.id == comment.user_id %>
-	                                <%= link_to 'Delete', comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+	                                <%= link_to 'Delete', medium_comment_path(id: comment.id, medium_id: comment.medium_id), method: :delete, data: { confirm: 'Are you sure?' } %>
 	                            <% end %>
 	                        </td>
 	                    </tr>

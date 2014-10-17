@@ -19,12 +19,12 @@ ActiveRecord::Schema.define(version: 20141016063216) do
   create_table "comments", force: true do |t|
     t.string   "text",       default: "", null: false
     t.integer  "user_id",                 null: false
-    t.integer  "media_id",                null: false
+    t.integer  "medium_id",               null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["media_id"], name: "index_comments_on_media_id", using: :btree
+  add_index "comments", ["medium_id"], name: "index_comments_on_medium_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "media", force: true do |t|

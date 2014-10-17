@@ -13,10 +13,17 @@ class ApplicationController < ActionController::Base
 	end
 
 	private
-		# Render corresponding view with values passed to the method as params
-		# Example usage: locals users: User.all
-		# Now you can use the user variable in User index
-		def locals(values)
-			render locals: values
+		# Render a view and pass parameters to it
+		# Example usages:
+		#
+		#   render action: :new, locals: { item: x }
+		#   render :new, locals: { item: x }
+		#   locals :new, item: x
+		#
+		#   render locals: { item: x }
+		#   locals item: x
+		#
+		def locals(action = nil, hash)
+			render action: action, locals: hash
 		end
 end

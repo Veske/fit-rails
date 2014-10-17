@@ -1,4 +1,4 @@
-class Media < ActiveRecord::Base
+class Medium < ActiveRecord::Base
 	belongs_to :user
 	before_create :randomize_file_name
 
