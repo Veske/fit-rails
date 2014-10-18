@@ -8,7 +8,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '~> 2.2.2'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'devise'
 gem 'pg'
