@@ -2,41 +2,48 @@ class MediaController < ApplicationController
 	before_filter :authenticate_user!, except: :show
 
 	def index
-		@media = Media.all
+		locals media: Medium.all
 	end
 
 	def new
-		@medium = current_user.medias.build
+		locals medium: current_user.media.build
 	end
 
 	def show
-		@medium = Media.find(params[:id])
+		medium = Medium.find(params[:id])
+
+		locals comment:     Comment.new,
+		       comments:    medium.comments,
+		       medium:      medium,
+		       users:       User.joins(comments: :medium).where(comments: {medium_id: medium.id})
 	end
 
 	def create
-		@medium = current_user.medias.build(media_params)
+		medium = current_user.media.build(medium_params)
 
-		if @medium.save
-			logger.info "INFO: New media uploaded: #{@medium.image_video_file_name}"
-			redirect_to medium_path(@medium), notice: 'New file uploaded'
+		if medium.save
+			logger.info "INFO: New medium uploaded: #{medium.image_video_file_name}"
+			redirect_to medium_path(medium), notice: 'New file uploaded'
 		else
-			redirect_to new_medium_path, alert: "Could not upload File: #{@medium.errors.full_messages}"
+			logger.info "ERROR: Uploading new medium file #{medium.errors.full_messages}"
+			redirect_to new_medium_path, alert: "Could not upload File: #{medium.errors.full_messages}"
 		end
 	end
 
 	def destroy
-		@medium = Media.find(params[:id]).destroy
+		medium = Medium.find(params[:id])
 
-		if @medium.destroy
-			logger.info "INFO: Media removed: #{@medium.image_video_file_name}"
+		if current_user.id == medium.user_id && medium.destroy
+			logger.info "INFO: medium removed: #{medium.image_video_file_name}"
 			redirect_to media_path, notice: 'File removed.'
 		else
-			redirect_to new_medium_path, alert: "Couldn't delete File: #{@medium.errors.full_messages}"
+			logger.info "ERROR: Removing medium with id: #{medium.id}, reason(s): #{medium.errors.full_messages}"
+			redirect_to new_medium_path, alert: "Couldn't delete File: #{medium.errors.full_messages}"
 		end
 	end
 
 	private
-		def media_params
-			params.require(:media).permit(:image_video, :text)
+		def medium_params
+			params.require(:medium).permit(:image_video, :text)
 		end
 end

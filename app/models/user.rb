@@ -13,5 +13,6 @@ class User < ActiveRecord::Base
 	devise :database_authenticatable, :registerable,
 	       :recoverable, :rememberable, :trackable, :validatable
 
-	has_many :medias, dependent: :destroy
+	has_many :media, dependent: :destroy
+	has_many :comments, dependent: :destroy
 end

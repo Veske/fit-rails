@@ -1,4 +1,4 @@
-class Media < ActiveRecord::Base
+class Medium < ActiveRecord::Base
 	belongs_to :user
 	before_create :randomize_file_name
 
@@ -15,4 +15,6 @@ class Media < ActiveRecord::Base
 			extension = File.extname(image_video_file_name).downcase
 			self.image_video.instance_write(:file_name, "#{SecureRandom.hex(8)}#{extension}")
 		end
+
+	has_many :comments, dependent: :destroy
 end

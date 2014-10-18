@@ -8,11 +8,10 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '~> 2.2.2'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'devise'
 gem 'pg'
-gem 'upmin-admin', '~> 0.1.01'
 gem 'passenger'
 gem 'paperclip'
 gem 'sprockets'
@@ -22,5 +21,6 @@ group :development do
 	gem 'binding_of_caller', :platforms=>[:mri_21]
 	gem 'quiet_assets'
 	gem 'rails_layout'
+	gem 'upmin-admin', '~> 0.1.01'
 	#gem 'spring'
 end

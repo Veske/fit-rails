@@ -1,3 +1,9 @@
 <%# We can make this a partial later to have the image pop up on top of current page with javascript %>
-<p style="text-align: center"><%= @medium.text %></p>
-<%= image_tag @medium.image_video.url(:big) %>
+<p style="text-align: center"><%= medium.text %></p>
+<%= image_tag medium.image_video.url(:big) %>
+
+<div id="comments">
+	<%= render partial: 'comments/show', locals: { comments: comments, users: users } %>
+</div>
+
+<%= render partial: 'comments/form', locals: { comment: comment, medium: medium } %>
