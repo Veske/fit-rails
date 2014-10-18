@@ -4,7 +4,7 @@
         <div class="column">
             <table class="table">
                 <tbody>
-	                <% @comments.zip(@users) do |comment, user| %>
+	                <% comments.zip(users) do |comment, user| %>
 	                    <tr>
 	                        <td>
 	                            <p><%= user.name %> wrote:</p>

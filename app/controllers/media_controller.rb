@@ -10,9 +10,12 @@ class MediaController < ApplicationController
 	end
 
 	def show
-		@medium = Medium.find(params[:id])
-		@comments = @medium.comments
-		@users = User.joins(comments: :medium).where(comments: {medium_id: @medium.id})
+		medium = Medium.find(params[:id])
+
+		locals comment:     Comment.new,
+		       comments:    medium.comments,
+		       medium:      medium,
+		       users:       User.joins(comments: :medium).where(comments: {medium_id: medium.id})
 	end
 
 	def create
