@@ -7,7 +7,7 @@
 	                <% comments.zip(users) do |comment, user| %>
 	                    <tr>
 	                        <td>
-	                            <p><%= user.name %> wrote:</p>
+	                            <p><%= link_to user.name, user_path(user) %></p>
 	                        </td>
 	                        <td>
 	                            <p><%= comment.text %></p>
