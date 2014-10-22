@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 	scope module: 'content' do
 		resources :media, only: [:index, :new, :create, :show, :destroy] do
 			resources :comments, only: [:create, :destroy]
-			resources :likes, only: [:create, :destroy]
+			resources :likes, only: [:create, :destroy, :index]
 		end
 	end
 

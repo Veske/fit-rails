@@ -1,5 +1,9 @@
 class Content::LikesController < ApplicationController
 
+	def index
+		locals users: User.joins(likes: :medium).where(likes: {medium_id: params[:medium_id]})
+	end
+
 	def create
 		like = current_user.likes.build(like_params)
 		like.medium_id = params[:medium_id]

@@ -30,7 +30,7 @@ class UsersControllerTest < ActionController::TestCase
 		assert_routing '/users', {controller: "users", action: "index"}
 	end
 
-	test "should route to users show" do
-		assert_routing '/users/1', {controller: "users", action: "show", id: "1"}
+	test "should route to users index" do
+		assert_routing '/users/1', {controller: "users", action: "index", id: "1"}
 	end
 end

@@ -3,9 +3,9 @@
 <%= image_tag medium.image_video.url(:big) %>
 
 <div id="likes" style="text-align: center">
-	<p><%= likes_count(medium.id) %> users like this</p>
+	<p><%= likes_count(medium.id) %> <%= link_to 'users', medium_likes_path(medium) %> like this</p>
     <% if current_user.likes.exists?(medium_id: medium.id) %>
-        <%= link_to 'Unlike', medium_like_path(unlike_params(current_user.id, medium.id), medium_id: medium.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Unlike', medium_like_path(unlike_params(current_user.id, medium), medium_id: medium.id), method: :delete, data: { confirm: 'Are you sure?' } %>
     <% else %>
         <%= render partial: 'content/likes/create', locals: { medium: medium, like: like } %>
     <% end %>
