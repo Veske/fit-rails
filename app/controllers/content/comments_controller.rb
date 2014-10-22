@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class Content::CommentsController < ApplicationController
 	before_filter :authenticate_user!
 
 	def create

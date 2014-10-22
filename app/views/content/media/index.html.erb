@@ -15,7 +15,6 @@
 		                        <% if current_user.id == medium.user_id %>
 		                            <%= link_to 'Delete', medium_path(medium), method: :delete, data: { confirm: 'Are you sure?' } %>
 		                        <% end %>
-
 		                    </td>
 	                    </tr>
 	                <% end %>
