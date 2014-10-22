@@ -1,4 +1,4 @@
-class MediaController < ApplicationController
+class Content::MediaController < ApplicationController
 	before_filter :authenticate_user!, except: :show
 
 	def index
@@ -15,7 +15,8 @@ class MediaController < ApplicationController
 		locals comment:     Comment.new,
 		       comments:    medium.comments,
 		       medium:      medium,
-		       users:       User.joins(comments: :medium).where(comments: {medium_id: medium.id})
+		       users:       User.joins(comments: :medium).where(comments: {medium_id: medium.id}),
+	           like:        Like.new
 	end
 
 	def create

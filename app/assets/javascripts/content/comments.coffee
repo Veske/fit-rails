@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'ready page:load', ->
+  console.log("Loaded")
 
   # Seems that doing this by just using CScript will be troublesome. Wait for AngularJS implementation
 
