@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CommentsControllerTest < ActionController::TestCase
+class Content::CommentsControllerTest < ActionController::TestCase
 
 
 end
