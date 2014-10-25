@@ -2,7 +2,11 @@ Rails.application.routes.draw do
 
 	mount Upmin::Engine => '/admin'
 	devise_for :users
-	resources :users
+	resources :users do
+		member do
+			get :following, :followers
+		end
+	end
 
 	scope module: 'content' do
 		resources :media, only: [:index, :new, :create, :show, :destroy] do
@@ -11,5 +15,6 @@ Rails.application.routes.draw do
 		end
 	end
 
+	resources :relationships,       only: [:create, :destroy]
 	root to: 'visitors#index'
 end

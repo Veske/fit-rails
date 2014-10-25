@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	before_filter :authenticate_user!
-	before_filter :admin_only, :except => :show
+	before_filter :admin_only, :except => [:show, :followers, :following]
 
 	def index
 		locals users: User.all
@@ -28,6 +28,18 @@ class UsersController < ApplicationController
 		user = User.find(params[:id])
 		user.destroy
 		redirect_to users_path, :notice => 'User deleted.'
+	end
+
+	def following
+		user  = User.find(params[:id])
+		users = user.following
+		render 'users/show_follow', locals: {user: user, users: users, title: 'following'}
+	end
+
+	def followers
+		user  = User.find(params[:id])
+		users = user.followers
+		render 'users/show_follow', locals: {user: user, users: users, title: 'followers'}
 	end
 
 	private

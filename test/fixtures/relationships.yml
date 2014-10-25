@@ -5,6 +5,9 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  user_id: 1
-  medium_id: 1
+  follower_id: 1
+  followed_id: 2
 
+two:
+  follower_id: 2
+  followed_id: 1
