@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20141025163056) do
   add_index "media", ["user_id"], name: "index_media_on_user_id", using: :btree
 
   create_table "relationships", force: true do |t|
-    t.integer  "follower_id"
-    t.integer  "followed_id"
+    t.integer  "follower_id", null: false
+    t.integer  "followed_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
