@@ -19,6 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.provision :chef_solo do |chef|
 		chef.cookbooks_path = ["cookbooks", "site-cookbooks"]
 
+		# Define software to use in our VM
 		chef.add_recipe "apt"
 		chef.add_recipe "nodejs"
 		chef.add_recipe "ruby_build"
@@ -26,18 +27,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		chef.add_recipe "rbenv::vagrant"
 		chef.add_recipe "vim"
 		chef.add_recipe 'postgresql::server'
+		chef.add_recipe 'postgresql::client'
+		#chef.add_recipe 'imagemagick::devel'
 		#chef.add_recipe 'nginx'
+
+		# Install Ruby 2.1.3, Bundler and PostgreSQL
 		chef.json = {
 			postgresql: {
 				password: {
 					postgres: 'admin'
-				}
-			}
-		}
-
-
-		# Install Ruby 2.1.3 and Bundler
-		chef.json = {
+				},
+				:pg_hba => [
+					{ :type => 'local', :db => 'all', :user => 'all', :addr => nil, :method => 'trust' },
+					{ :type => 'local', :db => 'all', :user => 'postgres', :addr => nil, :method => 'trust' },
+					{ :type => 'host', :db => 'all', :user => 'all', :addr => '127.0.0.1/32', :method => 'trust' }
+				]
+			},
 			rbenv: {
 				user_installs: [{
 					user: 'vagrant',
