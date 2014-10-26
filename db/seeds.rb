@@ -6,5 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# Create first admin user
-User.create({name: 'Admin', email: 'admin@admin.com', password: 'changeme', role: 2})
+# Create seed users
+User.create([
+	{name: 'Admin', email: 'admin@admin.com', password: 'changeme', role: 2},
+	{name: 'User', email: 'user@user.com', password: 'changeme', role: 0}
+])

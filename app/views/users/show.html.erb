@@ -2,28 +2,35 @@
 <p>Name: <%= user.name if user.name %></p>
 <p>Email: <%= user.email if user.email %></p>
 
-<div class="container">
-    <div class="row">
-        <h3><%= user.name.pluralize %> uploads:</h3>
-        <div class="column">
-            <table class="table">
-                <tbody>
-                <% media.each do |medium| %>
-                    <tr>
-                        <td>
-                            <%= link_to medium_path(medium) do %>
-                                <%= image_tag medium.image_video.url(:thumb) %>
-                            <% end %>
-                        </td>
-                        <td>
-                            <% if current_user.id == medium.user_id %>
-                                <%= link_to 'Delete', medium_path(medium), method: :delete, data: { confirm: 'Are you sure?' } %>
-                            <% end %>
-                        </td>
-                    </tr>
-                <% end %>
-                </tbody>
-            </table>
+<h3>Follower stats</h3>
+<p><%= render partial: 'users/stats', locals: {user: user} %></p>
+
+<%= render partial: 'users/follow_form', locals: {user: user} if logged_in? %>
+
+<% if user.media.exists? %>
+    <div class="container">
+        <div class="row">
+            <h3><%= user.name.pluralize %> uploads:</h3>
+            <div class="column">
+                <table class="table">
+                    <tbody>
+                    <% media.each do |medium| %>
+                        <tr>
+                            <td>
+                                <%= link_to medium_path(medium) do %>
+                                    <%= image_tag medium.image_video.url(:thumb) %>
+                                <% end %>
+                            </td>
+                            <td>
+                                <% if current_user.id == medium.user_id %>
+                                    <%= link_to 'Delete', medium_path(medium), method: :delete, data: { confirm: 'Are you sure?' } %>
+                                <% end %>
+                            </td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
+<% end %>

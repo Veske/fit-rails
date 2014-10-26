@@ -1,0 +1,13 @@
+<h1><%= user.name%> <%= title %></h1>
+
+<% if users.any? %>
+    <% users.each do |user| %>
+        <%= link_to user.name, user %>
+    <% end %>
+<% end %>
+
+<% if users.any? && current_user.admin? %>
+    <ul class="users">
+        <%= render users %>
+    </ul>
+<% end %>

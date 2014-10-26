@@ -3,6 +3,11 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
 	include Devise::TestHelpers
 
+	def setup
+		@test_user_admin = users(:test_user_admin)
+		@test_user = users(:test_user)
+	end
+
 	# Authentication tests
 	test 'should get index as authenticated admin user' do
 		sign_in users(:test_user_admin)
@@ -30,7 +35,15 @@ class UsersControllerTest < ActionController::TestCase
 		assert_routing '/users', {controller: "users", action: "index"}
 	end
 
-	test "should route to users index" do
-		assert_routing '/users/1', {controller: "users", action: "index", id: "1"}
+	test "should redirect following when not logged in" do
+		@request.env['HTTP_REFERER'] = 'http://test.host/users/sign_in'
+		get :following, id: @test_user_admin
+		assert_redirected_to @request.env['HTTP_REFERER']
+	end
+
+	test "should redirect followers when not logged in" do
+		@request.env['HTTP_REFERER'] = 'http://test.host/users/sign_in'
+		get :followers, id: @test_user_admin
+		assert_redirected_to @request.env['HTTP_REFERER']
 	end
 end
