@@ -28,7 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		chef.add_recipe "vim"
 		chef.add_recipe 'postgresql::server'
 		chef.add_recipe 'postgresql::client'
-		#chef.add_recipe 'imagemagick::devel'
+		chef.add_recipe 'imagemagick::devel'
 		#chef.add_recipe 'nginx'
 
 		# Install Ruby 2.1.3, Bundler and PostgreSQL
