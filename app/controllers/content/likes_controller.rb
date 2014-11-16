@@ -10,10 +10,10 @@ class Content::LikesController < ApplicationController
 
 		if like.save
 			logger.info "INFO: New like created: #{like.id}"
-			render :nothing => true
+			render nothing: true
 		else
 			logger.info "ERROR: Could not like medium #{like.errors.full_messages}"
-			render :nothing => true
+			render nothing: true
 		end
 	end
 
@@ -31,7 +31,7 @@ class Content::LikesController < ApplicationController
 
 	private
 		def like_params
-			params.require(:like).permit(:user_id, :media_id)
+			params.require(:like).permit(:user_id, :medium_id)
 		end
 
 end
