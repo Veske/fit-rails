@@ -1,3 +1,28 @@
 // Place all the styles related to the media controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.medium-view-center {
+	margin-left: auto;
+	margin-right: auto;
+	width: 70%;
+	background-color: #b0e0e6;
+}
+
+.container-medium-view {
+	margin-top: 4%;
+}
+
+.medium-view-row {
+	height: 600px;
+}
+
+.medium-view-comments {
+	overflow: scroll;
+	height: 480px;
+	width: auto;
+}
+
+.medium-view-comments-new {
+	align-items: flex-end;
+}
