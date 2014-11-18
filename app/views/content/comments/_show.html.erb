@@ -1,26 +1,13 @@
-<div class="container">
-    <div class="row">
-        <h3>Comments:</h3>
-        <div class="column">
-            <table class="table">
-                <tbody>
-	                <% comments.zip(users) do |comment, user| %>
-	                    <tr>
-	                        <td>
-	                            <p><%= link_to user.name, user_path(user) %></p>
-	                        </td>
-	                        <td>
-	                            <p><%= comment.text %></p>
-	                        </td>
-	                        <td>
-	                            <% if current_user.id == comment.user_id %>
-	                                <%= link_to 'Delete', medium_comment_path(id: comment.id, medium_id: comment.medium_id), method: :delete, data: { confirm: 'Are you sure?' } %>
-	                            <% end %>
-	                        </td>
-	                    </tr>
-	                <% end %>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+<h3>Comments:</h3>
+
+<% comments.zip(users) do |comment, user| %>
+    <p>
+        <%= link_to user.name, user_path(user) %>
+        <%= comment.text %>
+
+        <% if current_user.id == comment.user_id %>
+            <%= link_to 'Delete', medium_comment_path(id: comment.id, medium_id: comment.medium_id), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+    </p>
+<% end %>
+

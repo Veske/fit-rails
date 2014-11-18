@@ -5,6 +5,7 @@
         <div class="col-md-6 medium-view-row">
             <%= image_tag medium.image_video.url(:croppable) %>
         </div>
+
         <div class="col-md-6 medium-view-row">
 	        <%# This query is temporary %>
             <p><%= medium.text %> by <%= link_to User.find(medium.user_id).name , user_path(medium.user_id) %></p>

@@ -1,7 +1,5 @@
-<p>Comment this medium</p>
-
 <%= form_for :comment, url: medium_comments_path(medium_id: medium.id), remote: true do |f| %>
-    <%= label_tag 'Text: ' %>
+    <%= label_tag 'Write a comment: ' %>
     <%= f.text_field :text %>
     <%= f.submit 'New comment' %>
 <% end %>

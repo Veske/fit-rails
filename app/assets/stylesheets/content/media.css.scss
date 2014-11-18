@@ -2,27 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.medium-view-center {
-	margin-left: auto;
-	margin-right: auto;
-	width: 70%;
-	background-color: #b0e0e6;
-}
-
+// Align container from top, style it
 .container-medium-view {
 	margin-top: 4%;
+	background-color: #e0e3e6;
 }
 
+// Set the size of our container
 .medium-view-row {
 	height: 600px;
 }
 
+// Create a scroll-bar around the show-comments area
 .medium-view-comments {
 	overflow: scroll;
-	height: 480px;
+	overflow-x: hidden;
+	height: 507px;
 	width: auto;
 }
 
+// Class for new comment form. Needs a better way to align it at the bottom of the container
 .medium-view-comments-new {
 	align-items: flex-end;
 }
