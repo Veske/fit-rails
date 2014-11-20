@@ -10,13 +10,8 @@ class Content::MediaController < ApplicationController
 	end
 
 	def show
-		medium = Medium.includes(:comments, :likes).find(params[:id])
-		users = User.joins(comments: :medium).where(comments: {medium_id: medium.id})
-
-		locals comment:     Comment.new,
-		       medium:      medium,
-		       users:       users,
-	           like:        Like.new
+		medium = Medium.includes([{comments: :user}, :likes, :user]).find(params[:id])
+		locals medium: medium
 	end
 
 	def create

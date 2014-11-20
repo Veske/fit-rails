@@ -1,11 +1,11 @@
 <h3>Comments:</h3>
 
-<% comments.zip(users) do |comment, user| %>
+<% comments.each do |comment| %>
     <p>
-        <%= link_to user.name, user_path(user) %>
+        <%= link_to comment.user.name, user_path(comment.user) %>
         <%= comment.text %>
 
-        <% if current_user.id == comment.user_id %>
+        <% if current_user.id == comment.user.id %>
             <%= link_to 'Delete', medium_comment_path(id: comment.id, medium_id: comment.medium_id), method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
     </p>

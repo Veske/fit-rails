@@ -8,7 +8,7 @@
 
         <div class="col-md-6 medium-view-row">
 	        <%# This query is temporary %>
-            <p><%= medium.text %> by <%= link_to User.find(medium.user_id).name , user_path(medium.user_id) %></p>
+            <p><%= medium.text %> by <%= link_to medium.user.name , user_path(medium.user.id) %></p>
 
             <div id="likes">
                 <p>
@@ -16,17 +16,17 @@
                         <%= medium.likes.length %> <%= link_to 'users', medium_likes_path(medium) %> like this
 	                    <%= link_to 'Unlike', medium_like_path(unlike_params(current_user, medium), medium_id: medium.id), method: :delete, data: { confirm: 'Are you sure?' } %>
 	                <% else %>
-	                    <%= render partial: 'content/likes/create', locals: { medium: medium, like: like } %>
+	                    <%= render partial: 'content/likes/create', locals: { medium: medium } %>
 	                <% end %>
                 </p>
             </div>
 
 	        <div class="medium-view-comments">
-	            <%= render partial: 'content/comments/show', locals: { comments: medium.comments, users: users } %>
+	            <%= render partial: 'content/comments/show', locals: { comments: medium.comments } %>
 	        </div>
 
 	        <div class="medium-view-comments-new">
-	            <%= render partial: 'content/comments/form', locals: { comment: comment, medium: medium } %>
+	            <%= render partial: 'content/comments/form', locals: { medium: medium } %>
 	        </div>
         </div>
     </div>
