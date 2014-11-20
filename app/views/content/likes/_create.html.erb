@@ -1,7 +1,6 @@
 <%= form_for :like, url: medium_likes_path(medium_id: medium.id), remote: true do |f| %>
-    <%= likes_count(medium.id) %> <%= link_to 'users', medium_likes_path(medium) %> like this
+    <%= medium.likes.length %> <%= link_to 'users', medium_likes_path(medium) %> like this
 	<%= f.hidden_field user_id: current_user.id %>
-    <%= f.hidden_field medium_id: medium.id %>
 	<span class="glyphicon glyphicon-thumbs-up"></span>
     <%= f.submit 'Like' %>
 <% end %>

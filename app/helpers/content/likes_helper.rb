@@ -1,11 +1,22 @@
 module Content::LikesHelper
 
-	def likes_count(medium_id)
-		Like.where(medium_id: medium_id).count
+	def like_exists?(user, medium)
+		if medium.likes.length > 0
+			medium.likes.each do |like|
+				like.user_id == user.id ? true : false
+			end
+		else
+			false
+		end
 	end
 
-	def unlike_params(user_id, medium_id)
-		like = Like.where(user_id: user_id, medium_id: medium_id).first!
-		return like.id
+	def unlike_params(user, medium)
+		if medium.likes.length > 0
+			medium.likes.each do |like|
+				like.user_id == user.id ? like.id : false
+			end
+		else
+			false
+		end
 	end
 end

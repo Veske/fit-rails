@@ -12,9 +12,9 @@
 
             <div id="likes">
                 <p>
-	                <% if current_user.likes.exists?(medium_id: medium.id) %>
-                        <%= likes_count(medium.id) %> <%= link_to 'users', medium_likes_path(medium) %> like this
-	                    <%= link_to 'Unlike', medium_like_path(unlike_params(current_user.id, medium), medium_id: medium.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+	                <% if like_exists?(current_user, medium) %>
+                        <%= medium.likes.length %> <%= link_to 'users', medium_likes_path(medium) %> like this
+	                    <%= link_to 'Unlike', medium_like_path(unlike_params(current_user, medium), medium_id: medium.id), method: :delete, data: { confirm: 'Are you sure?' } %>
 	                <% else %>
 	                    <%= render partial: 'content/likes/create', locals: { medium: medium, like: like } %>
 	                <% end %>
@@ -22,7 +22,7 @@
             </div>
 
 	        <div class="medium-view-comments">
-	            <%= render partial: 'content/comments/show', locals: { comments: comments, users: users } %>
+	            <%= render partial: 'content/comments/show', locals: { comments: medium.comments, users: users } %>
 	        </div>
 
 	        <div class="medium-view-comments-new">
