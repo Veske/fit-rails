@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-	#mount Upmin::Engine => '/admin'
+	mount Upmin::Engine => '/admin'
 	devise_for :users
 	resources :users do
 		member do

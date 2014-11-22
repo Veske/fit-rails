@@ -7,14 +7,14 @@
 
 <%= render partial: 'users/follow_form', locals: {user: user} if logged_in? %>
 
-<% if user.media.exists? %>
+<% if has_media?(user) %>
     <div class="container">
         <div class="row">
             <h3><%= user.name.pluralize %> uploads:</h3>
             <div class="column">
                 <table class="table">
                     <tbody>
-                    <% media.each do |medium| %>
+                    <% user.media.each do |medium| %>
                         <tr>
                             <td>
                                 <%= link_to medium_path(medium) do %>

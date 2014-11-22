@@ -7,8 +7,8 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		user = User.find(params[:id])
-		locals user: user, media: Medium.where(user_id: user.id)
+		user = User.includes(:media).find(params[:id])
+		locals user: user
 	end
 
 	# TODO: This action was here by default, but the whole process seems to work without it too.

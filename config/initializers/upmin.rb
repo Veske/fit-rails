@@ -22,4 +22,4 @@ module AdminOnly
 
 end
 
-#Upmin::ApplicationController.send :include, AdminOnly
+Upmin::ApplicationController.send :include, AdminOnly
