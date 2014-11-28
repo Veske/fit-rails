@@ -15,6 +15,7 @@ gem 'pg'
 gem 'passenger'
 gem 'paperclip'
 gem 'sprockets'
+gem 'angularjs-rails'
 
 group :development do
 	gem 'better_errors'
