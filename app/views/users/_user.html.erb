@@ -1,12 +1,25 @@
 <td>
-	<%= link_to user.email, user %>
+	<a href="/users/{{user.id}}">{{ user.email }}</a>
+	<%# link_to user.email, user %>
 </td>
 <td>
-    <%= form_for(user) do |f| %>
-        <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
-        <%= f.submit 'Change Role', :class => 'button-xs' %>
-    <% end %>
+
+	    <form novalidate class="simple-form">
+	        <label for="count">Role:</label>
+	        <select ng-model="selectedRole" ng-options="role.name for role in roles">
+	            <option value=""> Current role: {{ user.role }} </option>
+	        </select>
+
+	        <button ng-click="updateUser(user, selectedRole)">SAVE</button>
+	    </form>
+
+
+
+    <%# form_for(user) do |f| %>
+        <%# f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
+        <%# f.submit 'Change Role', :class => 'button-xs' %>
+    <%# end %>
 </td>
 <td>
-    <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
+    <%# link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
 </td>

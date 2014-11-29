@@ -16,5 +16,10 @@ Rails.application.routes.draw do
 	end
 
 	resources :relationships,       only: [:create, :destroy]
+
+
+
+	get '*path', to: 'visitors#home'
 	root to: 'visitors#index'
+
 end

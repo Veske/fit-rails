@@ -1,16 +1,17 @@
-@fit_rails.controller 'VisitorsCtrl', ['$scope', '$location', '$http', ($scope, $location, $http) ->
+@fit_rails.controller 'VisitorsCtrl', ['$scope', '$location', '$http',  '$window', ($scope, $location, $http, $window) ->
 
 	$scope.users = []
-	$scope.viewUsers = ->
-		$location.url('/users')
 
 	$http.get('/users.json')
 	.success (users) =>
 		$scope.users = users
-		console.log($scope.users)
-		console.log('Count of users: ' + $scope.users.length)
 	.error (data) ->
 		console.log('error!')
+
+	$scope.viewUsers = ->
+		$location.path('/users')
+		$window.location.href = '/users'
+		console.log("Redirected")
 
 
 ]

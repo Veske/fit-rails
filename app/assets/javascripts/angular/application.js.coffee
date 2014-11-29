@@ -8,13 +8,8 @@
 #= require_tree ./services/
 
 @fit_rails = angular.module("fit_rails", ['ngRoute'])
+.value('$sniffer', { history: true })
 
-@fit_rails.config(['$routeProvider', ($routeProvider) ->
-	# Route for '/'
-	$routeProvider.when('/', { templateUrl: '../../views/visitors/index.html.erb', controller: 'TestCtrl' } )
-	$routeProvider.when('/users', { templateUrl: '../../views/users/index.html.erb', controller: 'TestCtrl' } )
-
-	# Default
-	$routeProvider.otherwise( { templateUrl: '../../views/visitors/index.html.erb', controller: 'TestCtrl' } )
-
+@fit_rails.config(["$httpProvider", ($httpProvider) ->
+	$httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
 ])
