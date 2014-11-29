@@ -24,10 +24,16 @@ class UsersController < ApplicationController
 		user = User.find(params[:id])
 		if user.update_attributes(secure_params)
 			logger.debug "INFO: User with id: #{user.id} updated!"
-			redirect_to users_path, :notice => 'User updated.'
+			respond_to do |format|
+				format.html
+				format.json { render json: {user: user} }
+			end
 		else
 			logger.debug "INFO: Was not able to update user with id: #{user.id} - #{user.errors.full_messages}"
-			redirect_to users_path, :alert => "Unable to update user: #{user.errors.full_messages}."
+			respond_to do |format|
+				format.html
+				format.json { render json: {user: user} }
+			end
 		end
 	end
 

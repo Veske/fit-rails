@@ -7,7 +7,7 @@
 #= require_tree ./directives/
 #= require_tree ./services/
 
-@fit_rails = angular.module("fit_rails", ['ngRoute'])
+@fit_rails = angular.module("fit_rails", ['ngRoute', 'growlNotifications'])
 .value('$sniffer', { history: true })
 
 @fit_rails.config(["$httpProvider", ($httpProvider) ->

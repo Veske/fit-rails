@@ -14,5 +14,6 @@
 #= require jquery_ujs
 #= require angular
 #= require angular-route
+#= require angular-growl-notifications.min
 #= require bootstrap-sprockets
 #= require_tree .
