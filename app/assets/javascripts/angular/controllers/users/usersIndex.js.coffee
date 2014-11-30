@@ -1,4 +1,4 @@
-@fit_rails.controller 'UsersCtrl',
+@fit_rails.controller 'UsersIndexCtrl',
 	['$scope', '$location', '$http', 'Common',
 	($scope, $location, $http, Common) ->
 
@@ -22,18 +22,8 @@
 				for user in $scope.users
 					if user.id == data.user.id
 						user.role = data.user.role
-						#$scope.flashNotification('Updated role for user: ' + user.name)
 						Common.flashNotification($scope, 'Updated role for user: ' + user.name)
 			).error( ->
 				# Display error notification
 			)
-
-
-		$scope.flashNotification = ($scope, text) ->
-			$scope.message = text
-			$scope.notify = true
-			setTimeout(()->
-				$scope.notify = false
-			, 2000)
-
 ]
