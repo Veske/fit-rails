@@ -1,4 +1,4 @@
-@fit_rails.factory 'Common', ['$window', ($window) ->
+angular.module('Fit').factory 'Common', ['$window', ($window) ->
 
 	{
 		# Display a toast on the top of the page to show info

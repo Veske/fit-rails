@@ -1,6 +1,4 @@
-@fit_rails.controller 'UsersIndexCtrl',
-	['$scope', '$location', '$http', 'Common',
-	($scope, $location, $http, Common) ->
+angular.module('Fit').controller "UsersIndexCtrl", ($scope, $timeout, $routeParams, $location, $http, $window, Common) ->
 
 		$scope.users = []
 		$scope.roles = []
@@ -26,4 +24,3 @@
 			).error( ->
 				# Display error notification
 			)
-]

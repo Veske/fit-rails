@@ -1,15 +1,18 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+Fit = angular.module("Fit", ['ngRoute', 'growlNotifications'])
 
-#= require_self
-#= require_tree ./controllers/
-#= require_tree ./directives/
-#= require_tree ./services/
+Fit.config ($httpProvider) ->
+	authToken = $("meta[name=\"csrf-token\"]").attr("content")
+	$httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
 
-@fit_rails = angular.module("fit_rails", ['ngRoute', 'growlNotifications'])
-.value('$sniffer', { history: true })
+Fit.config ($routeProvider, $locationProvider) ->
+	$locationProvider.html5Mode true
+	$routeProvider.when '/',  templateUrl: '../../views/visitors/index.html.erb', controller: 'VisitorsCtrl'
+	$routeProvider.when '/users', templateUrl: '../../views/users/index.html.erb', controller: 'UsersCtrl'
+	# Default
+	$routeProvider.otherwise( { redirectTo: "/" } )
 
-@fit_rails.config(["$httpProvider", ($httpProvider) ->
-	$httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
-])
+# Makes AngularJS work with turbolinks.
+$(document).on 'page:load', ->
+	$('[ng-app]').each ->
+		module = $(this).attr('ng-app')
+		angular.bootstrap(this, [module])

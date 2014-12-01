@@ -1,17 +1,13 @@
-@fit_rails.controller 'VisitorsCtrl', ['$scope', '$location', '$http',  '$window', ($scope, $location, $http, $window) ->
-
+angular.module('Fit').controller "VisitorsCtrl", ($scope, $timeout, $routeParams, $location, $http, $window) ->
 	$scope.users = []
 
 	$http.get('/users.json')
-	.success (users) =>
-		$scope.users = users
+	.success (data) =>
+		$scope.users = data.users
 	.error (data) ->
 		console.log('error!')
 
 	$scope.viewUsers = ->
-		$location.path('/users')
-		$window.location.href = '/users'
+		$location.url('/users')
+		#$window.location.href = '/users'
 		console.log("Redirected")
-
-
-]
