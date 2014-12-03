@@ -1,15 +1,1 @@
-<div ng-controller="VisitorsCtrl">
 
-    <h3>Welcome</h3>
-
-    <h2><a href="/users">Users</a></h2>
-    <h2><a ng-click="viewUsers()">Users</a></h2>
-    <p><%= link_to 'Users:', users_path %> {{ users.length }} registered</p>
-
-    <% if logged_in? %>
-        <div>
-            <%= render 'users/stats' %>
-        </div>
-    <% end %>
-
-</div>
