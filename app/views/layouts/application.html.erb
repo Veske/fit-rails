@@ -6,8 +6,8 @@
     <title><%= content_for?(:title) ? yield(:title) : "Example" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Example" %>">
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
 </head>
 
@@ -17,8 +17,12 @@
 	</header>
 
 	<main role="main">
-	    <%= render 'layouts/messages' %>
-	    <%= yield %>
+
+
+	    <div ng-view>
+	        <%= render 'layouts/messages' %>
+	        <%= yield %>
+	    </div>
 	</main>
 </body>
 </html>

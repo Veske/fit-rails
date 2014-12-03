@@ -1,0 +1,24 @@
+<div class="container" ng-controller="UsersIndexCtrl" >
+    <div ng-if="notify">
+        <growl-notification>
+            {{ message }}
+        </growl-notification>
+    </div>
+
+    <h3>Users</h3>
+    <div ng-repeat="user in users">
+	    <td>
+		    <a href="/users/{{user.id}}">{{ user.email }}</a>
+	    </td>
+	    <td>
+		    <form novalidate class="simple-form">
+			    <label for="count">Role:</label>
+			    <select ng-model="selectedRole" ng-options="role.name for role in roles">
+				    <option value=""> Current role: {{ user.role }} </option>
+			    </select>
+
+			    <button ng-click="updateUser(user, selectedRole)" class="button-xs">Change role</button>
+		    </form>
+	    </td>
+    </div>
+</div>

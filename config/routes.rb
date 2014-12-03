@@ -18,5 +18,4 @@ Rails.application.routes.draw do
 	resources :relationships,       only: [:create, :destroy]
 
 	root to: 'visitors#index'
-
 end
