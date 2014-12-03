@@ -8,10 +8,10 @@ Fit.config ($routeProvider, $locationProvider) ->
 
 	$routeProvider
 	.when '/',
-		templateUrl: 'assets/angular/templates/public.html',
+		templateUrl: 'assets/angular/templates/visitors/index.html',
 		controller: 'VisitorsCtrl'
 	.when '/users',
-		templateUrl: 'assets/angular/templates/public.html',
+		templateUrl: 'assets/angular/templates/users/index.html',
 		controller: 'UsersIndexCtrl'
 	.otherwise
 			redirectTo: '/'
