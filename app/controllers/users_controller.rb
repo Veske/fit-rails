@@ -7,10 +7,7 @@ class UsersController < ApplicationController
 		users = User.all
 		roles = User.roles.keys.map { |role| {name: role.titleize, key: role} }
 
-		respond_to do |format|
-			format.html
-			format.json { render json: {users: users, roles: roles} }
-		end
+		render json: {users: users, roles: roles}
 	end
 
 	def show

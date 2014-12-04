@@ -2,7 +2,9 @@ class Content::MediaController < ApplicationController
 	before_filter :authenticate_user!, except: :show
 
 	def index
-		locals media: Medium.all
+		media = Medium.all
+		#media.as_json(id: media.id, name: media.name, small_logo_url: media.url(:big))
+		render json: { media: Medium.all }
 	end
 
 	def new

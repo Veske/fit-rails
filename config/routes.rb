@@ -17,5 +17,6 @@ Rails.application.routes.draw do
 
 	resources :relationships,       only: [:create, :destroy]
 
+	get '/dashboard' => 'dashboard#index'
 	root to: 'visitors#index'
 end

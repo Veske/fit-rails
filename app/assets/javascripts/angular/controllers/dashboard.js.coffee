@@ -1,8 +1,9 @@
-angular.module('Fit').controller "VisitorsCtrl", ($scope, $timeout, $routeParams, $location, $http, $window) ->
+angular.module('Fit').controller "DashboardCtrl", ($scope, $timeout, $routeParams, $location, $http, $window) ->
 	$scope.users = []
 
 	$http.get('/users.json')
 	.success (data) =>
+		console.log("JHere")
 		$scope.users = data.users
 	.error (data) ->
 		console.log('error!')

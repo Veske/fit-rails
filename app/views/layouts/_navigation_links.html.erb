@@ -2,9 +2,9 @@
 <% if user_signed_in? %>
     <% if current_user.admin? %>
         <li><%= link_to 'Users', users_path %></li>
+        <li><%= link_to 'Media', media_path %></li>
     <% end %>
 <% end %>
-<li><%= link_to 'Media', media_path %></li>
 
 <% if user_signed_in? %>
 	    <li class="drowdown">

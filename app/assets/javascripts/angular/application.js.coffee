@@ -7,12 +7,15 @@ Fit.config ($httpProvider) ->
 Fit.config ($routeProvider, $locationProvider) ->
 
 	$routeProvider
-	.when '/',
-		templateUrl: 'templates/visitors/index.html',
-		controller: 'VisitorsCtrl'
+	.when '/dashboard',
+		templateUrl: 'templates/dashboard/index.html',
+		controller: 'DashboardCtrl'
 	.when '/users',
 		templateUrl: 'templates/users/index.html',
 		controller: 'UsersIndexCtrl'
+	.when '/media',
+		templateUrl: 'templates/content/media/index.html',
+		controller: 'MediaViewCtrl'
 	.otherwise
 			redirectTo: '/'
 	$locationProvider.html5Mode true
