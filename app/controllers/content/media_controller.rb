@@ -1,19 +1,20 @@
 class Content::MediaController < ApplicationController
 	before_filter :authenticate_user!, except: :show
+	respond_to :json
 
 	def index
 		media = Medium.all
-		#media.as_json(id: media.id, name: media.name, small_logo_url: media.url(:big))
-		render json: { media: Medium.all }
+		respond_with media
 	end
 
 	def new
-		locals medium: current_user.media.build
+		medium = current_user.media.build
+		respond_with medium
 	end
 
 	def show
 		medium = Medium.includes([{comments: :user}, :likes, :user]).find(params[:id])
-		locals medium: medium
+		respond_with medium
 	end
 
 	def create

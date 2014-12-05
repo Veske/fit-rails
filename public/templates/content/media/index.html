@@ -1,5 +1,9 @@
 <h3>Media#index</h3>
 
-<div ng-repeat="medium in media">
-	{{ medium }}
+<div class="photo" id="photo_{{ photo.id }}" ng:click="selectMedium(medium)" ng:repeat="medium in media">
+	<img ng:src="{{ medium.image_video_thumb_url }}" alt="{{ medium.text }}" /><br>
 </div>
+
+
+
+

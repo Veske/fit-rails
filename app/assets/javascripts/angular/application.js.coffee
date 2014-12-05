@@ -15,7 +15,10 @@ Fit.config ($routeProvider, $locationProvider) ->
 		controller: 'UsersIndexCtrl'
 	.when '/media',
 		templateUrl: 'templates/content/media/index.html',
-		controller: 'MediaViewCtrl'
+		controller: 'MediaIndexCtrl'
+	.when '/media/:id',
+		templateUrl: 'templates/content/media/show.html',
+		controller: 'MediumShowCtrl'
 	.otherwise
 			redirectTo: '/'
 	$locationProvider.html5Mode true

@@ -4,9 +4,8 @@ class ApplicationController < ActionController::Base
 	protect_from_forgery with: :exception
 	before_action :configure_permitted_parameters, if: :devise_controller?
 
-	#def after_sign_in_path_for(resource)
-	#	request.env['omniauth.origin'] || stored_location_for(resource) || :dashboard
-	#end
+	before_filter :intercept_html_requests
+	layout nil
 
 	def go_back
 		#Attempt to redirect
@@ -29,6 +28,11 @@ class ApplicationController < ActionController::Base
 		#   locals item: x
 		def locals(action = nil, hash)
 			render action: action, locals: hash
+		end
+
+		# Get HTML requests and direct them to our ng-view
+		def intercept_html_requests
+			render('dashboard/index') if request.format == Mime::HTML && authenticate_user!
 		end
 
 	protected
