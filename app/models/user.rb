@@ -8,6 +8,11 @@ class User < ActiveRecord::Base
 		self.role ||= :user
 	end
 
+	def roles
+		User.roles.keys.map { |role| {name: role.titleize, key: role} }
+		#User.roles
+	end
+
 	# Follows a user.
 	def follow(other_user)
 		if active_relationships.create(followed_id: other_user.id)

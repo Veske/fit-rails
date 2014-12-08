@@ -3,9 +3,9 @@
 		<h3>Media:</h3>
 		<div class="column">
 			<table class="table">
-				<tbody ng:click="selectMedium(medium)" ng:repeat="medium in media">
+				<tbody ng:repeat="medium in media">
 				<tr>
-					<td>
+					<td ng:click="selectMedium(medium)">
 						<img ng:src="{{ medium.image_video_thumb_url }}" alt="{{ medium.text }}" /><br>
 					</td>
 					<td>

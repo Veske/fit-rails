@@ -5,9 +5,12 @@ class UsersController < ApplicationController
 
 	def index
 		users = User.all
-		roles = User.roles.keys.map { |role| {name: role.titleize, key: role} }
+		respond_with users
+	end
 
-		render json: {users: users, roles: roles}
+	def roles
+		roles = User.roles.keys.map { |role| {name: role.titleize, key: role} }
+		respond_with roles.to_json
 	end
 
 	def show

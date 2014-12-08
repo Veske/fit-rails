@@ -3,7 +3,6 @@ angular.module('Fit').controller "DashboardCtrl", ($scope, $timeout, $routeParam
 
 	$http.get('/users.json')
 	.success (data) =>
-		console.log("JHere")
 		$scope.users = data.users
 	.error (data) ->
 		console.log('error!')

@@ -4,7 +4,7 @@ class Content::MediaController < ApplicationController
 
 	def index
 		media = Medium.all
-		respond_with media
+		respond_with media.to_json
 	end
 
 	def new

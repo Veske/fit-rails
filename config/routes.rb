@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 		end
 	end
 
+
+
 	scope module: 'content' do
 		resources :media, only: [:index, :new, :create, :show, :destroy] do
 			resources :comments, only: [:create, :destroy]
@@ -17,6 +19,8 @@ Rails.application.routes.draw do
 
 	resources :relationships,       only: [:create, :destroy]
 
-	get '/dashboard' => 'dashboard#index'
+	get '/dashboard', to: 'dashboard#index'
+	get '/roles', to: 'users#roles'
+
 	root to: 'visitors#index'
 end

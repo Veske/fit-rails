@@ -1,4 +1,4 @@
-angular.module('Fit').factory 'Common', ['$window', ($window) ->
+angular.module('Fit').factory 'Common', ['$window', '$http', ($window, $http) ->
 
 	{
 		# Display a toast on the top of the page to show info
