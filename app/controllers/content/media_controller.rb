@@ -13,8 +13,9 @@ class Content::MediaController < ApplicationController
 	end
 
 	def show
-		medium = Medium.includes([{comments: :user}, :likes, :user]).find(params[:id])
-		respond_with medium
+		#medium = Medium.includes([{comments: :user}, :likes, :user]).find(params[:id])
+		#respond_with medium
+		respond_with Medium.find(params[:id])
 	end
 
 	def create

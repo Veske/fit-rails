@@ -15,8 +15,6 @@ class UsersController < ApplicationController
 		locals user: user
 	end
 
-	# TODO: This action was here by default, but the whole process seems to work without it too.
-	# Needs testing and then remove it.
 	def update
 		user = User.find(params[:id])
 		if user.update_attributes(secure_params)

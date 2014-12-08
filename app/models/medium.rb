@@ -13,6 +13,14 @@ class Medium < ActiveRecord::Base
 	validates_attachment_content_type :image_video, :content_type => %w(image/jpeg image/jpg image/png image/gif)
 	validates_with AttachmentSizeValidator, attributes: :image_video, less_than: 1.megabytes
 
+	def image_video_croppable_url
+		image_video.url(:croppable)
+	end
+
+	def image_video_thumb_url
+		image_video.url(:thumb)
+	end
+
 	def as_json(options={})
 		hash = super(options)
 		hash.merge!({
