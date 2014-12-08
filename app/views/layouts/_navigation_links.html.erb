@@ -2,8 +2,8 @@
 <% if user_signed_in? %>
     <% if current_user.admin? %>
         <li><%= link_to 'Users', users_path %></li>
-        <li><%= link_to 'Media', media_path %></li>
     <% end %>
+    <li><%= link_to 'Media', media_path %></li>
 <% end %>
 
 <% if user_signed_in? %>

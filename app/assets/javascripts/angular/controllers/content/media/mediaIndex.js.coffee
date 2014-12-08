@@ -3,6 +3,7 @@ angular.module('Fit').controller "MediaIndexCtrl", ($scope, $timeout, $routePara
 
 	$http.get('/media.json')
 	.success (data) =>
+		console.log(data)
 		$scope.media = data.media
 	.error (data) ->
 		console.log('error!')

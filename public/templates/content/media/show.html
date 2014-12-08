@@ -10,18 +10,12 @@
 			<div id="likes">
 				<p>
 					{{ likes.length }} like this
-					<% if like_exists?(current_user, medium) %>
-					<%= medium.likes.length %> <%= link_to 'users', medium_likes_path(medium) %> like this
-					<%= link_to 'Unlike', medium_like_path(unlike_params(current_user, medium), medium_id: medium.id), method: :delete, data: { confirm: 'Are you sure?' } %>
-					<% else %>
-					<%= render partial: 'content/likes/create', locals: { medium: medium } %>
-					<% end %>
 				</p>
 			</div>
 
 			<div class="medium-view-comments" ng-include="templates[0].url"></div>
 
-			<div class="medium-view-comments-new" ng-include="templates[1].url"></div>
+			<div class="medium-view-comments-new" ng-include="templates[1].url" ng-controller="CommentsFormCtrl"></div>
 		</div>
 	</div>
 </div>
