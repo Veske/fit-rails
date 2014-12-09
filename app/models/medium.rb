@@ -13,6 +13,7 @@ class Medium < ActiveRecord::Base
 	validates_attachment_content_type :image_video, :content_type => %w(image/jpeg image/jpg image/png image/gif)
 	validates_with AttachmentSizeValidator, attributes: :image_video, less_than: 1.megabytes
 
+	# Define custom url fields for medium in serializer
 	def image_video_croppable_url
 		image_video.url(:croppable)
 	end
@@ -21,6 +22,7 @@ class Medium < ActiveRecord::Base
 		image_video.url(:thumb)
 	end
 
+	# Method that we use to get JSON for medium without serializer
 	def as_json(options={})
 		hash = super(options)
 		hash.merge!({
