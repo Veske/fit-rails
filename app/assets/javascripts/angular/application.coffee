@@ -13,15 +13,15 @@ Fit.config ($routeProvider, $locationProvider) ->
 	.when '/users',
 		templateUrl: 'templates/users/index.html',
 		controller: 'UsersIndexCtrl'
+	.when '/media/new',
+		templateUrl: 'templates/content/media/new.html',
+		controller: 'MediumNewCtrl'
 	.when '/media',
 		templateUrl: 'templates/content/media/index.html',
 		controller: 'MediaIndexCtrl'
 	.when '/media/:id',
 		templateUrl: 'templates/content/media/show.html',
 		controller: 'MediumShowCtrl'
-	.when '/media/new',
-		templateUrl: 'templates/content/media/new.html',
-		controller: 'MediumNewCtrl'
 	.otherwise
 			redirectTo: '/'
 	$locationProvider.html5Mode true
