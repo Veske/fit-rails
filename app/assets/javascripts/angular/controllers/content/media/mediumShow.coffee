@@ -12,7 +12,6 @@ angular.module('Fit').controller "MediumShowCtrl", ($scope, $timeout, $routePara
 		$scope.medium = data.medium
 		$scope.comments = data.medium.comments
 		$scope.likes = data.medium.likes
-		console.log($scope.medium)
 	.error (data) ->
 		console.log('error!')
 
