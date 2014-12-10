@@ -1,4 +1,4 @@
-Fit = angular.module("Fit", ['ngRoute', 'growlNotifications'])
+Fit = angular.module("Fit", ['ngRoute', 'growlNotifications', 'flow'])
 
 Fit.config ($httpProvider) ->
 	authToken = $("meta[name=\"csrf-token\"]").attr("content")
@@ -21,3 +21,20 @@ Fit.config ($routeProvider, $locationProvider) ->
 		controller: 'MediumShowCtrl'
 	.otherwise
 		redirectTo: '/'
+
+
+Fit.config (flowFactoryProvider) ->
+		flowFactoryProvider.defaults =
+			target: "/media.json"
+			permanentErrors: [
+				404
+				500
+				501
+			]
+			maxChunkRetries: 1
+			chunkRetryInterval: 5000
+			simultaneousUploads: 4
+			singleFile: true
+
+		flowFactoryProvider.on "catchAll", (event) ->
+			console.log "catchAll", arguments

@@ -18,6 +18,7 @@ class Content::MediaController < ApplicationController
 	end
 
 	def create
+		logger.debug params
 		medium = current_user.media.build(medium_params)
 
 		if medium.save
