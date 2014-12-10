@@ -20,9 +20,25 @@
 	</div>
 </div>
 
+<form ng-submit="$flow.upload()"
+      ng-controller="MediumNewCtrl"
+      flow-init="{target: '/upload'}" >
 
-<br><a href="/media/new" >Upload new media</a>
+	<input type="file" flow-btn flow-attrs="{accept: 'image/*'}"/>
 
+	<span class="btn button-xs" flow-btn flow-attrs="{accept: 'image/*'}">Choose file</span>
+	<button ng-click="upload($flow.files)" class="button-xs">Upload</button>
 
+	<div class="thumbnail" ng-show="$flow.files.length">
+		<img flow-img="$flow.files[0]" />
+	</div>
 
+	<table>
+		<tr ng-repeat="file in $flow.files">
+			<td>{{$index+1}}</td>
+			<td>{{file.name}}</td>
+			<td>{{file.msg}}</td>
+		</tr>
+	</table>
+</form>
 

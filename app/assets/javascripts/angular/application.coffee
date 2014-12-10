@@ -5,7 +5,7 @@ Fit.config ($httpProvider) ->
 	$httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
 
 Fit.config ($routeProvider, $locationProvider) ->
-
+	$locationProvider.html5Mode true
 	$routeProvider
 	.when '/dashboard',
 		templateUrl: 'templates/dashboard/index.html',
@@ -13,9 +13,6 @@ Fit.config ($routeProvider, $locationProvider) ->
 	.when '/users',
 		templateUrl: 'templates/users/index.html',
 		controller: 'UsersIndexCtrl'
-	.when '/media/new',
-		templateUrl: 'templates/content/media/new.html',
-		controller: 'MediumNewCtrl'
 	.when '/media',
 		templateUrl: 'templates/content/media/index.html',
 		controller: 'MediaIndexCtrl'
@@ -23,12 +20,4 @@ Fit.config ($routeProvider, $locationProvider) ->
 		templateUrl: 'templates/content/media/show.html',
 		controller: 'MediumShowCtrl'
 	.otherwise
-			redirectTo: '/'
-	$locationProvider.html5Mode true
-
-
-# Makes AngularJS work with turbolinks.
-#$(document).on 'page:load', ->
-#	$('[ng-app]').each ->
-#		module = $(this).attr('ng-app')
-#		angular.bootstrap(this, [module])
+		redirectTo: '/'

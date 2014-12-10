@@ -16,5 +16,7 @@
 #= require angular
 #= require angular-route
 #= require angular-growl-notifications.min
+#= require ng-flow.min
+#= require ng-flow-standalone.min
 #= require bootstrap-sprockets
 #= require_tree .
