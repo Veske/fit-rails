@@ -18,15 +18,18 @@ class Content::MediaController < ApplicationController
 	end
 
 	def create
-		logger.debug params
+		#text: 'asd', image_video: params[:image_video]
+
 		medium = current_user.media.build(medium_params)
 
 		if medium.save
 			logger.info "INFO: New medium uploaded: #{medium.image_video_file_name}"
-			redirect_to medium_path(medium), notice: 'New file uploaded'
+			#redirect_to medium_path(medium), notice: 'New file uploaded'
+			render json: medium, status: 201
 		else
 			logger.info "ERROR: Uploading new medium file #{medium.errors.full_messages}"
-			redirect_to new_medium_path, alert: "Could not upload File: #{medium.errors.full_messages}"
+			render json: medium, status: 201
+			#redirect_to new_medium_path, alert: "Could not upload File: #{medium.errors.full_messages}"
 		end
 	end
 

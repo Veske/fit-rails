@@ -1,18 +1,52 @@
-angular.module('Fit').controller "MediumNewCtrl", ($scope, $timeout, $routeParams, $location, $http, $window, Common) ->
+angular.module('Fit').controller "MediumNewCtrl", ($scope, $timeout, $routeParams, $location, $http, $window, Common, $upload) ->
 
 	$scope.media = []
 	console.log("Here")
+
+	$scope.onFileSelect = ($files) ->
+		console.log($files)
+
+	$scope.$watch 'media', () ->
+		console.log($scope.media)
+
 	$scope.upload = ($file) ->
-		console.log("Here")
+		fileReader = new FileReader()
+		fileReader.readAsArrayBuffer($file[0])
+		fileReader.onload = (e) ->
+			console.log(e.target.result)
+			$upload.upload(
+				url: "/media.json"
+				data: medium: {}
+				file: $file[0]
+				fileFormDataName: 'image_video'
+			).progress((evt) ->
+				console.log "percent: " + parseInt(100.0 * evt.loaded / evt.total)
+			).success((data, status, headers, config) ->
+				console.log data
+			)
+
+
+
+
+
+
+	$scope.upload2 = ($file) ->
 		console.log($file[0])
-		$scope.media = $file[0]
-		$http({
-			method: 'POST',
-			url:    './media' + '.json',
-			data:   comment: {image_video: $scope.media, text: "text"}
-		}).success( (data) ->
-			console.log(data)
-			#medium.comments.push(data.comment)
-		).error( ->
-			# Display error notification
-		)
+		fileReader = new FileReader()
+		fileReader.readAsArrayBuffer($file[0])
+		fileReader.onload = (e) ->
+			console.log(e)
+			$upload.http(
+				url: "/media.json"
+				headers: 'Content-Type': $file[0].type
+				data: medium: {text: 'text', image_video: e.target.result}
+			).progress((evt) ->
+				console.log "percent: " + parseInt(100.0 * evt.loaded / evt.total)
+				return
+			).success((data, status, headers, config) ->
+				# file is uploaded successfully
+				console.log data
+
+			).error((data) ->
+				console.log 'Error'
+			)

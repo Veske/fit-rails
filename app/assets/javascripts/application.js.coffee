@@ -13,10 +13,10 @@
 #= require jquery
 #= require jquery_ujs
 #= require turbolinks
+#= require angular-file-upload/angular-file-upload-shim
 #= require angular
 #= require angular-route
 #= require angular-growl-notifications.min
-#= require ng-flow.min
-#= require ng-flow-standalone.min
+#= require angular-file-upload
 #= require bootstrap-sprockets
 #= require_tree .

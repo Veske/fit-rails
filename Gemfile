@@ -17,6 +17,7 @@ gem 'paperclip'
 gem 'sprockets'
 gem 'angularjs-rails'
 gem 'active_model_serializers'
+gem 'angular-file-upload-rails'
 
 group :development do
 	gem 'better_errors'
