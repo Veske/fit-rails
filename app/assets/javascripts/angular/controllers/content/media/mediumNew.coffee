@@ -17,6 +17,12 @@ angular.module('Fit').controller "MediumNewCtrl", ($scope, $timeout, $routeParam
 			$upload.upload(
 				url: "/media.json"
 				data: medium: {}
+				formDataAppender = (fd, key, val) ->
+				if angular.isArray(val)
+					angular.forEach val, (v) ->
+						fd.append key, v
+				else
+					fd.append key, val
 				file: $file[0]
 				fileFormDataName: 'image_video'
 			).progress((evt) ->
@@ -26,27 +32,3 @@ angular.module('Fit').controller "MediumNewCtrl", ($scope, $timeout, $routeParam
 			)
 
 
-
-
-
-
-	$scope.upload2 = ($file) ->
-		console.log($file[0])
-		fileReader = new FileReader()
-		fileReader.readAsArrayBuffer($file[0])
-		fileReader.onload = (e) ->
-			console.log(e)
-			$upload.http(
-				url: "/media.json"
-				headers: 'Content-Type': $file[0].type
-				data: medium: {text: 'text', image_video: e.target.result}
-			).progress((evt) ->
-				console.log "percent: " + parseInt(100.0 * evt.loaded / evt.total)
-				return
-			).success((data, status, headers, config) ->
-				# file is uploaded successfully
-				console.log data
-
-			).error((data) ->
-				console.log 'Error'
-			)
