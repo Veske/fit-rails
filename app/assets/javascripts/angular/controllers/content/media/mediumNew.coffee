@@ -2,8 +2,6 @@ angular.module('Fit').controller "MediumNewCtrl", ($scope, $timeout, $routeParam
 
 	$scope.media = []
 
-	$scope.templates = [{name: 'mediumNew.html', url: 'templates/content/media/_new.html'}]
-
 	$scope.upload = ($file, media) ->
 		$upload.upload(
 			url: "/media.json"
