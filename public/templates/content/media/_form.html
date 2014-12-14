@@ -1,8 +1,8 @@
+<h3>Media form:</h3>
 <form>
-	{{ media }}
-	<button ng-file-select ng-file-model="media" multiple="false" class="btn button-xs">Attach Any File - this button is not working</button>
+	<label>Short description:</label>
+	<input type="text" name="text" ng-model="text" required>
+	<input type="file" name="file" ng-file-model="file" ng-file-select="chooseFile($files)" required>
 
-	<input type="file" ng-file-select="upload($files, {{ media }})" multiple>
-
-	<button ng-click="upload($files, media)" class="button-xs">Upload - will be used when the first button works</button>
+	<button ng-click="upload(file, text)" class="button-xs">Upload</button>
 </form>
