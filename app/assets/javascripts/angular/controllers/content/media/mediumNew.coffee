@@ -1,34 +1,26 @@
-angular.module('Fit').controller "MediumNewCtrl", ($scope, $timeout, $routeParams, $location, $http, $window, Common, $upload) ->
+angular.module('Fit').controller "MediumNewCtrl", ($scope, $timeout, $routeParams, $location, $http, $window, $upload) ->
 
 	$scope.media = []
-	console.log("Here")
 
-	$scope.onFileSelect = ($files) ->
-		console.log($files)
+	$scope.templates = [{name: 'mediumNew.html', url: 'templates/content/media/_new.html'}]
 
-	$scope.$watch 'media', () ->
-		console.log($scope.media)
-
-	$scope.upload = ($file) ->
-		fileReader = new FileReader()
-		fileReader.readAsArrayBuffer($file[0])
-		fileReader.onload = (e) ->
-			console.log(e.target.result)
-			$upload.upload(
-				url: "/media.json"
-				data: medium: {}
-				formDataAppender = (fd, key, val) ->
-				if angular.isArray(val)
+	$scope.upload = ($file, media) ->
+		$upload.upload(
+			url: "/media.json"
+			method: 'POST'
+			data: {text: 'asdsad'}
+			file: $file[0]
+			fileFormDataName: 'medium[image_video]'
+			formDataAppender: (fd, key, val) ->
+				if (angular.isArray(val))
 					angular.forEach val, (v) ->
-						fd.append key, v
+						fd.append 'medium[' + key + ']', v
 				else
-					fd.append key, val
-				file: $file[0]
-				fileFormDataName: 'image_video'
-			).progress((evt) ->
-				console.log "percent: " + parseInt(100.0 * evt.loaded / evt.total)
-			).success((data, status, headers, config) ->
-				console.log data
-			)
-
-
+					fd.append 'medium[' + key + ']', val
+		).progress((evt) ->
+			console.log "percent: " + parseInt(100.0 * evt.loaded / evt.total)
+		).success((data, status, headers, config) ->
+			console.log data
+			console.log media
+			media.push data
+		)

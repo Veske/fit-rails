@@ -4,7 +4,8 @@ class MediumSerializer < ActiveModel::Serializer
                :text,
                :image_video_file_name,
                :image_video_croppable_url,
-               :image_video_thumb_url
+               :image_video_thumb_url,
+               :image_video_big_url
 
     has_one :user
     has_many :comments, :likes

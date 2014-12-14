@@ -19,12 +19,5 @@
 		</div>
 	</div>
 </div>
-
-<form ng-controller="MediumNewCtrl">
-	<button ng-file-select ng-file-model="media" multiple="false" class="btn button-xs">Attach Any File</button>
-	<input type="file" ng-file-select="upload($files)" multiple>
-
-	<button ng-click="upload2(media)" class="button-xs">Upload</button>
-
-</form>
-
+{{ media }}
+<div ng-include="templates[0].url" ng-controller="MediumNewCtrl"></div>
