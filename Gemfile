@@ -2,14 +2,14 @@ source 'http://rubygems.org'
 
 ruby '2.1.3'
 gem 'rails', '4.1.6'
-gem 'bootstrap-sass', '~> 3.2.0.2'
-gem 'sass-rails', '~> 5.0.0.beta1'
+gem 'bootstrap-sass', '~> 3.3.1.0'
+gem 'sass-rails', '~> 5.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'jbuilder', '~> 2.2.2'
-gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'jbuilder', '~> 2.2.5'
+gem 'sdoc', '~> 0.4.1',          group: :doc
 gem 'devise'
 gem 'pg'
 gem 'passenger'
@@ -25,7 +25,6 @@ group :development do
 	gem 'quiet_assets'
 	gem 'rails_layout'
 	gem 'upmin-admin'
-	#gem 'spring'
 end
 
 group :production do

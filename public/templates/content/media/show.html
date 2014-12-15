@@ -5,11 +5,19 @@
 		</div>
 
 		<div class="col-md-6 medium-view-row">
-			<p>{{ medium.text }} by <%= link_to medium.user.name , user_path(medium.user.id) %></p>
+			<p>{{ medium.text }} by <a href="/users/{{ medium.user.id }}">{{ medium.user.name }}</a></p>
 
 			<div id="likes">
 				<p>
-					{{ likes.length }} like this
+					<div ng-switch="likes.length">
+						<div ng-switch-when="0" >
+							<div ng-include="templates[2].url"></div>
+						</div>
+						<div ng-switch-default>
+							{{ likes.length }} users like this
+							<%= link_to 'Unlike', medium_like_path(unlike_params(current_user, medium), medium_id: medium.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+						</div>
+					</div>
 				</p>
 			</div>
 
