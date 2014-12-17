@@ -24,10 +24,10 @@ angular.module('Fit').controller "UsersIndexCtrl", ($scope, $timeout, $routePara
 			url:    './users/' + user.id + '.json',
 			data:   user: {role: selectedRole.key}
 		}).success( (data) ->
-			if user.id == data.users[0][1].id
-				user.role = data.users[0][1].role
+			console.log(data)
+			if user.id == data.user.id
+				user.role = data.user.role
 				Common.flashNotification($scope, 'Updated role for user: ' + user.name)
-
 		).error( ->
 			# Display error notification
 		)
