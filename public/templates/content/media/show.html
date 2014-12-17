@@ -8,20 +8,17 @@
 			<p>{{ medium.text }} by <a href="/users/{{ medium.user.id }}">{{ medium.user.name }}</a></p>
 
 			<div id="likes">
-				<p>
-					<div ng-switch="userHasLiked">
-						<div ng-switch-when="false" >
-							<div ng-include="templates[2].url" ng-controller="LikeFormCtrl"></div>
-						</div>
-						<div ng-switch-default>
-							<div ng-include="templates[3].url" ng-controller="LikeFormCtrl"></div>
-						</div>
+				<div ng-switch="userHasLiked">
+					<div ng-switch-when="false" >
+						<div ng-include="templates[2].url" ng-controller="LikeFormCtrl"></div>
 					</div>
-				</p>
+					<div ng-switch-default>
+						<div ng-include="templates[3].url" ng-controller="LikeFormCtrl"></div>
+					</div>
+				</div>
 			</div>
 
 			<div class="medium-view-comments" ng-include="templates[0].url"></div>
-
 			<div class="medium-view-comments-new" ng-include="templates[1].url" ng-controller="CommentsFormCtrl"></div>
 		</div>
 	</div>

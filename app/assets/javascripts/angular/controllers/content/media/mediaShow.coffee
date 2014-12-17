@@ -5,14 +5,22 @@ angular.module('Fit').controller "MediaShowCtrl", ($scope, $timeout, $routeParam
 	$scope.userHasLiked = 'false'
 
 	$scope.$watch "likes", ((newVal) ->
+		match = 0
+
 		if $scope.likes.length == 0
 			$scope.userHasLiked = 'false'
 		else
+			# Iterate over all likes and see if the current user has made a like
+			# IF so, make match == to 1
 			for key, like of $scope.likes
 				if like.user_id == current_user.id
-					$scope.userHasLiked = 'true'
-				else
-					$scope.userHasLiked = 'false'
+					match = 1
+
+			# IF match is 1, we change our variable to true to show appropriate content and vice versa
+			if match == 1
+				$scope.userHasLiked = 'true'
+			else
+				$scope.userHasLiked = 'false'
 	), true
 
 	$http.get('/media/' + $routeParams.id + '.json')
@@ -23,8 +31,6 @@ angular.module('Fit').controller "MediaShowCtrl", ($scope, $timeout, $routeParam
 		for key, like of $scope.likes
 			if like.user_id == current_user.id
 				$scope.userHasLiked = 'true'
-			else
-				$scope.userHasLiked = 'false'
 	.error (data) ->
 		console.log('error!')
 
