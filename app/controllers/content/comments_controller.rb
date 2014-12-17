@@ -8,7 +8,6 @@ class Content::CommentsController < ApplicationController
 		if comment.save
 			logger.info "INFO: New post created with id #{comment.id}."
 			render json: comment, status: 201
-			#render nothing: true
 		else
 			logger.debug "ERROR: failed to create new comment #{comment.errors.full_messages}."
 			render json: comment.errors.full_messages, status: 400

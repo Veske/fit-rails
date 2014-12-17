@@ -1,1 +1,4 @@
-like this <%= render partial: 'content/likes/create', locals: { medium: medium } %>
+<form>
+	{{ likes.length }} users like this
+	<button ng-click="newLike(medium, userHasLiked)"><span class="glyphicon glyphicon-thumbs-up"></span>Like this</button>
+</form>

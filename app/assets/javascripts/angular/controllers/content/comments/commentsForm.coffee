@@ -10,4 +10,3 @@ angular.module('Fit').controller "CommentsFormCtrl", ($scope, $timeout, $routePa
 		).error( ->
 			# Display error notification
 		)
-
