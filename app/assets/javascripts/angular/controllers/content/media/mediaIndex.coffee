@@ -3,7 +3,9 @@ angular.module('Fit').controller "MediaIndexCtrl", ($scope, $timeout, $routePara
 	$scope.text = []
 	$scope.file = []
 
-	$scope.templates = [{name: 'mediumNew.html', url: 'templates/content/media/_form.html'}]
+	$scope.templates = [
+		{ name: 'mediumNew.html', 		url: 'templates/content/media/_form.html'},
+		{ name: 'mediumDestroy.html',	url: 'templates/content/media/_destroy.html'}]
 
 	$http.get('/media.json')
 	.success (data) =>
@@ -36,3 +38,17 @@ angular.module('Fit').controller "MediaIndexCtrl", ($scope, $timeout, $routePara
 
 	$scope.chooseFile = ($files) ->
 		$scope.file = $files[0]
+
+	$scope.userOwnsMedium = (medium) ->
+		if medium.user_id == current_user.id
+			true
+
+	$scope.destroyMedium = (medium) ->
+		$http({
+			method: 'DELETE',
+			url:    './media/' + medium.id + '.json',
+		}).success( (data) ->
+			# Remove medium
+		).error( ->
+			# Display error notification
+		)

@@ -18,18 +18,14 @@ class Content::MediaController < ApplicationController
 	end
 
 	def create
-		#text: 'asd', image_video: params[:image_video]
-
 		medium = current_user.media.build(medium_params)
 
 		if medium.save
 			logger.info "INFO: New medium uploaded: #{medium.image_video_file_name}"
-			#redirect_to medium_path(medium), notice: 'New file uploaded'
 			render json: medium, status: 201
 		else
 			logger.info "ERROR: Uploading new medium file #{medium.errors.full_messages}"
-			render json: medium, status: 201
-			#redirect_to new_medium_path, alert: "Could not upload File: #{medium.errors.full_messages}"
+			render json: medium, status: 400
 		end
 	end
 
@@ -38,10 +34,10 @@ class Content::MediaController < ApplicationController
 
 		if current_user.id == medium.user_id && medium.destroy
 			logger.info "INFO: medium removed: #{medium.image_video_file_name}"
-			redirect_to media_path, notice: 'File removed.'
+			render json: medium, status: 201
 		else
 			logger.info "ERROR: Removing medium with id: #{medium.id}, reason(s): #{medium.errors.full_messages}"
-			redirect_to new_medium_path, alert: "Couldn't delete File: #{medium.errors.full_messages}"
+			render json: medium, status: 400
 		end
 	end
 

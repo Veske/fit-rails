@@ -9,9 +9,9 @@
 						<img ng:src="{{ medium.image_video_thumb_url }}" alt="{{ medium.text }}" /><br>
 					</td>
 					<td>
-						<% if current_user.id == medium.user_id %>
-						<%= link_to 'Delete', medium_path(medium), method: :delete, data: { confirm: 'Are you sure?' } %>
-						<% end %>
+						<div ng-if="userOwnsMedium(medium)">
+							<div ng-include="templates[1].url"></div>
+						</div>
 					</td>
 				</tr>
 				</tbody>
