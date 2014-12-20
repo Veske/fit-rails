@@ -48,7 +48,9 @@ angular.module('Fit').controller "MediaIndexCtrl", ($scope, $timeout, $routePara
 			method: 'DELETE',
 			url:    './media/' + medium.id + '.json',
 		}).success( (data) ->
-			# Remove medium
+			for key, medium of $scope.media
+				if medium.id == data.medium.id
+					$scope.media.splice(key, 1)
 		).error( ->
 			# Display error notification
 		)

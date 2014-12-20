@@ -7,8 +7,6 @@ Rails.application.routes.draw do
 		end
 	end
 
-
-
 	scope module: 'content' do
 		resources :media, only: [:index, :new, :create, :show, :destroy] do
 			resources :comments, only: [:create, :destroy]

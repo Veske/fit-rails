@@ -14,8 +14,9 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		user = User.includes(:media).find(params[:id])
-		locals user: user
+		user = User.find(params[:id])
+		media = Medium.where(user_id: user.id)
+		respond_with user: user, media: media
 	end
 
 	def update
