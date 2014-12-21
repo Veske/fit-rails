@@ -1,5 +1,4 @@
 class MediumSerializer < ActiveModel::Serializer
-
     attributes :id,
                :text,
                :image_video_file_name,

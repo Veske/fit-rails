@@ -42,9 +42,12 @@ class User < ActiveRecord::Base
 	devise :database_authenticatable, :registerable,
 	       :recoverable, :rememberable, :trackable, :validatable
 
+	# User can have many media, comments and likes
 	has_many :media, dependent: :destroy
 	has_many :comments, dependent: :destroy
 	has_many :likes, dependent: :destroy
+
+	# Associations for relationships, user can have many active and passive relationships
 	has_many :active_relationships, class_name:  'Relationship', foreign_key: 'follower_id', dependent:   :destroy
 	has_many :passive_relationships, class_name:  'Relationship', foreign_key: 'followed_id', dependent:   :destroy
 	has_many :following, through: :active_relationships, source: :followed

@@ -14,9 +14,26 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		user = User.find(params[:id])
-		media = Medium.where(user_id: user.id)
-		respond_with user: user, media: media
+		user = User.includes(:media, :active_relationships, :passive_relationships).find(params[:id])
+		media = user.media
+		following = user.active_relationships
+		followers = user.passive_relationships
+		respond_with user: user,
+		             media: media,
+		             following: following,
+		             followers: followers
+	end
+
+	def following
+		user  = User.includes(:active_relationships).find(params[:id])
+		following = user.active_relationships
+		respond_with user: user, following: following
+	end
+
+	def followers
+		user  = User.includes(:passive_relationships).find(params[:id])
+		followers = user.passive_relationships
+		respond_with user: user, followers: followers
 	end
 
 	def update
@@ -40,18 +57,6 @@ class UsersController < ApplicationController
 		user = User.find(params[:id])
 		user.destroy
 		redirect_to users_path, :notice => 'User deleted.'
-	end
-
-	def following
-		user  = User.find(params[:id])
-		users = user.following
-		render 'users/show_follow', locals: {user: user, users: users, title: 'following'}
-	end
-
-	def followers
-		user  = User.find(params[:id])
-		users = user.followers
-		render 'users/show_follow', locals: {user: user, users: users, title: 'followers'}
 	end
 
 	private

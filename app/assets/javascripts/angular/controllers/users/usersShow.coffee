@@ -2,6 +2,8 @@ angular.module('Fit').controller "UsersShowCtrl", ($scope, $timeout, $routeParam
 
 	$scope.user = []
 	$scope.media = []
+	$scope.followers = []
+	$scope.following = []
 
 	$scope.templates = [
 		{ name: 'mediumDestroy.html',	url: 'templates/content/media/_destroy.html'}]
@@ -10,6 +12,8 @@ angular.module('Fit').controller "UsersShowCtrl", ($scope, $timeout, $routeParam
 	.success (data) =>
 		$scope.media = data.media
 		$scope.user = data.user
+		$scope.followers = data.followers
+		$scope.following = data.following
 	.error (data) ->
 		console.log('error!')
 
