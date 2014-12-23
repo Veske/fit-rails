@@ -25,15 +25,15 @@ class UsersController < ApplicationController
 	end
 
 	def following
-		user  = User.includes(:active_relationships).find(params[:id])
-		following = user.active_relationships
-		respond_with user: user, following: following
+		user  = User.find(params[:id])
+		users = user.following
+		respond_with user: user, users: users
 	end
 
 	def followers
-		user  = User.includes(:passive_relationships).find(params[:id])
-		followers = user.passive_relationships
-		respond_with user: user, followers: followers
+		user  = User.find(params[:id])
+		users = user.followers
+		respond_with user: user, users: users
 	end
 
 	def update

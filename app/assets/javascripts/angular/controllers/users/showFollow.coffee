@@ -2,25 +2,19 @@ angular.module('Fit').controller "ShowFollowCtrl", ($scope, $timeout, $routePara
 	$scope.user = []
 	$scope.users = []
 
-	$scope.getUsers()
-	$scope.getRelationships()
-
-	$scope.getUsers = () ->
-		$http.get('/users/' + $routeParams.id + '.json')
+	# Get relationships depending which link was chosen
+	# params : type: following && followers
+	if $routeParams.type == 'following'
+		$http.get('/users/' + $routeParams.id + '/following.json')
 		.success (data) =>
 			$scope.user = data.user
+			$scope.users = data.users
 		.error (data) ->
 			console.log('error!')
-
-	$scope.getRelationships = () ->
-		console.log("Here")
-		if $routeParams.type == 'following'
-			console.log("following")
-			$http.get('/users/' + $routeParams.id + '/following.json')
-			.success (data) =>
-				console.log(data)
-				$scope.user = data.user
-			.error (data) ->
-				console.log('error!')
-		else
-			console.log("followers")
+	else
+		$http.get('/users/' + $routeParams.id + '/followers.json')
+		.success (data) =>
+			$scope.user = data.user
+			$scope.users = data.users
+		.error (data) ->
+			console.log('error!')
