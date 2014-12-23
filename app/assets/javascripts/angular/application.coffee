@@ -16,10 +16,10 @@ Fit.config ($routeProvider, $locationProvider) ->
 	.when '/users/:id',
 		templateUrl: 'templates/users/show.html',
 		controller: 'UsersShowCtrl'
-	.when '/users/:id/following',
+	.when '/users/:id/:type',
 		templateUrl: 'templates/users/show_follow.html',
 		controller:  'ShowFollowCtrl'
-	.when '/users/:id/followers',
+	.when '/users/:id/:type',
 		templateUrl: 'templates/users/show_follow.html',
 		controller:  'ShowFollowCtrl'
 	.when '/media',
