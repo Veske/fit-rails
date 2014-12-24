@@ -17,6 +17,18 @@
 	</a>
 </div>
 
+<div ng-if="is_following">
+	<form>
+		<button class="btn btn-primary" ng-click="unFollow(user)">Unfollow</button>
+	</form>
+</div>
+
+<div ng-if="!is_following && current_user.id != user.id">
+	<form>
+		<button class="btn btn-primary" ng-click="follow(user)">Follow</button>
+	</form>
+</div>
+
 <div class="container">
 	<div class="row">
 		<h3>{{ user.name }} uploads:</h3>

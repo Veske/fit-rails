@@ -18,10 +18,12 @@ class UsersController < ApplicationController
 		media = user.media
 		following = user.active_relationships
 		followers = user.passive_relationships
+		is_following = current_user.following?(user)
 		respond_with user: user,
 		             media: media,
 		             following: following,
-		             followers: followers
+		             followers:    followers,
+		             is_following: is_following
 	end
 
 	def following
