@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-	mount Upmin::Engine => '/admin'
 	devise_for :users
 	resources :users do
 		member do
@@ -16,5 +15,9 @@ Rails.application.routes.draw do
 	end
 
 	resources :relationships,       only: [:create, :destroy]
+
+	get '/dashboard', to: 'dashboard#index'
+	get '/roles', to: 'users#roles'
+
 	root to: 'visitors#index'
 end

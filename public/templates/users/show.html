@@ -1,0 +1,55 @@
+<h1>{{ user.name }}</h1>
+
+<p>Email: {{ user.email }}</p>
+
+<div class="stats">
+	<a href="/users/{{ user.id }}/following">
+		following
+		<strong id="following" class="stat">
+			{{ following.length }}
+		</strong>
+	</a>
+	<a href="/users/{{ user.id }}/followers">
+		followers
+		<strong id="followers" class="stat">
+			{{ followers.length }}
+		</strong>
+	</a>
+</div>
+
+<div class="follow-form" ng-controller="FollowFormCtrl">
+	<div ng-if="is_following">
+		<form>
+			<button class="btn btn-primary" ng-click="unFollow(user, followers)">Unfollow</button>
+		</form>
+	</div>
+
+	<div ng-if="!is_following && current_user.id != user.id">
+		<form>
+			<button class="btn btn-primary" ng-click="follow(user, followers)">Follow</button>
+		</form>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<h3>{{ user.name }} uploads:</h3>
+		<div class="column">
+			<table class="table">
+				<tbody ng-repeat="medium in media">
+					<tr>
+						<td ng:click="selectMedium(medium)">
+							<img ng:src="{{ medium.image_video_thumb_url }}" alt="{{ medium.text }}" /><br>
+						</td>
+
+						<td>
+							<div ng-if="userOwnsMedium(medium)">
+								<div ng-include="templates[0].url"></div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

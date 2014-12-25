@@ -4,6 +4,9 @@ class ApplicationController < ActionController::Base
 	protect_from_forgery with: :exception
 	before_action :configure_permitted_parameters, if: :devise_controller?
 
+	before_filter :intercept_html_requests
+	layout nil
+
 	def go_back
 		#Attempt to redirect
 		redirect_to :back, :alert => "Access denied."
@@ -25,6 +28,12 @@ class ApplicationController < ActionController::Base
 		#   locals item: x
 		def locals(action = nil, hash)
 			render action: action, locals: hash
+		end
+
+		# Get HTML requests and direct them to our ng-view
+		# TODO: make this method take our controller specific restrictions into consideration also
+		def intercept_html_requests
+			render('dashboard/index') if request.format == Mime::HTML && authenticate_user!
 		end
 
 	protected

@@ -1,0 +1,8 @@
+<h3>Media form:</h3>
+<form>
+	<label>Short description:</label>
+	<input type="text" name="text" ng-model="text" required>
+	<input type="file" name="file" ng-file-model="file" ng-file-select="chooseFile($files)" required>
+
+	<button ng-click="upload(file, text)" class="button-xs">Upload</button>
+</form>

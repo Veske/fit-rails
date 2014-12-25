@@ -8,13 +8,14 @@ class User < ActiveRecord::Base
 		self.role ||= :user
 	end
 
-	# Follows a user.
+	def roles
+		User.roles.keys.map { |role| {name: role.titleize, key: role} }
+		#User.roles
+	end
+
+	# Follows a user. Throw error to console when index violation appears
 	def follow(other_user)
-		if active_relationships.create(followed_id: other_user.id)
-			logger.debug "INFO: Following user with id: #{other_user.id}!"
-		else
-			logger.debug "ERROR: failed to follow user with id: #{other_user.id}!"
-		end
+		active_relationship = active_relationships.create!(followed_id: other_user.id)
 	end
 
 	# Unfollows a user.
@@ -37,9 +38,12 @@ class User < ActiveRecord::Base
 	devise :database_authenticatable, :registerable,
 	       :recoverable, :rememberable, :trackable, :validatable
 
+	# User can have many media, comments and likes
 	has_many :media, dependent: :destroy
 	has_many :comments, dependent: :destroy
 	has_many :likes, dependent: :destroy
+
+	# Associations for relationships, user can have many active and passive relationships
 	has_many :active_relationships, class_name:  'Relationship', foreign_key: 'follower_id', dependent:   :destroy
 	has_many :passive_relationships, class_name:  'Relationship', foreign_key: 'followed_id', dependent:   :destroy
 	has_many :following, through: :active_relationships, source: :followed

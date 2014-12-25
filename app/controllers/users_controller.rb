@@ -1,26 +1,57 @@
 class UsersController < ApplicationController
 	before_filter :authenticate_user!
 	before_filter :admin_only, :except => [:show, :followers, :following]
+	respond_to :json
 
 	def index
-		locals users: User.all
+		users = User.all
+		respond_with users
+	end
+
+	def roles
+		roles = User.roles.keys.map { |role| {name: role.titleize, key: role} }
+		respond_with roles.to_json
 	end
 
 	def show
-		user = User.includes(:media).find(params[:id])
-		locals user: user
+		user = User.includes(:media, :active_relationships, :passive_relationships).find(params[:id])
+		media = user.media
+		following = user.active_relationships
+		followers = user.passive_relationships
+		is_following = current_user.following?(user)
+		respond_with user: user,
+		             media: media,
+		             following: following,
+		             followers:    followers,
+		             is_following: is_following
 	end
 
-	# TODO: This action was here by default, but the whole process seems to work without it too.
-	# Needs testing and then remove it.
+	def following
+		user  = User.find(params[:id])
+		users = user.following
+		respond_with user: user, users: users
+	end
+
+	def followers
+		user  = User.find(params[:id])
+		users = user.followers
+		respond_with user: user, users: users
+	end
+
 	def update
 		user = User.find(params[:id])
 		if user.update_attributes(secure_params)
 			logger.debug "INFO: User with id: #{user.id} updated!"
-			redirect_to users_path, :notice => 'User updated.'
+			respond_to do |format|
+				format.html
+				format.json { render json: {user: user} }
+			end
 		else
 			logger.debug "INFO: Was not able to update user with id: #{user.id} - #{user.errors.full_messages}"
-			redirect_to users_path, :alert => "Unable to update user: #{user.errors.full_messages}."
+			respond_to do |format|
+				format.html
+				format.json { render json: {user: user} }
+			end
 		end
 	end
 
@@ -28,18 +59,6 @@ class UsersController < ApplicationController
 		user = User.find(params[:id])
 		user.destroy
 		redirect_to users_path, :notice => 'User deleted.'
-	end
-
-	def following
-		user  = User.find(params[:id])
-		users = user.following
-		render 'users/show_follow', locals: {user: user, users: users, title: 'following'}
-	end
-
-	def followers
-		user  = User.find(params[:id])
-		users = user.followers
-		render 'users/show_follow', locals: {user: user, users: users, title: 'followers'}
 	end
 
 	private
