@@ -1,14 +1,14 @@
 angular.module('Fit').controller "FollowFormCtrl", ($scope, $timeout, $routeParams, $location, $http, $window) ->
 	$scope.current_user = current_user
 
-	$scope.follow = (user) ->
+	$scope.follow = (user, followers) ->
 		$http({
 			method: 'POST',
 			url: './relationships.json',
 			data:
 				followed_id: user.id
 		}).success((data) ->
-			console.log(data)
+			followers.push(data.relationship)
 			$scope.is_following = true
 		).error(->
 			# Display error notification
@@ -23,7 +23,9 @@ angular.module('Fit').controller "FollowFormCtrl", ($scope, $timeout, $routePara
 			method: 'DELETE',
 			url: './relationships/' + $scope.id + '.json',
 		}).success((data) ->
-			console.log(data)
+			for key, follower of followers
+				if follower.id == $scope.id
+					followers.splice(key, 1)
 			$scope.is_following = false
 		).error(->
 			# Display error notification

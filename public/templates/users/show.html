@@ -4,29 +4,29 @@
 
 <div class="stats">
 	<a href="/users/{{ user.id }}/following">
+		following
 		<strong id="following" class="stat">
 			{{ following.length }}
 		</strong>
-		following
 	</a>
 	<a href="/users/{{ user.id }}/followers">
+		followers
 		<strong id="followers" class="stat">
 			{{ followers.length }}
 		</strong>
-		followers
 	</a>
 </div>
 
 <div class="follow-form" ng-controller="FollowFormCtrl">
 	<div ng-if="is_following">
 		<form>
-			<button class="btn btn-primary" ng-click="unFollow(user, is_following, followers)">Unfollow</button>
+			<button class="btn btn-primary" ng-click="unFollow(user, followers)">Unfollow</button>
 		</form>
 	</div>
 
 	<div ng-if="!is_following && current_user.id != user.id">
 		<form>
-			<button class="btn btn-primary" ng-click="follow(user, is_following)">Follow</button>
+			<button class="btn btn-primary" ng-click="follow(user, followers)">Follow</button>
 		</form>
 	</div>
 </div>

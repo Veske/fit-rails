@@ -11,7 +11,7 @@ angular.module('Fit').controller "UsersShowCtrl", ($scope, $timeout, $routeParam
 
 	$http.get('/users/' + $routeParams.id + '.json')
 	.success (data) =>
-		console.log(data)
+		#console.log(data)
 		$scope.media = data.media
 		$scope.user = data.user
 		$scope.followers = data.followers

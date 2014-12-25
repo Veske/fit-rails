@@ -1,7 +1,14 @@
 source 'http://rubygems.org'
 
+# Environment versions. These versions will be used for main development
+# Make sure your own environment contains the same versions of Ruby and Ruby on Rails
 ruby '2.1.3'
 gem 'rails', '4.1.6'
+
+# These will be used soon when ActiveModelSerializer issues are fixed
+#ruby '2.2.0'
+#gem 'rails', '4.2.0'
+
 gem 'bootstrap-sass', '~> 3.3.1.0'
 gem 'sass-rails', '~> 5.0.0'
 gem 'uglifier', '>= 1.3.0'

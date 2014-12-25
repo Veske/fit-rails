@@ -13,13 +13,9 @@ class User < ActiveRecord::Base
 		#User.roles
 	end
 
-	# Follows a user.
+	# Follows a user. Throw error to console when index violation appears
 	def follow(other_user)
-		if active_relationships.create(followed_id: other_user.id)
-			logger.debug "INFO: Following user with id: #{other_user.id}!"
-		else
-			logger.debug "ERROR: failed to follow user with id: #{other_user.id}!"
-		end
+		active_relationship = active_relationships.create!(followed_id: other_user.id)
 	end
 
 	# Unfollows a user.

@@ -25,6 +25,7 @@ angular.module('Fit').controller "MediaShowCtrl", ($scope, $timeout, $routeParam
 
 	$http.get('/media/' + $routeParams.id + '.json')
 	.success (data) =>
+		console.log(data)
 		$scope.medium = data.medium
 		$scope.comments = data.medium.comments
 		$scope.likes = data.medium.likes
