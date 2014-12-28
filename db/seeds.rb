@@ -11,3 +11,32 @@ User.create([
 	{name: 'Admin', email: 'admin@admin.com', password: 'changeme', role: 2},
 	{name: 'User', email: 'user@user.com', password: 'changeme', role: 0}
 ])
+
+Medium.create([
+	{text: 'Some text nr1', image_video: File.new("#{Rails.root}/public/images/1.png"), user_id: 1},
+	{text: 'Some text nr2', image_video: File.new("#{Rails.root}/public/images/2.jpg"), user_id: 1},
+    {text: 'Some text nr3', image_video: File.new("#{Rails.root}/public/images/3.jpg"), user_id: 2}
+])
+
+Relationship.create([
+	{follower_id: 1, followed_id: 2},
+    {follower_id: 2, followed_id: 1}
+])
+
+Comment.create([
+	{text: 'Random comment 123', user_id: 1, medium_id: 1},
+    {text: 'Comment about picture', user_id: 2, medium_id: 1},
+	{text: 'Random comment 123', user_id: 1, medium_id: 2},
+	{text: 'Comment about picture', user_id: 2, medium_id: 2},
+	{text: 'Random comment 123', user_id: 1, medium_id: 3},
+	{text: 'Comment about picture', user_id: 2, medium_id: 3}
+])
+
+Like.create([
+	{user_id: 1, medium_id: 1},
+	{user_id: 2, medium_id: 1},
+	{user_id: 1, medium_id: 2},
+	{user_id: 2, medium_id: 2},
+	{user_id: 1, medium_id: 3},
+	{user_id: 2, medium_id: 3}
+])

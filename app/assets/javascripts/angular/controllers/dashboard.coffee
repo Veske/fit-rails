@@ -19,3 +19,6 @@ angular.module('Fit').controller "DashboardCtrl", ($scope, $timeout, $routeParam
 		$location.url('/users')
 		#$window.location.href = '/users'
 		console.log("Redirected")
+
+	$scope.selectMedium = (medium) ->
+		$location.url('/media/' + medium.id)
