@@ -8,16 +8,4 @@ class MediumSerializer < ActiveModel::Serializer
 
     has_one :user
     has_many :comments, :likes
-
-    def include_user?
-        object.association(:user).loaded?
-    end
-
-    def include_comments?
-        object.association(:comments).loaded?
-    end
-
-    def include_associations?
-        object.association(:user, :comments, :likes).loaded?
-    end
 end
