@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
 	# For APIs, you may want to use :null_session instead.
 	protect_from_forgery with: :exception
 	before_action :configure_permitted_parameters, if: :devise_controller?
-
 	before_filter :intercept_html_requests
 	layout nil
 
@@ -14,6 +13,16 @@ class ApplicationController < ActionController::Base
 		#Catch exception and redirect to root
 		rescue ActionController::RedirectBackError
 		redirect_to root_path, :alert => "Access denied."
+	end
+
+	def _render_with_renderer_json(json, options)
+		serializer = build_json_serializer(json, options)
+
+		if serializer
+			super(serializer, options)
+		else
+			super(json, options)
+		end
 	end
 
 	private
