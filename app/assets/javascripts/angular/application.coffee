@@ -1,4 +1,4 @@
-Fit = angular.module("Fit", ['ngRoute', 'growlNotifications', 'angularFileUpload'])
+Fit = angular.module("Fit", ['ngRoute', 'growlNotifications', 'angularFileUpload', 'ngResource'])
 
 Fit.config ($httpProvider) ->
 	authToken = $("meta[name=\"csrf-token\"]").attr("content")
@@ -30,4 +30,10 @@ Fit.config ($routeProvider, $locationProvider) ->
 		controller: 'MediaShowCtrl'
 	.otherwise
 		redirectTo: '/'
+
+# Makes AngularJS work with turbolinks.
+$(document).on 'page:load', ->
+	$('[ng-app]').each ->
+		module = $(this).attr('ng-app')
+		angular.bootstrap(this, [module])
 

@@ -1,4 +1,4 @@
-angular.module('Fit').controller "CommentsFormCtrl", ($scope, $timeout, $routeParams, $location, $http, $window) ->
+angular.module('Fit').controller "CommentsFormCtrl", ($scope, $routeParams, $http, $window) ->
 
 	$scope.newComment = (text, medium) ->
 		$http({

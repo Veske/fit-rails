@@ -1,27 +1,13 @@
-angular.module('Fit').controller "MediaShowCtrl", ($scope, $timeout, $routeParams, $location, $http, $window) ->
+angular.module('Fit').controller "MediaShowCtrl", ($scope, $routeParams, MediaShow) ->
 	$scope.medium = []
 	$scope.comments = []
 	$scope.likes = []
 	$scope.userHasLiked = 'false'
 
-	$http.get('/media/' + $routeParams.id + '.json')
-	.success (data) =>
-		console.log(data)
-		$scope.medium = data.medium
-		$scope.comments = data.medium.comments
-		$scope.likes = data.medium.likes
-		for key, like of $scope.likes
-			if like.user_id == current_user.id
-				$scope.userHasLiked = 'true'
-	.error (data) ->
-		console.log('error!')
-
-
-	$scope.templates = [
-		{ name: 'commentsShow.html', url: 'templates/content/comments/_show.html'},
-		{ name: 'commentsForm.html', url: 'templates/content/comments/_form.html'},
-		{ name: 'likesForm.html',    url: 'templates/content/likes/_form.html'},
-		{ name: 'likeDestroy.html',  url: 'templates/content/likes/_destroy.html'}]
+	# Function that is ran upon page load
+	$scope.init = ->
+		mediumService = new MediaShow($routeParams.id, serverErrorHandler)
+		queryMedium(mediumService)
 
 	$scope.$watch "likes", ((newVal) ->
 		match = 0
@@ -40,3 +26,22 @@ angular.module('Fit').controller "MediaShowCtrl", ($scope, $timeout, $routeParam
 			else
 				$scope.userHasLiked = 'false'
 	), true
+
+	queryMedium = (mediumService) ->
+		mediumService.all().$promise.then(
+			(data) ->
+				$scope.medium = data.medium
+				$scope.comments = data.medium.comments
+				$scope.likes = data.medium.likes
+			(error) ->
+				serverErrorHandler()
+		)
+
+	$scope.templates = [
+		{ name: 'commentsShow.html', url: 'templates/content/comments/_show.html'},
+		{ name: 'commentsForm.html', url: 'templates/content/comments/_form.html'},
+		{ name: 'likesForm.html',    url: 'templates/content/likes/_form.html'},
+		{ name: 'likeDestroy.html',  url: 'templates/content/likes/_destroy.html'}]
+
+	serverErrorHandler = ->
+		alert("There was a server error, please reload the page and try again.")

@@ -13,10 +13,13 @@
 #= require jquery
 #= require jquery_ujs
 #= require turbolinks
+# --------- begin Angular imports -----------------
 #= require angular-file-upload/angular-file-upload-shim
 #= require angular
 #= require angular-route
 #= require angular-growl-notifications.min
 #= require angular-file-upload
+#= require angular-resource
+# --------- end Angular imports --------------------
 #= require bootstrap-sprockets
 #= require_tree .
