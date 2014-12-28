@@ -2,3 +2,25 @@
 
 <p><a href="/users">Users</a> {{ users.length }} registered</p>
 
+
+<h3>News feed:</h3>
+
+<div class="container">
+	<div class="row">
+		<div class="column">
+			<table class="table">
+				<tbody ng-repeat="medium in feed">
+					<tr>
+						<td>
+							{{medium.user.name}} posted:
+						</td>
+						<td ng:click="selectMedium(medium)">
+							<p>{{ medium.text }}</p>
+							<img ng:src="{{ medium.image_video_thumb_url }}" alt="{{ medium.text }}" /><br>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

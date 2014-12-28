@@ -20,7 +20,7 @@ angular.module('Fit').controller "MediaIndexCtrl", ($scope, $timeout, $routePara
 		$upload.upload(
 			url: "/media.json"
 			method: 'POST'
-			data: {text: $scope.text}
+			data: { text: text }
 			file: file
 			fileFormDataName: 'medium[image_video]'
 			formDataAppender: (fd, key, val) ->

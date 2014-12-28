@@ -7,7 +7,7 @@ Fit.config ($httpProvider) ->
 Fit.config ($routeProvider, $locationProvider) ->
 	$locationProvider.html5Mode true
 	$routeProvider
-	.when '/dashboard',
+	.when '/',
 		templateUrl: 'templates/dashboard/index.html',
 		controller: 'DashboardCtrl'
 	.when '/users',

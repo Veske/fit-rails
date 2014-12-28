@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
 		redirect_to root_path, :alert => "Access denied."
 	end
 
+	# Uses serializer to format data to json, when a proper serializer exists
 	def _render_with_renderer_json(json, options)
 		serializer = build_json_serializer(json, options)
 

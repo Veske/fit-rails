@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 # Environment versions. These versions will be used for main development
 # Make sure your own environment contains the same versions of Ruby and Ruby on Rails
-ruby '2.1.3'
+ruby '2.2.0'
 gem 'rails', '4.2.0'
 
 gem 'bootstrap-sass', '~> 3.3.1.0'
@@ -11,7 +11,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'jbuilder', '~> 2.2.5'
+gem 'jbuilder', '~> 2.2.6'
 gem 'sdoc', '~> 0.4.1',          group: :doc
 gem 'devise'
 gem 'pg'

@@ -55,6 +55,6 @@ Rails.application.configure do
 	# Set Imagemagic path for Paperclip
 	Paperclip.options[:command_path] = "/usr/bin"
 
-# ActiveRecord callback errors
-#config.active_record.raise_in_transactional_callbacks = true
+	# Raise callback errors
+	config.active_record.raise_in_transactional_callbacks = true
 end
