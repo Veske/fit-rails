@@ -12,11 +12,8 @@ angular.module('Fit')
 		$scope.file = []
 
 		$scope.init = ->
-			@mediumService = new MediumService($routeParams.id, serverErrorHandler)
-			@mediumService.all().$promise.then(
-				(data) ->
-					$scope.media = data
-			)
+			@mediumService = new MediumService(serverErrorHandler)
+			@mediumService.all($scope)
 
 		$scope.selectMedium = (medium) ->
 			$location.url('/media/' + medium.id)
@@ -47,7 +44,7 @@ angular.module('Fit')
 			if medium.user_id == current_user.id then true
 
 		$scope.destroyMedium = (medium) ->
-			@mediumService.delete(medium, $scope.media)
+			@mediumService.delete(medium, $scope)
 
 		$scope.templates = [
 			{ name: 'mediumNew.html', 		url: 'templates/content/media/_form.html'},

@@ -6,7 +6,7 @@ angular.module('Fit')
 	'Common',
 	($resource, $http, $routeParams, Common) ->
 		class CommentService
-			constructor: (mediumId, errorHandler) ->
+			constructor: (errorHandler) ->
 				@service = $resource('/media/:id/comments/:comment_id.json',
 					{
 						id: '@id',

@@ -22,15 +22,15 @@ angular.module('Fit')
 			create: (attributes, successHandler) ->
 				new @service(medium: attributes).$save ((medium) -> successHandler(medium)), @errorHandler
 
-			delete: (medium, media) ->
+			delete: (medium, $scope) ->
 				new @service().$delete {id: medium.id}, ((data) ->
-					for key, medium of media
-						if medium.id == data.medium.id then media.splice(key, 1)
+					for key, medium of $scope.media
+						if medium.id == data.medium.id then $scope.media.splice(key, 1)
 				), @errorHandler
 
 			find: (mediumId) ->
 				@service.get {id: mediumId}, (-> null), @errorHandler
 
-			all: () ->
-				@service.query (-> null), @errorHandler
+			all: ($scope) ->
+				@service.query ((data)-> $scope.media = data), @errorHandler
 ]

@@ -5,10 +5,10 @@ angular.module('Fit')
 	'$routeParams',
 	($resource, $http, $routeParams) ->
 		class LikeService
-			constructor: (mediumId, errorHandler) ->
+			constructor: (errorHandler) ->
 				@service = $resource('/media/:id/likes/:like_id.json',
 					{
-						id: mediumId,
+						id: '@id',
 						like_id: '@likeId'
 					},
 					{
@@ -23,12 +23,12 @@ angular.module('Fit')
 				defaults.patch = defaults.patch || {}
 				defaults.patch['Content-Type'] = 'application/json'
 
-			create: (attributes, successHandler, medium) ->
+			create: (attributes, successHandler, medium, mediumId) ->
 				# Success event triggers function successHandler()
-				new @service(like: attributes).$save ((like) -> successHandler(like, medium)), @errorHandler
+				new @service(like: attributes).$save { id: mediumId }, ((like) -> successHandler(like, medium)), @errorHandler
 
-			delete: (like, medium) ->
-				new @service().$delete {like_id: like.id}, ((data) ->
+			delete: (like, medium, mediumId) ->
+				new @service().$delete {like_id: like.id, id: mediumId}, ((data) ->
 					# Handle success event by splicing the likes array with deleted like
 					for key, like of medium.likes
 						if like.id == data.id then medium.likes.splice(key, 1)
