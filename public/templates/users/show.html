@@ -20,13 +20,13 @@
 <div class="follow-form" ng-controller="FollowFormCtrl">
 	<div ng-if="is_following">
 		<form>
-			<button class="btn btn-primary" ng-click="unFollow(user, followers)">Unfollow</button>
+			<button class="btn btn-primary sten" ng-click="unFollow(user, followers)">Unfollow</button>
 		</form>
 	</div>
 
 	<div ng-if="!is_following && current_user.id != user.id">
 		<form>
-			<button class="btn btn-primary" ng-click="follow(user, followers)">Follow</button>
+			<button class="btn btn-primary sten" ng-click="follow(user, followers)">Follow</button>
 		</form>
 	</div>
 </div>
