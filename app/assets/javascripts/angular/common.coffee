@@ -12,5 +12,9 @@ angular.module('Fit')
 				setTimeout(() ->
 					$scope.notify = false
 				, 2000)
+
+			# Display a notification on server errors
+			serverErrorHandler: () ->
+				alert("There was a server error, please reload the page and try again.")
 		}
 ]

@@ -3,21 +3,19 @@ angular.module('Fit')
 	'$scope',
 	'$location',
 	'$http',
-	($scope, $location, $http) ->
+	'UserService',
+	'Common',
+	'FeedService',
+	($scope, $location, $http, UserService, Common, FeedService) ->
 		$scope.users = []
 		$scope.feed = []
+		serverErrorHandler = Common.serverErrorHandler
 
-		$http.get('/users.json')
-		.success (data) =>
-			$scope.users = data.users
-		.error (data) ->
-			console.log('error!')
-
-		$http.get('/feed.json')
-		.success (data) =>
-			$scope.feed = data.feed
-		.error (data) ->
-			console.log('error!')
+		$scope.init = ->
+			@userService = new UserService(serverErrorHandler)
+			@feedService = new FeedService(serverErrorHandler)
+			@userService.all($scope)
+			@feedService.all($scope)
 
 		$scope.viewUsers = ->
 			$location.url('/users')
