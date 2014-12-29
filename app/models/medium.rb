@@ -11,7 +11,7 @@ class Medium < ActiveRecord::Base
 	                                croppable: '600x600>',
 	                                big: '1000x1000>' }
 	validates_attachment_content_type :image_video, :content_type => %w(image/jpeg image/jpg image/png image/gif)
-	validates_with AttachmentSizeValidator, attributes: :image_video, less_than: 1.megabytes
+	validates_with AttachmentSizeValidator, attributes: :image_video, less_than: 5.megabytes
 
 	# Define custom url fields for medium in serializer
 	# TODO: find a better way to get them to serializer
