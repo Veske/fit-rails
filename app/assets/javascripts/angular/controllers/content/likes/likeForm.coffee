@@ -1,15 +1,11 @@
-angular.module('Fit').controller "LikeFormCtrl", ($scope, $timeout, $routeParams, $location, $http, $window) ->
+angular.module('Fit').controller "LikeFormCtrl", ($scope, $routeParams, $http, LikeService) ->
+
+	$scope.init = ->
+		@likeService = new LikeService($routeParams.id, serverErrorHandler)
 
 	$scope.newLike = (medium) ->
-		$http({
-			method: 'POST',
-			url:    './media/' + medium.id + '/likes' + '.json',
-			data:   like: {user_id: current_user.id}
-		}).success( (data) ->
-			medium.likes.push(data)
-		).error( ->
-			# Display error notification
-		)
+		@likeService.create({'user_id': current_user.id}, successHandler , medium)
+
 
 	$scope.destroyLike = (medium) ->
 		$scope.like = []
@@ -27,3 +23,9 @@ angular.module('Fit').controller "LikeFormCtrl", ($scope, $timeout, $routeParams
 		).error( ->
 			# Display error notification
 		)
+
+	serverErrorHandler = ->
+		alert("There was a server error, please reload the page and try again.")
+
+	successHandler = (like, medium) ->
+		medium.likes.push(like)

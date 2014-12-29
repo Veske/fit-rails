@@ -7,13 +7,13 @@
 		<div class="col-md-6 medium-view-row">
 			<p>{{ medium.text }} by <a href="/users/{{ medium.user.id }}">{{ medium.user.name }}</a></p>
 
-			<div id="likes">
+			<div id="likes" ng-controller="LikeFormCtrl" ng-init="init()">
 				<div ng-switch="userHasLiked">
 					<div ng-switch-when="false" >
-						<div ng-include="templates[2].url" ng-controller="LikeFormCtrl"></div>
+						<div ng-include="templates[2].url"></div>
 					</div>
 					<div ng-switch-default>
-						<div ng-include="templates[3].url" ng-controller="LikeFormCtrl"></div>
+						<div ng-include="templates[3].url"></div>
 					</div>
 				</div>
 			</div>
