@@ -1,15 +1,16 @@
-<h3>Dashboard</h3>
+<div ng-init="init()">
+	<h3>Dashboard</h3>
 
-<p><a href="/users">Users</a> {{ users.length }} registered</p>
+	<p><a href="/users">Users</a> {{ users.length }} registered</p>
 
 
-<h3>News feed:</h3>
+	<h3>News feed:</h3>
 
-<div class="container">
-	<div class="row">
-		<div class="column">
-			<table class="table">
-				<tbody ng-repeat="medium in feed">
+	<div class="container">
+		<div class="row">
+			<div class="column">
+				<table class="table">
+					<tbody ng-repeat="medium in feed">
 					<tr>
 						<td>
 							{{medium.user.name}} posted:
@@ -19,8 +20,10 @@
 							<img ng:src="{{ medium.image_video_thumb_url }}" alt="{{ medium.text }}" /><br>
 						</td>
 					</tr>
-				</tbody>
-			</table>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>
+

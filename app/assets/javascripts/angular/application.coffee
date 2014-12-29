@@ -1,39 +1,20 @@
-Fit = angular.module("Fit", ['ngRoute', 'growlNotifications', 'angularFileUpload', 'ngResource'])
+# Register Fit-rails app for angular
+angular.module('Fit.services', [
+	'ngRoute',
+	'ngResource',
+	'growlNotifications',
+	'angularFileUpload'
+])
 
-Fit.config ($httpProvider) ->
-	authToken = $("meta[name=\"csrf-token\"]").attr("content")
-	$httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
+# Include all Angular modules
+angular.module('Fit', [
+	'Fit.services'
+])
 
-Fit.config ($routeProvider, $locationProvider) ->
-	$locationProvider.html5Mode true
-	$routeProvider
-	.when '/',
-		templateUrl: 'templates/dashboard/index.html',
-		controller: 'DashboardCtrl'
-	.when '/users',
-		templateUrl: 'templates/users/index.html',
-		controller: 'UsersIndexCtrl'
-	.when '/users/:id',
-		templateUrl: 'templates/users/show.html',
-		controller: 'UsersShowCtrl'
-	.when '/users/:id/:type',
-		templateUrl: 'templates/users/show_follow.html',
-		controller:  'ShowFollowCtrl'
-	.when '/users/:id/:type',
-		templateUrl: 'templates/users/show_follow.html',
-		controller:  'ShowFollowCtrl'
-	.when '/media',
-		templateUrl: 'templates/content/media/index.html',
-		controller: 'MediaIndexCtrl'
-	.when '/media/:id',
-		templateUrl: 'templates/content/media/show.html',
-		controller: 'MediaShowCtrl'
-	.otherwise
-		redirectTo: '/'
-
-# Makes AngularJS work with turbolinks.
-$(document).on 'page:load', ->
-	$('[ng-app]').each ->
-		module = $(this).attr('ng-app')
-		angular.bootstrap(this, [module])
-
+# Set metadata for $httpProvider
+angular.module('Fit').config [
+	'$httpProvider',
+	($httpProvider) ->
+		authToken = $("meta[name=\"csrf-token\"]").attr("content")
+		$httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
+]

@@ -1,41 +1,37 @@
-angular.module('Fit').controller "UsersShowCtrl", ($scope, $timeout, $routeParams, $location, $http, $window) ->
+angular.module('Fit')
+.controller "UsersShowCtrl", [
+	'$scope',
+	'$routeParams',
+	'$location',
+	'UserService',
+	'Common',
+	'MediumService',
+	($scope, $routeParams, $location, UserService, Common, MediumService) ->
+		# Initialize $scope variables
+		$scope.user = []
+		$scope.media = []
+		$scope.followers = []
+		$scope.following = []
+		$scope.isFollowing = false
+		serverErrorHandler = Common.serverErrorHandler
 
-	$scope.user = []
-	$scope.media = []
-	$scope.followers = []
-	$scope.following = []
-	$scope.isFollowing = false
+		# Function that is ran upon page load to initalize services
+		$scope.init = ->
+			@userService = new UserService(serverErrorHandler)
+			@mediumService = new MediumService(serverErrorHandler)
+			@userService.find($routeParams.id, $scope)
 
-	$scope.templates = [
-		{ name: 'mediumDestroy.html',	url: 'templates/content/media/_destroy.html'}]
+		$scope.selectMedium = (medium) -> $location.url('/media/' + medium.id)
 
-	$http.get('/users/' + $routeParams.id + '.json')
-	.success (data) =>
-		#console.log(data)
-		$scope.media = data.media
-		$scope.user = data.user
-		$scope.followers = data.followers
-		$scope.following = data.following
-		$scope.is_following = data.is_following
-	.error (data) ->
-		console.log('error!')
+		# Check to know if we should show the delete medium button
+		$scope.userOwnsMedium = (medium) ->
+			if medium.user_id == current_user.id then true
 
-	$scope.selectMedium = (medium) ->
-		$location.url('/media/' + medium.id)
+		$scope.destroyMedium = (medium) ->
+			@mediumService.delete(medium, $scope)
 
-	$scope.userOwnsMedium = (medium) ->
-		if medium.user_id == current_user.id
-			true
-
-	$scope.destroyMedium = (medium) ->
-		$http({
-			method: 'DELETE',
-			url:    './media/' + medium.id + '.json',
-		}).success( (data) ->
-			for key, medium of $scope.media
-				if medium.id == data.medium.id
-					$scope.media.splice(key, 1)
-		).error( ->
-			# Display error notification
-		)
-
+		# These templates are used to show little partials on the currently loaded page that
+		# use different controllers
+		$scope.templates = [
+			{ name: 'mediumDestroy.html',	url: 'templates/content/media/_destroy.html'}]
+]

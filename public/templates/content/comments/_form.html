@@ -1,3 +1,9 @@
+<div ng-if="notify">
+	<growl-notification>
+		{{ message }}
+	</growl-notification>
+</div>
+
 <form novalidate class="simple-form">
 	<label for="count">Text:</label>
 	<input type="text" name="text" ng-model="text">

@@ -1,31 +1,26 @@
-angular.module('Fit').controller "LikeFormCtrl", ($scope, $routeParams, $http, LikeService) ->
-
-	$scope.init = ->
-		@likeService = new LikeService($routeParams.id, serverErrorHandler)
-
-	$scope.newLike = (medium) ->
-		@likeService.create({'user_id': current_user.id}, successHandler , medium)
-
-
-	$scope.destroyLike = (medium) ->
+angular.module('Fit')
+.controller "LikeFormCtrl", [
+	'$scope',
+	'$routeParams',
+	'$http',
+	'LikeService',
+	($scope, $routeParams, $http, LikeService) ->
 		$scope.like = []
-		for key, like of medium.likes
-			if like.user_id == current_user.id
-				$scope.like = like
 
-		$http({
-			method: 'DELETE',
-			url:    './media/' + medium.id + '/likes/' + $scope.like.id + '.json',
-		}).success( (data) ->
+		$scope.init = ->
+			@likeService = new LikeService(serverErrorHandler)
+
+		$scope.newLike = (medium) ->
+			@likeService.create({'user_id': current_user.id}, successHandler , medium, $routeParams.id)
+
+		$scope.destroyLike = (medium) ->
 			for key, like of medium.likes
-				if like.id == data.id
-					medium.likes.splice(key, 1)
-		).error( ->
-			# Display error notification
-		)
+				if like.user_id == current_user.id then $scope.like = like
+			@likeService.delete($scope.like, medium, $routeParams.id)
 
-	serverErrorHandler = ->
-		alert("There was a server error, please reload the page and try again.")
+		serverErrorHandler = ->
+			alert("There was a server error, please reload the page and try again.")
 
-	successHandler = (like, medium) ->
-		medium.likes.push(like)
+		successHandler = (like, medium) ->
+			medium.likes.push(like)
+]
