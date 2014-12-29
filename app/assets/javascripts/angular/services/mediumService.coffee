@@ -1,5 +1,5 @@
-angular.module('Fit').factory 'MediaShow', ($resource, $http, $routeParams) ->
-	class Comments
+angular.module('Fit').factory 'MediumService', ($resource, $http, $routeParams) ->
+	class MediumService
 		constructor: (mediumId, errorHandler) ->
 			@service = $resource('/media/:id.json',
 				{id: mediumId},
@@ -15,7 +15,7 @@ angular.module('Fit').factory 'MediaShow', ($resource, $http, $routeParams) ->
 			defaults.patch['Content-Type'] = 'application/json'
 
 		create: (attributes, successHandler) ->
-			new @service(list: attributes).$save ((list) -> successHandler(list)), @errorHandler
+			new @service(medium: attributes).$save ((medium) -> successHandler(medium)), @errorHandler
 
-		all: () ->
+		getData: () ->
 			@service.query((-> null), @errorHandler)

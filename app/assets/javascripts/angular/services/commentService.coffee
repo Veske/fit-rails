@@ -1,13 +1,12 @@
-angular.module('Fit').factory 'LikeService', ($resource, $http, $routeParams) ->
-	class LikeService
+angular.module('Fit').factory 'CommentService', ($resource, $http, $routeParams) ->
+	class CommentService
 		constructor: (mediumId, errorHandler) ->
-			@service = $resource('/media/:id/likes/:like_id.json',
+			@service = $resource('/media/:id/comments/:comment_id.json',
 				{
 					id: mediumId,
-					like_id: '@likeId'
+					comment_id: '@commentId'
 				},
 				{
-					'query':  { method: 'GET', isArray: false },
 					'create': { method: 'POST'},
 					'delete': { method: 'DELETE' }
 				}
@@ -20,11 +19,11 @@ angular.module('Fit').factory 'LikeService', ($resource, $http, $routeParams) ->
 
 		create: (attributes, successHandler, medium) ->
 			# Success event triggers function successHandler()
-			new @service(like: attributes).$save ((like) -> successHandler(like, medium)), @errorHandler
+			new @service(comment: attributes).$save ((comment) -> successHandler(comment.comment, medium)), @errorHandler
 
 		delete: (like, medium) ->
-			new @service().$delete {like_id: like.id}, ((data) ->
+			#new @service().$delete {like_id: like.id}, ((data) ->
 				# Handle success event by splicing the likes array with deleted like
-				for key, like of medium.likes
-					if like.id == data.id then medium.likes.splice(key, 1)
-			), @errorHandler
+			#	for key, like of medium.likes
+			#		if like.id == data.id then medium.likes.splice(key, 1)
+			#), @errorHandler

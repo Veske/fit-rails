@@ -1,4 +1,4 @@
-angular.module('Fit').controller "MediaShowCtrl", ($scope, $routeParams, MediaShow) ->
+angular.module('Fit').controller "MediaShowCtrl", ($scope, $routeParams, MediumService) ->
 	$scope.medium = []
 	$scope.comments = []
 	$scope.likes = []
@@ -6,7 +6,7 @@ angular.module('Fit').controller "MediaShowCtrl", ($scope, $routeParams, MediaSh
 
 	# Function that is ran upon page load
 	$scope.init = ->
-		mediumService = new MediaShow($routeParams.id, serverErrorHandler)
+		mediumService = new MediumService($routeParams.id, serverErrorHandler)
 		queryMedium(mediumService)
 
 	$scope.$watch "likes", ((newVal) ->
@@ -28,7 +28,7 @@ angular.module('Fit').controller "MediaShowCtrl", ($scope, $routeParams, MediaSh
 	), true
 
 	queryMedium = (mediumService) ->
-		mediumService.all().$promise.then(
+		mediumService.getData().$promise.then(
 			(data) ->
 				$scope.medium = data.medium
 				$scope.comments = data.medium.comments
