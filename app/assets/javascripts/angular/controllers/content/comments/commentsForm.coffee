@@ -1,10 +1,11 @@
 angular.module('Fit').controller "CommentsFormCtrl", ($scope, $routeParams, $http, CommentService) ->
+	$scope.notify = false
 
 	$scope.init = ->
 		@commentService = new CommentService($routeParams.id, serverErrorHandler)
 
 	$scope.newComment = (text, medium) ->
-		@commentService.create({text: text, user_id: current_user.id}, successHandler, medium)
+		@commentService.create({text: text, user_id: current_user.id}, successHandler, medium, $scope)
 
 	successHandler = (comment, medium) ->
 		medium.comments.push(comment)

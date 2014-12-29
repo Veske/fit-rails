@@ -1,10 +1,10 @@
 angular.module('Fit').factory 'MediumService', ($resource, $http, $routeParams) ->
 	class MediumService
-		constructor: (mediumId, errorHandler) ->
+		constructor: (errorHandler) ->
 			@service = $resource('/media/:id.json',
-				{id: mediumId},
+				{id: '@id'},
 				{
-					'query': { method: 'GET', isArray: false },
+					'all':    { method: 'GET', isArray: false },
 					'create': { method: 'POST'}
 				}
 			)
@@ -17,5 +17,14 @@ angular.module('Fit').factory 'MediumService', ($resource, $http, $routeParams) 
 		create: (attributes, successHandler) ->
 			new @service(medium: attributes).$save ((medium) -> successHandler(medium)), @errorHandler
 
-		getData: () ->
-			@service.query((-> null), @errorHandler)
+		delete: (medium, media) ->
+			new @service().$delete {id: medium.id}, ((data) ->
+				for key, medium of media
+					if medium.id == data.medium.id then media.splice(key, 1)
+			), @errorHandler
+
+		find: (mediumId) ->
+			@service.get {id: mediumId}, (-> null), @errorHandler
+
+		all: () ->
+			@service.query (-> null), @errorHandler

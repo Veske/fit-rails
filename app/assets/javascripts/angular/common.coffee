@@ -9,7 +9,6 @@ angular.module('Fit').factory 'Common', ['$window', '$http', ($window, $http) ->
 			setTimeout(() ->
 				$scope.notify = false
 			, 2000)
-
 	}
 
 

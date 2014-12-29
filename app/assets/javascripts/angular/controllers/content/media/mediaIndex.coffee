@@ -1,17 +1,14 @@
-angular.module('Fit').controller "MediaIndexCtrl", ($scope, $timeout, $routeParams, $location, $http, $window, $upload) ->
+angular.module('Fit').controller "MediaIndexCtrl", ($scope, $routeParams, $location, $http, $upload, MediumService) ->
 	$scope.media = []
 	$scope.text = []
 	$scope.file = []
 
-	$scope.templates = [
-		{ name: 'mediumNew.html', 		url: 'templates/content/media/_form.html'},
-		{ name: 'mediumDestroy.html',	url: 'templates/content/media/_destroy.html'}]
-
-	$http.get('/media.json')
-	.success (data) =>
-		$scope.media = data
-	.error (data) ->
-		console.log('error!')
+	$scope.init = ->
+		@mediumService = new MediumService($routeParams.id, serverErrorHandler)
+		@mediumService.all().$promise.then(
+			(data) ->
+				$scope.media = data
+		)
 
 	$scope.selectMedium = (medium) ->
 		$location.url('/media/' + medium.id)
@@ -32,7 +29,6 @@ angular.module('Fit').controller "MediaIndexCtrl", ($scope, $timeout, $routePara
 		).progress((evt) ->
 			console.log "percent: " + parseInt(100.0 * evt.loaded / evt.total)
 		).success((data, status, headers, config) ->
-			console.log(data)
 			$scope.media.push data.medium
 		)
 
@@ -40,17 +36,15 @@ angular.module('Fit').controller "MediaIndexCtrl", ($scope, $timeout, $routePara
 		$scope.file = $files[0]
 
 	$scope.userOwnsMedium = (medium) ->
-		if medium.user_id == current_user.id
-			true
+		if medium.user_id == current_user.id then true
 
 	$scope.destroyMedium = (medium) ->
-		$http({
-			method: 'DELETE',
-			url:    './media/' + medium.id + '.json',
-		}).success( (data) ->
-			for key, medium of $scope.media
-				if medium.id == data.medium.id
-					$scope.media.splice(key, 1)
-		).error( ->
-			# Display error notification
-		)
+		@mediumService.delete(medium, $scope.media)
+
+	$scope.templates = [
+		{ name: 'mediumNew.html', 		url: 'templates/content/media/_form.html'},
+		{ name: 'mediumDestroy.html',	url: 'templates/content/media/_destroy.html'}]
+
+	serverErrorHandler = ->
+		alert("There was a server error, please reload the page and try again.")
+
