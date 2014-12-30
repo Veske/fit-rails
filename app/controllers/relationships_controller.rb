@@ -3,14 +3,14 @@ class RelationshipsController < ApplicationController
 	respond_to :json
 
 	def create
-		user = User.find(params[:followed_id])
-		relationship = current_user.follow!(user)
-		respond_with relationship
+		user = User.find(params[:user_to_follow_id])
+		current_user.follow!(user)
+		render json: current_user, status: 201
 	end
 
 	def destroy
-		user = Relationship.find(params[:id]).followed
+		user = User.find(params[:id])
 		current_user.unfollow!(user)
-		respond_with user
+		render json: current_user, status: 201
 	end
 end

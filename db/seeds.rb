@@ -18,11 +18,6 @@ Medium.create([
     {text: 'Some text nr3', image_video: File.new("#{Rails.root}/public/images/3.jpg"), user_id: 2}
 ])
 
-Relationship.create([
-	{follower_id: 1, followed_id: 2},
-    {follower_id: 2, followed_id: 1}
-])
-
 Comment.create([
 	{text: 'Random comment 123', user_id: 1, medium_id: 1},
     {text: 'Comment about picture', user_id: 2, medium_id: 1},
