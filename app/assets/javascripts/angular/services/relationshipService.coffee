@@ -22,7 +22,6 @@ angular.module('Fit')
 			allFollowers: (userId, relationShipType, $scope) ->
 				@service.query {id: userId, relationship_type: relationShipType},
 					(data) ->
-						console.log(data)
 						$scope.user = data.user
 						$scope.users = data.users
 					, @errorHandler
@@ -30,7 +29,6 @@ angular.module('Fit')
 			allFollowing: (userId, relationShipType, $scope) ->
 				@service.query {id: userId, relationship_type: relationShipType},
 					(data) ->
-						console.log(data)
 						$scope.user = data.user
 						$scope.users = data.users
 					, @errorHandler

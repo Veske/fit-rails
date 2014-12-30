@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
 
 	# SQL query to get a news feed for current_user
 	def feed
-		following_ids = $redis.smembers(self.redis_key(:following))
-		Medium.includes([{comments: :user}, :likes, :user]).where("user_id IN (?) OR user_id = ?", following_ids, id)
+		user_ids = $redis.smembers(self.redis_key(:following)) << id
+		Medium.includes([{comments: :user}, :likes, :user]).where(user_id: user_ids)
 	end
 end
