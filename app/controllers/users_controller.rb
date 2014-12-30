@@ -14,10 +14,10 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		user = User.includes(:media, :active_relationships, :passive_relationships).find(params[:id])
+		user = User.includes(:media).find(params[:id])
 		media = user.media
-		following = user.active_relationships
-		followers = user.passive_relationships
+		following = user.following
+		followers = user.followers
 		is_following = current_user.following?(user)
 		respond_with user: user,
 		             media: media,

@@ -1,88 +1,34 @@
 class User < ActiveRecord::Base
-	validates :name, presence: true, length: {maximum: 50}
+	include Relationship
+
 	enum role: [:user, :moderator, :admin]
+	validates :name, presence: true, length: {maximum: 50}
 	after_initialize :set_default_role, :if => :new_record?
 
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable
-	devise :database_authenticatable, :registerable,
-	       :recoverable, :rememberable, :trackable, :validatable
+	devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
 	# User can have many media, comments and likes
 	has_many :media, dependent: :destroy
 	has_many :comments, dependent: :destroy
 	has_many :likes, dependent: :destroy
 
-	# Associations for relationships, user can have many active and passive relationships
-	has_many :active_relationships, class_name:  'Relationship', foreign_key: 'follower_id', dependent:   :destroy
-	has_many :passive_relationships, class_name:  'Relationship', foreign_key: 'followed_id', dependent:   :destroy
-	has_many :following, through: :active_relationships, source: :followed
-	has_many :followers, through: :passive_relationships, source: :follower
-
 	# Sets newly created user's role to :user
 	def set_default_role
 		self.role ||= :user
 	end
 
+	# Map roles into an hash which has the following keys:
+	# name: User friendly name of the user role
+	# key:  Computer friendly name of the user role
 	def roles
 		User.roles.keys.map { |role| {name: role.titleize, key: role} }
-		#User.roles
 	end
 
 	# SQL query to get a news feed for current_user
 	def feed
-		following_ids = 'SELECT followed_id FROM relationships WHERE  follower_id = :user_id'
-		Medium.includes([{comments: :user}, :likes, :user]).where("user_id IN (#{ following_ids }) OR user_id = :user_id", user_id: id)
-	end
-
-	# ========= RELATIONSHIPS ============
-	def follow!(user)
-		$redis.multi do
-			$redis.sadd(self.redis_key(:following), user.id)
-			$redis.sadd(user.redis_key(:followers), self.id)
-		end
-	end
-
-	# unfollow a user
-	def unfollow!(user)
-		$redis.multi do
-			$redis.srem(self.redis_key(:following), user.id)
-			$redis.srem(user.redis_key(:followers), self.id)
-		end
-	end
-
-	def following?(user)
-		#following.include?(other_user)
-		$redis.sismember(self.redis_key(:following), user.id)
-	end
-
-	# Helper method to generate redis keys
-	def redis_key(str)
-		"user:#{self.id}:#{str}"
-	end
-
-
-
-
-
-
-
-
-
-
-
-
-
-	def follow(other_user)
-		active_relationship = active_relationships.create!(followed_id: other_user.id)
-	end
-
-	def unfollow(other_user)
-		if active_relationships.find_by(followed_id: other_user.id).destroy
-			logger.debug "INFO: Unfollowing user with id: #{other_user.id}!"
-		else
-			logger.debug "ERROR: failed to unfollow user with id: #{other_user.id}!"
-		end
-
+		user_ids = $redis.smembers(self.redis_key(:following)) << id
+		Medium.includes([{comments: :user}, :likes, :user]).where(user_id: user_ids)
 	end
 end

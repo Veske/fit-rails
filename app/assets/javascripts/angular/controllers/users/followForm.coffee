@@ -15,9 +15,5 @@ angular.module('Fit')
 			@relationshipService.follow(user, followers, $scope)
 
 		$scope.unFollow = (user, followers) ->
-			$scope.id = []
-			for key, follower of followers
-				if follower.follower_id == $scope.current_user.id
-					$scope.id = follower.id
 			@relationshipService.unFollow(user, followers, $scope)
 ]

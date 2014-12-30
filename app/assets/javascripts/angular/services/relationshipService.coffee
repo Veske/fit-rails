@@ -37,10 +37,9 @@ angular.module('Fit')
 				$http({
 					method: 'POST',
 					url: '/relationships.json',
-					data:
-						followed_id: user.id
+					data: user_to_follow_id: user.id
 				}).success((data) ->
-					followers.push(data.relationship)
+					followers.push({id: current_user.id})
 					$scope.is_following = true
 				).error(->
 					@errorHandler
@@ -49,12 +48,10 @@ angular.module('Fit')
 			unFollow: (user, followers, $scope) ->
 				$http({
 					method: 'DELETE',
-					url: '/relationships/' + $scope.id + '.json',
-					data: user_id: user.id
+					url: '/relationships/' + user.id + '.json'
 				}).success((data) ->
 					for key, follower of followers
-						if follower.id == $scope.id
-							followers.splice(key, 1)
+						if follower.id == current_user.id then followers.splice(key, 1)
 					$scope.is_following = false
 				).error(->
 					@errorHandler
