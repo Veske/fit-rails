@@ -39,7 +39,7 @@ angular.module('Fit')
 					url: '/relationships.json',
 					data: user_to_follow_id: user.id
 				}).success((data) ->
-					followers.push(data.user)
+					followers.push({id: current_user.id})
 					$scope.is_following = true
 				).error(->
 					@errorHandler
@@ -51,7 +51,7 @@ angular.module('Fit')
 					url: '/relationships/' + user.id + '.json'
 				}).success((data) ->
 					for key, follower of followers
-						if follower.id == data.user.id then followers.splice(key, 1)
+						if follower.id == current_user.id then followers.splice(key, 1)
 					$scope.is_following = false
 				).error(->
 					@errorHandler

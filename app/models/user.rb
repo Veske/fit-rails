@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
 		self.role ||= :user
 	end
 
+	# Map roles into an hash which has the following keys:
+	# name: User friendly name of the user role
+	# key:  Computer friendly name of the user role
 	def roles
 		User.roles.keys.map { |role| {name: role.titleize, key: role} }
 	end
