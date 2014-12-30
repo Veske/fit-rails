@@ -3,42 +3,6 @@ class User < ActiveRecord::Base
 	enum role: [:user, :moderator, :admin]
 	after_initialize :set_default_role, :if => :new_record?
 
-	# Sets newly created user's role to :user
-	def set_default_role
-		self.role ||= :user
-	end
-
-	def roles
-		User.roles.keys.map { |role| {name: role.titleize, key: role} }
-		#User.roles
-	end
-
-	# Follows a user. Throw error to console when index violation appears
-	def follow(other_user)
-		active_relationship = active_relationships.create!(followed_id: other_user.id)
-	end
-
-	# Unfollows a user.
-	def unfollow(other_user)
-		if active_relationships.find_by(followed_id: other_user.id).destroy
-			logger.debug "INFO: Unfollowing user with id: #{other_user.id}!"
-		else
-			logger.debug "ERROR: failed to unfollow user with id: #{other_user.id}!"
-		end
-
-	end
-
-	# Returns true if the current user is following the other user.
-	def following?(other_user)
-		following.include?(other_user)
-	end
-
-	# SQL query to get a news feed for current_user
-	def feed
-		following_ids = 'SELECT followed_id FROM relationships WHERE  follower_id = :user_id'
-		Medium.includes([{comments: :user}, :likes, :user]).where("user_id IN (#{ following_ids }) OR user_id = :user_id", user_id: id)
-	end
-
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable
 	devise :database_authenticatable, :registerable,
@@ -54,4 +18,71 @@ class User < ActiveRecord::Base
 	has_many :passive_relationships, class_name:  'Relationship', foreign_key: 'followed_id', dependent:   :destroy
 	has_many :following, through: :active_relationships, source: :followed
 	has_many :followers, through: :passive_relationships, source: :follower
+
+	# Sets newly created user's role to :user
+	def set_default_role
+		self.role ||= :user
+	end
+
+	def roles
+		User.roles.keys.map { |role| {name: role.titleize, key: role} }
+		#User.roles
+	end
+
+	# SQL query to get a news feed for current_user
+	def feed
+		following_ids = 'SELECT followed_id FROM relationships WHERE  follower_id = :user_id'
+		Medium.includes([{comments: :user}, :likes, :user]).where("user_id IN (#{ following_ids }) OR user_id = :user_id", user_id: id)
+	end
+
+	# ========= RELATIONSHIPS ============
+	def follow!(user)
+		$redis.multi do
+			$redis.sadd(self.redis_key(:following), user.id)
+			$redis.sadd(user.redis_key(:followers), self.id)
+		end
+	end
+
+	# unfollow a user
+	def unfollow!(user)
+		$redis.multi do
+			$redis.srem(self.redis_key(:following), user.id)
+			$redis.srem(user.redis_key(:followers), self.id)
+		end
+	end
+
+	def following?(user)
+		#following.include?(other_user)
+		$redis.sismember(self.redis_key(:following), user.id)
+	end
+
+	# Helper method to generate redis keys
+	def redis_key(str)
+		"user:#{self.id}:#{str}"
+	end
+
+
+
+
+
+
+
+
+
+
+
+
+
+	def follow(other_user)
+		active_relationship = active_relationships.create!(followed_id: other_user.id)
+	end
+
+	def unfollow(other_user)
+		if active_relationships.find_by(followed_id: other_user.id).destroy
+			logger.debug "INFO: Unfollowing user with id: #{other_user.id}!"
+		else
+			logger.debug "ERROR: failed to unfollow user with id: #{other_user.id}!"
+		end
+
+	end
 end

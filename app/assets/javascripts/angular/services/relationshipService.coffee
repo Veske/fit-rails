@@ -50,6 +50,7 @@ angular.module('Fit')
 				$http({
 					method: 'DELETE',
 					url: '/relationships/' + $scope.id + '.json',
+					data: user_id: user.id
 				}).success((data) ->
 					for key, follower of followers
 						if follower.id == $scope.id
