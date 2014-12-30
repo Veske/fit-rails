@@ -14,13 +14,18 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.2.6'
 gem 'sdoc', '~> 0.4.1',          group: :doc
 gem 'devise'
-gem 'pg'
-gem 'passenger'
 gem 'paperclip'
 gem 'sprockets'
 gem 'angularjs-rails'
 gem 'active_model_serializers'
 gem 'angular-file-upload-rails'
+
+# Database gems
+gem 'pg'
+gem 'redis'
+
+# Rails server
+gem 'passenger'
 
 group :development do
 	gem 'better_errors'
