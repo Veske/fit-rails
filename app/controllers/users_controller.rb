@@ -61,6 +61,12 @@ class UsersController < ApplicationController
 		redirect_to users_path, :notice => 'User deleted.'
 	end
 
+	# We display a new feed for current_user
+	def feed
+		feed_items = current_user.feed
+		respond_with feed: ActiveModel::ArraySerializer.new(feed_items, each_serializer: MediumSerializer)
+	end
+
 	private
 		def admin_only
 			unless current_user.admin?

@@ -7,7 +7,7 @@ angular.module('Fit.services', [
 ])
 
 # Include all Angular modules
-angular.module('Fit', [
+@Fit = angular.module('Fit', [
 	'Fit.services'
 ])
 
@@ -15,6 +15,9 @@ angular.module('Fit', [
 angular.module('Fit').config [
 	'$httpProvider',
 	($httpProvider) ->
+		# Set request header to use CSRF token
 		authToken = $("meta[name=\"csrf-token\"]").attr("content")
 		$httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
+		$httpProvider.interceptors.push 'InterceptorService'
 ]
+

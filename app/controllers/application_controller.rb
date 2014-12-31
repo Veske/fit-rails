@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
 		# Get HTML requests and direct them to our ng-view
 		# TODO: make this method take our controller specific restrictions into consideration also
 		def intercept_html_requests
-			render('dashboard/index') if request.format == Mime::HTML && authenticate_user!
+			render('visitors/index') if request.format == Mime::HTML
 		end
 
 	protected

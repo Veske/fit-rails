@@ -5,7 +5,7 @@ angular.module('Fit')
 	'RelationshipService',
 	'Common',
 	($scope, $routeParams, RelationshipService, Common) ->
-		$scope.current_user = current_user
+		#$scope.current_user = current_user
 		serverErrorHandler = Common.serverErrorHandler
 
 		$scope.init = ->

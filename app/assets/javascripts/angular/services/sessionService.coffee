@@ -4,7 +4,8 @@ angular.module('Fit')
 	'$http',
 	'$routeParams',
 	'Common',
-	($resource, $http, $routeParams, Common) ->
+	'$window'
+	($resource, $http, $routeParams, Common, $window) ->
 		class SessionService
 			constructor: (errorHandler) ->
 				@service = $resource '/users/:param.json', {},
@@ -17,11 +18,29 @@ angular.module('Fit')
 				defaults.patch = defaults.patch || {}
 				defaults.patch['Content-Type'] = 'application/json'
 
-			login: (newUser) ->
-				promise = @service.login(param: 'sign_in',newUser).$promise
-				promise.then((data)->
-					console.log(data)
-					#updateCurrentUser(result.user, result.authorized)
-				)
-				promise
+			@currentUser = {}
+
+			authorized = ->
+				getCurrentUser().authorized is 'true'
+
+			getCurrentUser = ->
+				currentUser
+
+			updateCurrentUser = (user) ->
+				if user
+					currentUser.id = user.id
+					currentUser.name = user.name
+				currentUser.authorized = authorized
+
+			login: ($scope, newUser) ->
+				new @service(user: newUser).$save {param: 'sign_in'},
+					(data) ->
+						console.log(data)
+						if data.error then Common.flashNotification($scope, data.error)
+						if data.user then Common.updateCurrentUser(data.user)
+						if Common.isAuthorized() then $window.location.href = '/'
+						#console.log(Common.getCurrentUser())
+						#console.log(Common.isAuthorized())
+						#console.log(data)
+					, @errorHandler
 ]
