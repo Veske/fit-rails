@@ -7,14 +7,11 @@ angular.module('Fit')
 	($resource, $http, $routeParams, Common) ->
 		class UserService
 			constructor: (errorHandler) ->
-				@service = $resource('/users/:id.json',
-					{id: '@id'},
-					{
-						'query':    { method: 'GET', isArray: false },
-						'create':   { method: 'POST' },
-						'update':   { method: 'PATCH' }
-					}
-				)
+				@service = $resource '/users/:id.json', {},
+					'query':    { method: 'GET', isArray: false },
+					'create':   { method: 'POST' },
+					'update':   { method: 'PATCH' }
+
 				@errorHandler = errorHandler
 
 				defaults = $http.defaults.headers
