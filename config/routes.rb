@@ -16,8 +16,7 @@ Rails.application.routes.draw do
 
 	resources :relationships,       only: [:create, :destroy]
 
-	get '/dashboard',   to: 'dashboard#index'
-	get '/feed',        to: 'dashboard#feed'
+	get '/feed',        to: 'users#feed'
 	get '/roles',       to: 'users#roles'
 
 	root to: 'visitors#index'

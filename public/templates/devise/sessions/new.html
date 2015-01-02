@@ -1,0 +1,30 @@
+<div class="authform" ng-init="init()">
+	<div ng-if="notify">
+		<growl-notification>
+			{{ message }}
+		</growl-notification>
+	</div>
+
+	<h3>Sign in</h3>
+	<form>
+		<div class="form-group">
+			<a href="/users/sign_up" class="right">Sign up</a>
+			<label for="user_email">Email:</label>
+			<input id="user_email" type="email" class="form-control" name="user[email]" autofocus="autofocues" ng-model="email">
+		</div>
+
+		<div class="form-group">
+			<a href="/users/password/new" class="right">Forgot password?</a>
+			<label for="user_password">Password:</label>
+			<input id="user_password" type="password" class="form-control" ng-model="password" name="user[password]" autocomplete="off">
+		</div>
+
+		<button name="commit" class="button right" ng-click="sign_in(email, password, remember_me)">Sign in</button>
+		<div class="checkbox" style="width:150px">
+			<label>
+				<input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me" ng-model="remember_me">
+				Remember me
+			</label>
+		</div>
+	</form>
+</div>

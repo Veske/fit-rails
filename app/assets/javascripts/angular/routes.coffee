@@ -3,12 +3,21 @@
 #          controller:  define what Angular controller to use for the rendered template
 angular.module('Fit').config [
 	'$routeProvider'
-	'$locationProvider'
+	'$locationProvider',
 	($routeProvider, $locationProvider) ->
 		$routeProvider
 		.when '/',
 			templateUrl: 'templates/dashboard/index.html',
 			controller: 'DashboardCtrl'
+		.when '/users/sign_in',
+			templateUrl: 'templates/devise/sessions/new.html',
+			controller:  'SessionCtrl'
+		.when '/users/sign_up',
+			templateUrl: 'templates/devise/registrations/new.html',
+			controller:  'SessionCtrl'
+		.when '/users/edit',
+			templateUrl: 'templates/devise/registrations/edit.html',
+			controller:  'UserEditCtrl'
 		.when '/users',
 			templateUrl: 'templates/users/index.html',
 			controller: 'UsersIndexCtrl'

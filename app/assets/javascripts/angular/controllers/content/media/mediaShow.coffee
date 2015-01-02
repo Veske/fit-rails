@@ -3,7 +3,8 @@ angular.module('Fit')
 	'$scope',
 	'$routeParams',
 	'MediumService',
-	($scope, $routeParams, MediumService) ->
+	'Common',
+	($scope, $routeParams, MediumService, Common) ->
 		$scope.medium = []
 		$scope.comments = []
 		$scope.likes = []
@@ -22,7 +23,7 @@ angular.module('Fit')
 				# Iterate over all likes and see if the current user has made a like
 				# IF so, make match == to 1
 				for key, like of $scope.likes
-					if like.user_id == current_user.id then match = 1
+					if like.user_id == Common.get_current_user().id then match = 1
 
 				# IF match is 1, we change our variable to true to show appropriate content and vice versa
 				if match == 1

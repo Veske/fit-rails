@@ -4,6 +4,8 @@ angular.module('Fit')
 	'$http',
 	($window, $http) ->
 		{
+			currentUser: {}
+
 			# Display a toast on the top of the page to show info
 			# @params: $scope, text
 			flashNotification: ($scope, text) ->
@@ -16,5 +18,14 @@ angular.module('Fit')
 			# Display a notification on server errors
 			serverErrorHandler: () ->
 				alert("There was a server error, please reload the page and try again.")
+
+			get_current_user: ->
+				@currentUser
+
+			update_current_user: (user) ->
+				if user
+					@currentUser.id = user.id
+					@currentUser.name = user.name
+				@currentUser.authorized = 'true'
 		}
 ]
