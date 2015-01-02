@@ -15,6 +15,9 @@ angular.module('Fit').config [
 		.when '/users/sign_up',
 			templateUrl: 'templates/devise/registrations/new.html',
 			controller:  'SessionCtrl'
+		.when '/users/edit',
+			templateUrl: 'templates/devise/registrations/edit.html',
+			controller:  'UserEditCtrl'
 		.when '/users',
 			templateUrl: 'templates/users/index.html',
 			controller: 'UsersIndexCtrl'

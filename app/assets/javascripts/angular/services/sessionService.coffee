@@ -18,29 +18,18 @@ angular.module('Fit')
 				defaults.patch = defaults.patch || {}
 				defaults.patch['Content-Type'] = 'application/json'
 
-			@currentUser = {}
-
-			authorized = ->
-				getCurrentUser().authorized is 'true'
-
-			getCurrentUser = ->
-				currentUser
-
-			updateCurrentUser = (user) ->
-				if user
-					currentUser.id = user.id
-					currentUser.name = user.name
-				currentUser.authorized = authorized
-
 			login: ($scope, newUser) ->
 				new @service(user: newUser).$save {param: 'sign_in'},
 					(data) ->
-						console.log(data)
 						if data.error then Common.flashNotification($scope, data.error)
 						if data.user then Common.updateCurrentUser(data.user)
 						if Common.isAuthorized() then $window.location.href = '/'
-						#console.log(Common.getCurrentUser())
-						#console.log(Common.isAuthorized())
-						#console.log(data)
 					, @errorHandler
+
+			logout: ($scope, user) ->
+				new @service(user: user).$delete {param: 'sign_out'},
+					(data) ->
+						if data.error then Common.flashNotification($scope, data.error)
+						$window.location.href = '/'
+				, @errorHandler
 ]
