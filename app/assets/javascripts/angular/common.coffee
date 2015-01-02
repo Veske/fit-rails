@@ -19,13 +19,10 @@ angular.module('Fit')
 			serverErrorHandler: () ->
 				alert("There was a server error, please reload the page and try again.")
 
-			getCurrentUser: ->
+			get_current_user: ->
 				@currentUser
 
-			isAuthorized: ->
-				@currentUser.authorized is 'true'
-
-			updateCurrentUser: (user) ->
+			update_current_user: (user) ->
 				if user
 					@currentUser.id = user.id
 					@currentUser.name = user.name

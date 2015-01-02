@@ -3,11 +3,9 @@
 	'$rootScope',
 	'$location'
 	($q, $rootScope, $location) ->
-		# optional method
-		request: (config) ->
-			config
 
-		# optional method
+		# We intercept requests that get a 401 - unauthorized response, and redirect the user
+		# to /sign_in page
 		responseError: (response) ->
 			if response.status == 401
 				$rootScope.$broadcast('event:unauthorized');

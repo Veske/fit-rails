@@ -11,14 +11,17 @@
     <%= csrf_meta_tags %>
 </head>
 
+
 <%#  Load current user into js variable for global use %>
 <% if current_user %>
     <script>
-	    var current_user = <%=raw current_user.to_json  %>
+	    var current_user = <%=raw current_user.to_json %>
     </script>
 <% end %>
 
 <body>
+	<%# Load current user into Angular session service %>
+	<div ng-controller="SessionCtrl" ng-init="init_current_user(<%= current_user.to_json %>)"></div>
 	<header>
 	    <%= render 'layouts/navigation' %>
 	</header>

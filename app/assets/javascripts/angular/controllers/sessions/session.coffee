@@ -19,11 +19,14 @@ angular.module('Fit')
 			@userService = new UserService(serverErrorHandler)
 			$scope.sessionService = new SessionService(serverErrorHandler)
 
+		$scope.init_current_user = (user) ->
+			Common.update_current_user(user)
+
+
 		$scope.sign_in = (email, password, remember_me) ->
 			$scope.sessionService.login($scope, { email: email, password: password })
 
 		$scope.sign_out = ->
 			$scope.sessionService = new SessionService(serverErrorHandler)
-			$scope.sessionService.logout($scope, current_user)
-
+			$scope.sessionService.logout($scope, Common.get_current_user())
 ]

@@ -4,8 +4,9 @@ angular.module('Fit')
 	'$http',
 	'$routeParams',
 	'Common',
-	'$window'
-	($resource, $http, $routeParams, Common, $window) ->
+	'$window',
+	'$location',
+	($resource, $http, $routeParams, Common, $window, $location) ->
 		class SessionService
 			constructor: (errorHandler) ->
 				@service = $resource '/users/:param.json', {},
@@ -22,8 +23,7 @@ angular.module('Fit')
 				new @service(user: newUser).$save {param: 'sign_in'},
 					(data) ->
 						if data.error then Common.flashNotification($scope, data.error)
-						if data.user then Common.updateCurrentUser(data.user)
-						if Common.isAuthorized() then $window.location.href = '/'
+						if data.user then Common.update_current_user(data.user) && $window.location.href = '/'
 					, @errorHandler
 
 			logout: ($scope, user) ->

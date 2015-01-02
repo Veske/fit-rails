@@ -25,7 +25,7 @@ angular.module('Fit')
 
 		# Check to know if we should show the delete medium button
 		$scope.userOwnsMedium = (medium) ->
-			if medium.user_id == current_user.id then true
+			if medium.user_id == Common.get_current_user().id then true
 
 		$scope.destroyMedium = (medium) ->
 			@mediumService.delete(medium, $scope)
