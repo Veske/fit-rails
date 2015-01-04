@@ -37,4 +37,12 @@ angular.module('Fit')
 							user.role = data.user.role
 							Common.flashNotification($scope, 'Updated role for user: ' + user.name)
 				, @errorHandler
+
+			updateUser: (user, userId, $scope) ->
+				delete user['id']
+				delete user['authorized']
+				new @service(user: user).$update {id: userId},
+					(data) ->
+						console.log(data)
+				, @errorHandler
 ]

@@ -13,9 +13,12 @@ module Relationship
 
 	# Follow a user
 	def follow!(user)
-		$redis.multi do
-			$redis.sadd(self.redis_key(:following), user.id)
-			$redis.sadd(user.redis_key(:followers), self.id)
+		# TODO: throw error when redis transaction fails
+		unless self.id == user.id
+			$redis.multi do
+				$redis.sadd(self.redis_key(:following), user.id)
+				$redis.sadd(user.redis_key(:followers), self.id)
+			end
 		end
 	end
 

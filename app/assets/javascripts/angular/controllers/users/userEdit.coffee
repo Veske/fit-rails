@@ -17,4 +17,8 @@ angular.module('Fit')
 			@sessionService = new SessionService(serverErrorHandler)
 			$scope.user = Common.get_current_user()
 
+		$scope.update = (user) ->
+			console.log(user)
+			@userService.updateUser(user, user.id, $scope)
+
 ]
