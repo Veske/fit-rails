@@ -29,4 +29,7 @@ angular.module('Fit')
 		$scope.sign_out = ->
 			$scope.sessionService = new SessionService(serverErrorHandler)
 			$scope.sessionService.logout($scope, Common.get_current_user())
+
+		$scope.create = (user) ->
+			console.log(user)
 ]
