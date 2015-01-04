@@ -10,10 +10,11 @@ angular.module('Fit')
 	($scope, $location, $http, UserService, Common, SessionService, $window) ->
 		serverErrorHandler = Common.serverErrorHandler
 		$scope.message = []
-		$scope.sessionService = []
+		$scope.user = []
 
 		$scope.init = ->
 			@userService = new UserService(serverErrorHandler)
-			$scope.sessionService = new SessionService(serverErrorHandler)
+			@sessionService = new SessionService(serverErrorHandler)
+			$scope.user = Common.get_current_user()
 
 ]

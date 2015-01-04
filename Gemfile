@@ -5,20 +5,14 @@ source 'http://rubygems.org'
 ruby '2.2.0'
 gem 'rails', '4.2.0'
 
+# Gems for assets
 gem 'bootstrap-sass', '~> 3.3.1.0'
-gem 'sass-rails', '~> 5.0.0'
-gem 'uglifier', '>= 1.3.0'
+gem 'sass-rails', '~> 5.0.1'
 gem 'coffee-rails'
 gem 'jquery-rails'
-gem 'turbolinks'
-gem 'jbuilder', '~> 2.2.6'
-gem 'sdoc', '~> 0.4.1',          group: :doc
-gem 'devise'
-gem 'paperclip'
+gem 'angular-file-upload-rails'
 gem 'sprockets'
 gem 'angularjs-rails'
-gem 'active_model_serializers'
-gem 'angular-file-upload-rails'
 
 # Database gems
 gem 'pg'
@@ -26,6 +20,14 @@ gem 'redis'
 
 # Rails server
 gem 'passenger'
+
+gem 'uglifier', '>= 1.3.0'
+gem 'turbolinks'
+gem 'jbuilder', '~> 2.2.6'
+gem 'sdoc', '~> 0.4.1', group: :doc
+gem 'devise'
+gem 'paperclip'
+gem 'active_model_serializers'
 
 group :development do
 	gem 'better_errors'
