@@ -11,6 +11,7 @@ angular.module('Fit')
 					'query':    { method: 'GET', isArray: false },
 					'create':   { method: 'POST' },
 					'update':   { method: 'PATCH' }
+					'save': {method: 'POST'}
 
 				@errorHandler = errorHandler
 
@@ -36,5 +37,19 @@ angular.module('Fit')
 						if user.id == data.user.id
 							user.role = data.user.role
 							Common.flashNotification($scope, 'Updated role for user: ' + user.name)
+				, @errorHandler
+
+			updateUser: (user, userId, $scope) ->
+				delete user['id']
+				delete user['authorized']
+				new @service(user: user).$update {id: userId},
+					(data) ->
+						console.log(data)
+				, @errorHandler
+
+			createUser: (user, $scope) ->
+				new @service(user: user).$save {id: ''},
+					(data) ->
+						console.log(data)
 				, @errorHandler
 ]

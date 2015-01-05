@@ -26,6 +26,9 @@ angular.module('Fit')
 				if user
 					@currentUser.id = user.id
 					@currentUser.name = user.name
-				@currentUser.authorized = 'true'
+					@currentUser.email = user.email
+					@currentUser.authorized = 'true'
+				else
+					@currentUser.authorized = 'false'
 		}
 ]
