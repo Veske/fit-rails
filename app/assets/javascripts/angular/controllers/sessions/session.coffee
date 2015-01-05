@@ -31,5 +31,5 @@ angular.module('Fit')
 			$scope.sessionService.logout($scope, Common.get_current_user())
 
 		$scope.create = (user) ->
-			console.log(user)
+			@userService.createUser(user, $scope)
 ]

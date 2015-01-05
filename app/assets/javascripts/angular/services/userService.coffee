@@ -11,6 +11,7 @@ angular.module('Fit')
 					'query':    { method: 'GET', isArray: false },
 					'create':   { method: 'POST' },
 					'update':   { method: 'PATCH' }
+					'save': {method: 'POST'}
 
 				@errorHandler = errorHandler
 
@@ -42,6 +43,12 @@ angular.module('Fit')
 				delete user['id']
 				delete user['authorized']
 				new @service(user: user).$update {id: userId},
+					(data) ->
+						console.log(data)
+				, @errorHandler
+
+			createUser: (user, $scope) ->
+				new @service(user: user).$save {id: ''},
 					(data) ->
 						console.log(data)
 				, @errorHandler
