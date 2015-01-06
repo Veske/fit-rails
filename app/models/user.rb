@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	include Relationship
+	include Relationship, Like
 
 	enum role: [:user, :moderator, :admin]
 	validates :name, presence: true, length: {maximum: 50}
@@ -12,7 +12,6 @@ class User < ActiveRecord::Base
 	# User can have many media, comments and likes
 	has_many :media, dependent: :destroy
 	has_many :comments, dependent: :destroy
-	has_many :likes, dependent: :destroy
 
 	# Sets newly created user's role to :user
 	def set_default_role
@@ -28,7 +27,7 @@ class User < ActiveRecord::Base
 
 	# SQL query to get a news feed for current_user
 	def feed
-		user_ids = $redis.smembers(self.redis_key(:following)) << id
-		Medium.includes([{comments: :user}, :likes, :user]).where(user_id: user_ids)
+		user_ids = $redis.smembers(self.redis_relationship_key(:following)) << id
+		Medium.includes([{comments: :user}, :user]).where(user_id: user_ids)
 	end
 end
