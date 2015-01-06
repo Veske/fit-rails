@@ -12,12 +12,13 @@ module Relationship
 	#           member as its sole member.
 
 	# Follow a user
+	# TODO: No need for excess database queries, use like.rb as an example to use just one user querie
 	def follow!(user)
 		# TODO: throw error when redis transaction fails
 		unless self.id == user.id
 			$redis.multi do
-				$redis.sadd(self.redis_key(:following), user.id)
-				$redis.sadd(user.redis_key(:followers), self.id)
+				$redis.sadd(self.redis_relationship_key(:following), user.id)
+				$redis.sadd(user.redis_relationship_key(:followers), self.id)
 			end
 		end
 	end
@@ -25,52 +26,52 @@ module Relationship
 	# Unfollow a user
 	def unfollow!(user)
 		$redis.multi do
-			$redis.srem(self.redis_key(:following), user.id)
-			$redis.srem(user.redis_key(:followers), self.id)
+			$redis.srem(self.redis_relationship_key(:following), user.id)
+			$redis.srem(user.redis_relationship_key(:followers), self.id)
 		end
 	end
 
 	# Users that self follows
 	def followers
-		user_ids = $redis.smembers(self.redis_key(:followers))
+		user_ids = $redis.smembers(self.redis_relationship_key(:followers))
 		User.where(id: user_ids)
 	end
 
 	# Users that follow self
 	def following
-		user_ids = $redis.smembers(self.redis_key(:following))
+		user_ids = $redis.smembers(self.redis_relationship_key(:following))
 		User.where(id: user_ids)
 	end
 
 	# Does self follow user
 	def following?(user)
 		#following.include?(other_user)
-		$redis.sismember(self.redis_key(:following), user.id)
+		$redis.sismember(self.redis_relationship_key(:following), user.id)
 	end
 
 	# Users who follow and are being followed by self
 	def friends
-		user_ids = $redis.sinter(self.redis_key(:following), self.redis_key(:followers))
+		user_ids = $redis.sinter(self.redis_relationship_key(:following), self.redis_relationship_key(:followers))
 		User.where(:id => user_ids)
 	end
 
 	# Does the user follow self
 	def followed_by?(user)
-		$redis.sismember(self.redis_key(:followers), user.id)
+		$redis.sismember(self.redis_relationship_key(:followers), user.id)
 	end
 
 	# Number of followers
 	def followers_count
-		$redis.scard(self.redis_key(:followers))
+		$redis.scard(self.redis_relationship_key(:followers))
 	end
 
 	# Number of users being followed
 	def following_count
-		$redis.scard(self.redis_key(:following))
+		$redis.scard(self.redis_relationship_key(:following))
 	end
 
 	# Helper method to generate redis keys
-	def redis_key(relationship_type)
+	def redis_relationship_key(relationship_type)
 		"user:#{self.id}:#{relationship_type}"
 	end
 end

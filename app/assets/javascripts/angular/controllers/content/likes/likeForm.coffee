@@ -12,7 +12,7 @@ angular.module('Fit')
 			@likeService = new LikeService(serverErrorHandler)
 
 		$scope.newLike = (medium) ->
-			@likeService.create({'user_id': Common.get_current_user().id}, successHandler , medium, $routeParams.id)
+			@likeService.create(medium, {'user_id': Common.get_current_user().id})
 
 		$scope.destroyLike = (medium) ->
 			for key, like of medium.likes
