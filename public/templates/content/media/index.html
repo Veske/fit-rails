@@ -6,7 +6,7 @@
 				<tbody ng:repeat="medium in media">
 					<tr>
 						<td ng:click="selectMedium(medium)">
-							<img ng:src="{{ medium.image_video_thumb_url }}" alt="{{ medium.text }}" /><br>
+							<img ng:src="{{ medium.image_video_croppable_url }}" alt="{{ medium.text }}" /><br>
 						</td>
 						<td>
 							<div ng-if="userOwnsMedium(medium)">

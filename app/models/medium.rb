@@ -9,7 +9,7 @@ class Medium < ActiveRecord::Base
 	# Check that file is less than 1MB
 	validates :image_video, presence:   { message: 'No file was chosen for upload'}
 	has_attached_file :image_video,
-	                  styles:     { thumb:      '200x250>',
+	                  styles:     { thumb:      '100x250>',
 	                                croppable:  '600x600>',
 	                                big:        '1000x1000>' }
 	validates_attachment_content_type :image_video, :content_type => %w(image/jpeg image/jpg image/png image/gif)

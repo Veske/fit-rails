@@ -10,9 +10,9 @@
 						<td>
 							{{ medium.user.name }} posted:
 						</td>
-						<td ng:click="selectMedium(medium)">
+						<td>
 							<p>{{ medium.text }}</p>
-							<img ng:src="{{ medium.image_video_thumb_url }}" alt="{{ medium.text }}" /><br>
+							<img ng:src="{{ medium.image_video_croppable_url }}" alt="{{ medium.text }}" ng:click="selectMedium(medium)"/><br>
 						</td>
 					</tr>
 					</tbody>
