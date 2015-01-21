@@ -18,6 +18,12 @@
 				</div>
 			</div>
 
+			<div ng-if="current_user == medium.user.id">
+				<div>
+					<button ng-click="set_avatar()">Set this as your profile avatar</button>
+				</div>
+			</div>
+
 			<div class="medium-view-comments" ng-include="templates[0].url"></div>
 			<div class="medium-view-comments-new" ng-include="templates[1].url" ng-controller="CommentsFormCtrl" ng-init="init()"></div>
 		</div>

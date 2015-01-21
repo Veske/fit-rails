@@ -1,19 +1,22 @@
 angular.module('Fit')
-.controller "MediaShowCtrl", [
+.controller "MediumShowCtrl", [
 	'$scope',
 	'$routeParams',
 	'MediumService',
 	'Common',
-	($scope, $routeParams, MediumService, Common) ->
+	'UserService',
+	($scope, $routeParams, MediumService, Common, UserService) ->
 		$scope.medium = []
 		$scope.comments = []
 		$scope.likes = []
 		$scope.userHasLiked = 'false'
+		$scope.current_user = []
 
 		# Function that is ran upon page load
 		$scope.init = ->
 			mediumService = new MediumService(serverErrorHandler)
 			queryMedium(mediumService)
+			$scope.current_user = Common.get_current_user().id
 
 		$scope.$watch "likes", ((newVal) ->
 			match = 0
@@ -31,6 +34,11 @@ angular.module('Fit')
 				else
 					$scope.userHasLiked = 'false'
 		), true
+
+		$scope.set_avatar = () ->
+			user_service = new UserService(serverErrorHandler)
+			user_service.set_avatar($routeParams.id, $scope)
+			console.log("Set avatar")
 
 		queryMedium = (mediumService) ->
 			mediumService.find($routeParams.id).$promise.then(
