@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 	def set_avatar
 		user = User.find(params[:id])
 		user.set_avatar!(avatar_params)
-		render json: {user: user}
+		respond_with user
 	end
 
 	def update

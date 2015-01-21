@@ -9,6 +9,7 @@ angular.module('Fit')
 		$scope.medium = []
 		$scope.comments = []
 		$scope.likes = []
+		$scope.avatar = []
 		$scope.userHasLiked = 'false'
 		$scope.current_user = []
 
@@ -44,6 +45,7 @@ angular.module('Fit')
 			mediumService.find($routeParams.id).$promise.then(
 				(data) ->
 					$scope.medium = data.medium
+					$scope.avatar = data.medium.user.avatar
 					$scope.comments = data.medium.comments
 					$scope.likes = data.medium.likes
 				(error) ->

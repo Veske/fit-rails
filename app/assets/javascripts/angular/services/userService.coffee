@@ -55,8 +55,6 @@ angular.module('Fit')
 				, @errorHandler
 
 			set_avatar: (medium_id, $scope) ->
-				console.log(medium_id)
-				console.log($scope)
 				new @service(avatar: {medium_id: medium_id}).$avatar {id: $scope.current_user, option: 'set_avatar'},
 					(data) ->
 						console.log(data)
