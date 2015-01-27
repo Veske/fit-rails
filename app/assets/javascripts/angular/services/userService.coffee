@@ -7,11 +7,12 @@ angular.module('Fit')
 	($resource, $http, $routeParams, Common) ->
 		class UserService
 			constructor: (errorHandler) ->
-				@service = $resource '/users/:id.json', {},
+				@service = $resource '/users/:id/:option.json', {},
 					'query':    { method: 'GET', isArray: false },
 					'create':   { method: 'POST' },
-					'update':   { method: 'PATCH' }
-					'save': {method: 'POST'}
+					'update':   { method: 'PATCH'},
+					'save':     { method: 'POST' },
+					'avatar':   { method: 'POST' }
 
 				@errorHandler = errorHandler
 
@@ -52,4 +53,9 @@ angular.module('Fit')
 					(data) ->
 						console.log(data)
 				, @errorHandler
+
+			set_avatar: (medium_id, $scope) ->
+				new @service(avatar: {medium_id: medium_id}).$avatar {id: $scope.current_user, option: 'set_avatar'},
+					(data) ->
+						console.log(data)
 ]

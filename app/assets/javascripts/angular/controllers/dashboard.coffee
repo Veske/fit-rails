@@ -17,9 +17,6 @@ angular.module('Fit')
 			@userService.all($scope)
 			@feedService.all($scope)
 
-		$scope.viewUsers = ->
-			$location.url('/users')
-
-		$scope.selectMedium = (medium) ->
+		$scope.select_medium = (medium) ->
 			$location.url('/media/' + medium.id)
 ]

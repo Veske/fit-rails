@@ -1,4 +1,12 @@
 <div ng-init="init()">
+	<div ng-if="user.avatar">
+		<img ng-src="{{ user.avatar.image_video_thumb_url }}" alt="{{ user.avatar.text }}" class="thumbnail"/>
+	</div>
+
+	<div ng-if="!user.avatar">
+		<img src="default-avatar.png" alt="default avatar" class="thumbnail">
+	</div>
+
 	<h1>{{ user.name }}</h1>
 
 	<p>Email: {{ user.email }}</p>
@@ -40,7 +48,7 @@
 					<tbody ng-repeat="medium in media">
 					<tr>
 						<td ng:click="selectMedium(medium)">
-							<img ng:src="{{ medium.image_video_thumb_url }}" alt="{{ medium.text }}" /><br>
+							<img ng:src="{{ medium.image_video_croppable_url }}" alt="{{ medium.text }}" /><br>
 						</td>
 
 						<td>

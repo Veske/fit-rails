@@ -4,8 +4,7 @@ class UsersController < ApplicationController
 	respond_to :json
 
 	def index
-		users = User.all
-		respond_with users
+		respond_with User.all
 	end
 
 	def roles
@@ -38,6 +37,12 @@ class UsersController < ApplicationController
 		respond_with user: user, users: users
 	end
 
+	def set_avatar
+		user = User.find(params[:id])
+		user.set_avatar!(avatar_params)
+		respond_with user
+	end
+
 	def update
 		user = User.find(params[:id])
 		if user.update_attributes(secure_params)
@@ -61,7 +66,7 @@ class UsersController < ApplicationController
 		redirect_to users_path, :notice => 'User deleted.'
 	end
 
-	# We display a new feed for current_user
+	# We display a news feed for current_user
 	def feed
 		feed_items = current_user.feed
 		respond_with feed: ActiveModel::ArraySerializer.new(feed_items, each_serializer: MediumSerializer)
@@ -72,6 +77,10 @@ class UsersController < ApplicationController
 			unless current_user.admin?
 				go_back
 			end
+		end
+
+		def avatar_params
+			params.require(:avatar).permit(:medium_id)
 		end
 
 		def secure_params

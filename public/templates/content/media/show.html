@@ -5,7 +5,17 @@
 		</div>
 
 		<div class="col-md-6 medium-view-row">
-			<p>{{ medium.text }} by <a href="/users/{{ medium.user.id }}">{{ medium.user.name }}</a></p>
+
+			<p>{{ medium.text }} by</p>
+
+			<div ng-if="avatar">
+				<img ng-src="{{ avatar.image_video_thumb_url }}" alt="{{ avatar.text }}" class="thumbnail"/>
+			</div>
+
+			<div ng-if="!avatar">
+				<img src="default-avatar.png" alt="default avatar" class="thumbnail">
+			</div>
+			<a href="/users/{{ medium.user.id }}">{{ medium.user.name }}</a>
 
 			<div id="likes" ng-controller="LikeFormCtrl" ng-init="init()">
 				<div ng-switch="userHasLiked">
@@ -15,6 +25,12 @@
 					<div ng-switch-default>
 						<div ng-include="templates[3].url"></div>
 					</div>
+				</div>
+			</div>
+
+			<div ng-if="current_user == medium.user.id">
+				<div>
+					<button ng-click="set_avatar()">Set this as your profile avatar</button>
 				</div>
 			</div>
 

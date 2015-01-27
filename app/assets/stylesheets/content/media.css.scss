@@ -26,9 +26,10 @@
 	align-items: flex-end;
 }
 
+// Used for showing user avatar in desired size
 .thumbnail {
-	max-width: 200px;
-	max-height: 150px;
+	max-width: 100px;
+	max-height: 100px;
 	line-height: 20px;
 	margin-bottom: 5px;
 }

@@ -35,7 +35,7 @@ angular.module('Fit').config [
 			controller: 'MediaIndexCtrl'
 		.when '/media/:id',
 			templateUrl: 'templates/content/media/show.html',
-			controller: 'MediaShowCtrl'
+			controller: 'MediumShowCtrl'
 		.otherwise
 				redirectTo: '/'
 		# Enabling html5Mode

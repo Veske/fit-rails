@@ -8,11 +8,21 @@
 					<tbody ng-repeat="medium in feed">
 					<tr>
 						<td>
+							<div ng-if="medium.user.avatar">
+								<img ng-src="{{ medium.user.avatar.image_video_thumb_url }}"
+								     alt="{{ medium.user.avatar.text }}" class="thumbnail"/>
+							</div>
+
+							<div ng-if="!medium.user.avatar">
+								<img src="default-avatar.png" alt="default avatar" class="thumbnail">
+							</div>
+
 							{{ medium.user.name }} posted:
 						</td>
 						<td>
 							<p>{{ medium.text }}</p>
-							<img ng:src="{{ medium.image_video_croppable_url }}" alt="{{ medium.text }}" ng:click="selectMedium(medium)"/><br>
+							<img ng:src="{{ medium.image_video_croppable_url }}" alt="{{ medium.text }}"
+							     ng:click="select_medium(medium)"/><br>
 						</td>
 					</tr>
 					</tbody>
