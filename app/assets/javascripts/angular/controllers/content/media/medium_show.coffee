@@ -16,7 +16,7 @@ angular.module('Fit')
 		# Function that is ran upon page load
 		$scope.init = ->
 			mediumService = new MediumService(serverErrorHandler)
-			queryMedium(mediumService)
+			query_medium(mediumService)
 			$scope.current_user = Common.get_current_user().id
 
 		$scope.$watch "likes", ((newVal) ->
@@ -41,7 +41,7 @@ angular.module('Fit')
 			user_service.set_avatar($routeParams.id, $scope)
 			console.log("Set avatar")
 
-		queryMedium = (mediumService) ->
+		query_medium = (mediumService) ->
 			mediumService.find($routeParams.id).$promise.then(
 				(data) ->
 					$scope.medium = data.medium

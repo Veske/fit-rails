@@ -32,7 +32,7 @@ module Avatar
 
 	# Avatar that self has set
 	def user_avatar
-		avatar = $redis.smembers("avatar:#{self.id}")
+		$redis.smembers("avatar:#{self.id}")
 	end
 
 	# Helper method to generate redis keys
