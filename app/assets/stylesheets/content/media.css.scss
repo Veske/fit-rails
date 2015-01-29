@@ -15,9 +15,9 @@
 
 // Create a scroll-bar around the show-comments area
 .medium-view-comments {
-	overflow: scroll;
+	overflow: auto;
 	overflow-x: hidden;
-	height: 507px;
+	height: 385px;
 	width: auto;
 }
 

@@ -26,12 +26,3 @@ Comment.create([
 	{text: 'Random comment 123', user_id: 1, medium_id: 3},
 	{text: 'Comment about picture', user_id: 2, medium_id: 3}
 ])
-
-Like.create([
-	{user_id: 1, medium_id: 1},
-	{user_id: 2, medium_id: 1},
-	{user_id: 1, medium_id: 2},
-	{user_id: 2, medium_id: 2},
-	{user_id: 1, medium_id: 3},
-	{user_id: 2, medium_id: 3}
-])

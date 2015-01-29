@@ -5,37 +5,42 @@
 		</div>
 
 		<div class="col-md-6 medium-view-row">
+			<div class="row">
+				<p>{{ medium.text }} by</p>
 
-			<p>{{ medium.text }} by</p>
+				<div ng-if="avatar">
+					<img ng-src="{{ avatar.image_video_thumb_url }}" alt="{{ avatar.text }}" class="thumbnail"
+					     align="left"/>
+				</div>
 
-			<div ng-if="avatar">
-				<img ng-src="{{ avatar.image_video_thumb_url }}" alt="{{ avatar.text }}" class="thumbnail"/>
+				<div ng-if="!avatar">
+					<img src="default-avatar.png" alt="default avatar" class="thumbnail">
+				</div>
+				<a href="/users/{{ medium.user.id }}">{{ medium.user.name }}</a>
 			</div>
 
-			<div ng-if="!avatar">
-				<img src="default-avatar.png" alt="default avatar" class="thumbnail">
-			</div>
-			<a href="/users/{{ medium.user.id }}">{{ medium.user.name }}</a>
-
-			<div id="likes" ng-controller="LikeFormCtrl" ng-init="init()">
-				<div ng-switch="userHasLiked">
-					<div ng-switch-when="false" >
-						<div ng-include="templates[2].url"></div>
-					</div>
-					<div ng-switch-default>
-						<div ng-include="templates[3].url"></div>
+			<div class="row">
+				<div id="likes" ng-controller="LikeFormCtrl" ng-init="init()">
+					<div ng-switch="userHasLiked">
+						<div ng-switch-when="false">
+							<div ng-include="templates[2].url"></div>
+						</div>
+						<div ng-switch-default>
+							<div ng-include="templates[3].url"></div>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div ng-if="current_user == medium.user.id">
-				<div>
-					<button ng-click="set_avatar()">Set this as your profile avatar</button>
+				<div ng-if="current_user == medium.user.id">
+					<div>
+						<button ng-click="set_avatar()">Set this as your profile avatar</button>
+					</div>
 				</div>
-			</div>
 
-			<div class="medium-view-comments" ng-include="templates[0].url"></div>
-			<div class="medium-view-comments-new" ng-include="templates[1].url" ng-controller="CommentsFormCtrl" ng-init="init()"></div>
+				<div class="medium-view-comments" ng-include="templates[0].url"></div>
+				<div class="medium-view-comments-new" ng-include="templates[1].url" ng-controller="CommentsFormCtrl"
+				     ng-init="init()"></div>
+			</div>
 		</div>
 	</div>
 </div>
