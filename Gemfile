@@ -12,7 +12,7 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'angular-file-upload-rails'
 gem 'sprockets'
-gem 'angularjs-rails'
+gem 'angularjs-rails', '~> 1.3.10'
 
 # Database gems
 gem 'pg'
