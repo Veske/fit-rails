@@ -6,17 +6,17 @@
 
 		<div class="col-md-6 medium-view-row">
 			<div class="row">
-				<p>{{ medium.text }} by</p>
-
 				<div ng-if="avatar">
 					<img ng-src="{{ avatar.image_video_thumb_url }}" alt="{{ avatar.text }}" class="thumbnail"
 					     align="left"/>
 				</div>
 
 				<div ng-if="!avatar">
-					<img src="default-avatar.png" alt="default avatar" class="thumbnail">
+					<img src="default-avatar.png" alt="default avatar" class="thumbnail" align="left">
 				</div>
 				<a href="/users/{{ medium.user.id }}">{{ medium.user.name }}</a>
+
+				<p>{{ medium.text }}</p>
 			</div>
 
 			<div class="row">
