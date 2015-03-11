@@ -7,7 +7,6 @@
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Example" %>">
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
 </head>
 
@@ -15,7 +14,7 @@
 <%#  Load current user into js variable for global use %>
 <% if current_user %>
     <script>
-	    var current_user = <%=raw current_user.to_json %>
+	    var current_user = <%=raw current_user.to_json %>;
     </script>
 <% end %>
 
@@ -30,5 +29,6 @@
 	    <%= render 'layouts/messages' %>
 	    <%= yield %>
 	</main>
+	<%= javascript_include_tag 'application' %>
 </body>
 </html>
