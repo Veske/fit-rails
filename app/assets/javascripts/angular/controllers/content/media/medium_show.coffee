@@ -34,7 +34,6 @@
 		$scope.set_avatar = () ->
 			user_service = new UserService(serverErrorHandler)
 			user_service.set_avatar($routeParams.id, $scope)
-			console.log("Set avatar")
 
 		# Function that is ran upon page load to initialize variables
 		query_medium = (mediumService) ->

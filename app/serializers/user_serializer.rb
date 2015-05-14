@@ -8,6 +8,6 @@ class UserSerializer < ActiveModel::Serializer
                :avatar
 
     def avatar
-        Medium.find(self.user_avatar)[0]
+        Medium.find(self.current_avatar)[0]
     end
 end
