@@ -8,6 +8,6 @@
 				},
 
 				{
-					remove: {method: 'DELETE'}
+					destroy: {method: 'DELETE'}
 				}
 ]

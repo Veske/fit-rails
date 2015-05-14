@@ -1,5 +1,4 @@
-angular.module('Fit')
-.controller "MediumShowCtrl", [
+@Fit.controller "MediumShowCtrl", [
 	'$scope',
 	'$routeParams',
 	'MediumService',
@@ -13,11 +12,7 @@ angular.module('Fit')
 		$scope.userHasLiked = 'false'
 		$scope.current_user = []
 
-		# Function that is ran upon page load
-		$scope.init = ->
-			mediumService = new MediumService(serverErrorHandler)
-			query_medium(mediumService)
-			$scope.current_user = Common.get_current_user().id
+		mediumService = new MediumService(serverErrorHandler)
 
 		$scope.$watch "likes", ((newVal) ->
 			match = 0
@@ -27,7 +22,7 @@ angular.module('Fit')
 				# Iterate over all likes and see if the current user has made a like
 				# IF so, make match == to 1
 				for key, like of $scope.likes
-					if parseInt(like) == Common.get_current_user().id then match = 1
+					if parseInt(like, 10) == Common.get_current_user().id then match = 1
 
 				# IF match is 1, we change our variable to true to show appropriate content and vice versa
 				if match == 1
@@ -41,7 +36,9 @@ angular.module('Fit')
 			user_service.set_avatar($routeParams.id, $scope)
 			console.log("Set avatar")
 
+		# Function that is ran upon page load to initialize variables
 		query_medium = (mediumService) ->
+			$scope.current_user = Common.get_current_user().id
 			mediumService.find($routeParams.id).$promise.then(
 				(data) ->
 					$scope.medium = data.medium
@@ -60,4 +57,6 @@ angular.module('Fit')
 
 		serverErrorHandler = ->
 			alert("There was a server error, please reload the page and try again.")
+
+		query_medium(mediumService)
 ]
