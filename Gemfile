@@ -6,13 +6,14 @@ ruby '2.2.0'
 gem 'rails', '4.2.0'
 
 # Gems for assets
-gem 'bootstrap-sass', '~> 3.3.3'
-gem 'sass-rails', '~> 5.0.1'
+gem 'purecss-rails', '~>0.6.0'
+gem 'bootstrap-sass', '~> 3.3.4.1'
+gem 'sass-rails', '~> 5.0.3'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'angular-file-upload-rails'
 gem 'sprockets'
-gem 'angularjs-rails', '~> 1.3.14'
+gem 'angularjs-rails', '~> 1.3.15'
 
 # Database gems
 gem 'pg'
