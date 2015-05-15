@@ -18,5 +18,7 @@ angular.module('Fit')
 				defaults.patch = defaults.patch || {}
 				defaults.patch['Content-Type'] = 'application/json'
 
-			all: ($scope) -> @service.query(((data)-> $scope.feed = data.feed), @errorHandler)
+			all: ($scope) -> @service.query(( (response)->
+				$scope.feed = data
+			), @errorHandler)
 ]

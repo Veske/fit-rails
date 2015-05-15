@@ -30,17 +30,17 @@ class Medium < ActiveRecord::Base
 	end
 
 	# Method that we use to get JSON for medium without serializer
-	def as_json(options={})
-		hash = super(options)
-		hash.merge!({
-				            image_video_croppable_url: image_video.url(:croppable),
-				            image_video_big_url: image_video.url(:big),
-				            image_video_original_url: image_video.url(:original),
-				            image_video_thumb_url: image_video.url(:thumb)
-		            }
-		)
-		hash
-	end
+	#def as_json(options={})
+	#	hash = super(options)
+	#	hash.merge!({
+	#			            image_video_croppable_url: image_video.url(:croppable),
+	#			            image_video_big_url: image_video.url(:big),
+	#			            image_video_original_url: image_video.url(:original),
+	#			            image_video_thumb_url: image_video.url(:thumb)
+	#	            }
+	#	)
+	#	hash
+	#end
 
 	private
 		def randomize_file_name

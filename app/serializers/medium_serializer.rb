@@ -6,6 +6,6 @@ class MediumSerializer < ActiveModel::Serializer
                :image_video_thumb_url,
                :image_video_big_url
 
-    has_one :user
-    has_many :comments, :likes
+    belongs_to :user
+    has_many :comments
 end

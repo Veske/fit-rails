@@ -10,4 +10,7 @@ class UserSerializer < ActiveModel::Serializer
     def avatar
         Medium.find(self.current_avatar)[0]
     end
+
+    #has_one :avatar, serializer: AvatarSerializer
+    has_many :media, :comments
 end

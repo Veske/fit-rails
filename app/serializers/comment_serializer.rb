@@ -4,5 +4,5 @@ class CommentSerializer < ActiveModel::Serializer
 	           :user_id,
 	           :medium_id
 
-	has_one :user
+	belongs_to :user
 end

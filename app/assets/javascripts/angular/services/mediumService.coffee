@@ -10,7 +10,8 @@ angular.module('Fit')
 					{id: '@id'},
 					{
 						'all':    { method: 'GET', isArray: false },
-						'create': { method: 'POST'}
+						'create': {method: 'POST'},
+#'query': {isArray: false}
 					}
 				)
 				@errorHandler = errorHandler
@@ -32,5 +33,8 @@ angular.module('Fit')
 				@service.get {id: mediumId}, (-> null), @errorHandler
 
 			all: ($scope) ->
-				@service.query ((data)-> $scope.media = data), @errorHandler
+				@service.query ((data)->
+					$scope.media = data
+					console.log(data)
+				), @errorHandler
 ]

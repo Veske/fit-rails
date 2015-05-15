@@ -3,8 +3,7 @@ class Content::MediaController < ApplicationController
 	respond_to :json
 
 	def index
-		media = Medium.all
-		respond_with media.to_json
+		respond_with Medium.all, each_serializer: MediumIndexSerializer
 	end
 
 	def new

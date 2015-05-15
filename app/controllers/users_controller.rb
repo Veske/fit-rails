@@ -68,8 +68,10 @@ class UsersController < ApplicationController
 
 	# We display a news feed for current_user
 	def feed
-		feed_items = current_user.feed
-		respond_with feed: ActiveModel::ArraySerializer.new(feed_items, each_serializer: MediumSerializer)
+		media = current_user.feed
+		#feed_items = current_user.feed
+		respond_with media, each_serializer: MediumSerializer
+		#respond_with feed: ActiveModel::ArraySerializer.new(feed_items, each_serializer: MediumSerializer)
 	end
 
 	private

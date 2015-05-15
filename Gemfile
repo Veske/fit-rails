@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.2.11'
 gem 'sdoc', '~> 0.4.1', group: :doc
 gem 'devise'
 gem 'paperclip'
-gem 'active_model_serializers'
+gem 'active_model_serializers', '~> 0.10.0.rc1'
 
 group :development do
 	gem 'better_errors'

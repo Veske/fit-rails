@@ -39,11 +39,12 @@
 		query_medium = (mediumService) ->
 			$scope.current_user = Common.get_current_user().id
 			mediumService.find($routeParams.id).$promise.then(
-				(data) ->
-					$scope.medium = data.medium
-					$scope.avatar = data.medium.user.avatar
-					$scope.comments = data.medium.comments
-					$scope.likes = data.medium.likes
+				(response) ->
+					console.log(response)
+					$scope.medium = response
+					$scope.avatar = response.user.avatar
+					$scope.comments = response.comments
+#$scope.likes = response.likes
 				(error) ->
 					serverErrorHandler()
 			)
