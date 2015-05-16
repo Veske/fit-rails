@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 	respond_to :json
 
 	def index
-		respond_with User.all
+		respond_with User.all, each_serializer: UserSimpleSerializer
 	end
 
 	def roles
@@ -69,9 +69,8 @@ class UsersController < ApplicationController
 	# We display a news feed for current_user
 	def feed
 		media = current_user.feed
-		#feed_items = current_user.feed
-		respond_with media, each_serializer: MediumSerializer
-		#respond_with feed: ActiveModel::ArraySerializer.new(feed_items, each_serializer: MediumSerializer)
+		respond_with media, each_serializer: MediumSerializer, root: 'media'
+		#respond_with feed: ActiveModel::ArraySerializer.new(media, each_serializer: MediumSerializer)
 	end
 
 	private

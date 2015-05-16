@@ -9,5 +9,4 @@ class MediumIndexSerializer < ActiveModel::Serializer
 	           :image_video_thumb_url,
 	           :image_video_big_url
 
-	url :medium
 end

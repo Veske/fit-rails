@@ -22,7 +22,7 @@
 				# Iterate over all likes and see if the current user has made a like
 				# IF so, make match == to 1
 				for key, like of $scope.likes
-					if parseInt(like, 10) == Common.get_current_user().id then match = 1
+					if like.user_id == Common.get_current_user().id then match = 1
 
 				# IF match is 1, we change our variable to true to show appropriate content and vice versa
 				if match == 1
@@ -40,11 +40,10 @@
 			$scope.current_user = Common.get_current_user().id
 			mediumService.find($routeParams.id).$promise.then(
 				(response) ->
-					console.log(response)
-					$scope.medium = response
-					$scope.avatar = response.user.avatar
-					$scope.comments = response.comments
-#$scope.likes = response.likes
+					$scope.medium = response.medium
+					$scope.avatar = response.medium.user.avatar
+					$scope.comments = response.medium.comments
+					$scope.likes = response.medium.likes
 				(error) ->
 					serverErrorHandler()
 			)

@@ -8,11 +8,11 @@ class ApplicationController < ActionController::Base
 
 	def go_back
 		#Attempt to redirect
-		redirect_to :back, :alert => "Access denied."
+		redirect_to :back, :alert => 'Access denied.'
 
 		#Catch exception and redirect to root
 		rescue ActionController::RedirectBackError
-		redirect_to root_path, :alert => "Access denied."
+		redirect_to root_path, :alert => 'Access denied.'
 	end
 
 	private

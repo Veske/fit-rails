@@ -20,7 +20,10 @@ angular.module('Fit')
 				defaults.patch = defaults.patch || {}
 				defaults.patch['Content-Type'] = 'application/json'
 
-			all: ($scope) -> @service.query(((data)-> $scope.users = data.users), @errorHandler)
+			all: ($scope) -> @service.query((
+				(response)->
+					$scope.users = response.users
+			), @errorHandler)
 
 			find: (userId, $scope) ->
 				@service.get {id: userId}, (
@@ -45,13 +48,13 @@ angular.module('Fit')
 				delete user['authorized']
 				new @service(user: user).$update {id: userId},
 					(data) ->
-						console.log(data)
+						# epty
 				, @errorHandler
 
 			createUser: (user, $scope) ->
 				new @service(user: user).$save {id: ''},
 					(data) ->
-						console.log(data)
+						# epty
 				, @errorHandler
 
 			set_avatar: (medium_id, $scope) ->

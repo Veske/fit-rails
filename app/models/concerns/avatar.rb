@@ -43,7 +43,7 @@ module Avatar
 
 	# Remove avatar from self
 	def remove_avatar!(medium_id)
-		$redis.srem(redis_avatar_key(:medium_id), self.id)
+		$redis.srem(redis_avatar_key(medium_id), self.id)
 	end
 
 	# Avatar that self has set

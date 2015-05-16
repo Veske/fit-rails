@@ -11,7 +11,7 @@ angular.module('Fit')
 					{
 						'all':    { method: 'GET', isArray: false },
 						'create': {method: 'POST'},
-#'query': {isArray: false}
+						'query': {method: 'GET', isArray: false}
 					}
 				)
 				@errorHandler = errorHandler
@@ -34,7 +34,6 @@ angular.module('Fit')
 
 			all: ($scope) ->
 				@service.query ((data)->
-					$scope.media = data
-					console.log(data)
+					$scope.media = data.media
 				), @errorHandler
 ]
