@@ -1,9 +1,5 @@
 @Fit.controller "MediumShowCtrl", [
-	'$scope',
-	'$routeParams',
-	'MediumService',
-	'Common',
-	'UserService',
+	'$scope', '$routeParams', 'MediumService', 'Common', 'UserService',
 	($scope, $routeParams, MediumService, Common, UserService) ->
 		$scope.medium = []
 		$scope.comments = []
@@ -11,8 +7,6 @@
 		$scope.avatar = []
 		$scope.userHasLiked = 'false'
 		$scope.current_user = []
-
-		mediumService = new MediumService(serverErrorHandler)
 
 		$scope.$watch "likes", ((newVal) ->
 			match = 0
@@ -36,16 +30,16 @@
 			user_service.set_avatar($routeParams.id, $scope)
 
 		# Function that is ran upon page load to initialize variables
-		query_medium = (mediumService) ->
+		query_medium = ->
 			$scope.current_user = Common.get_current_user().id
-			mediumService.find($routeParams.id).$promise.then(
+			new MediumService(id: $routeParams.id).$get(
 				(response) ->
 					$scope.medium = response.medium
 					$scope.avatar = response.medium.user.avatar
 					$scope.comments = response.medium.comments
 					$scope.likes = response.medium.likes
 				(error) ->
-					serverErrorHandler()
+					console.log(error)
 			)
 
 		$scope.templates = [
@@ -57,5 +51,5 @@
 		serverErrorHandler = ->
 			alert("There was a server error, please reload the page and try again.")
 
-		query_medium(mediumService)
+		query_medium()
 ]
