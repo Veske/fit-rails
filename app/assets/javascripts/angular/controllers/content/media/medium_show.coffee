@@ -43,10 +43,10 @@
 			)
 
 		$scope.templates = [
-			{ name: 'commentsShow.html', url: 'templates/content/comments/_show.html'},
-			{ name: 'commentsForm.html', url: 'templates/content/comments/_form.html'},
-			{ name: 'likesForm.html',    url: 'templates/content/likes/_form.html'},
-			{ name: 'likeDestroy.html',  url: 'templates/content/likes/_destroy.html'}]
+			{name: 'commentsShow.html', url: 'templates/content/comments/_show.html'},
+			{name: 'commentsForm.html', url: 'templates/content/comments/_form.html'},
+			{name: 'likesForm.html', url: 'templates/content/likes/_form.html'},
+			{name: 'likeDestroy.html', url: 'templates/content/likes/_destroy.html'}]
 
 		serverErrorHandler = ->
 			alert("There was a server error, please reload the page and try again.")

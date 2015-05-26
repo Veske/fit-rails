@@ -1,12 +1,6 @@
 angular.module('Fit')
 .controller "SessionCtrl", [
-	'$scope',
-	'$location',
-	'$http',
-	'UserService',
-	'Common',
-	'SessionService',
-	'$window'
+	'$scope', '$location', '$http', 'UserService', 'Common', 'SessionService', '$window'
 	($scope, $location, $http, UserService, Common, SessionService, $window) ->
 		serverErrorHandler = Common.serverErrorHandler
 		$scope.remember_me = false

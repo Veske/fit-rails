@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
 	def roles
 		roles = User.roles.keys.map { |role| {name: role.titleize, key: role} }
-		respond_with roles.to_json
+		respond_with roles
 	end
 
 	def show

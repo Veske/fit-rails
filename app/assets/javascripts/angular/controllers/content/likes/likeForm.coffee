@@ -1,8 +1,5 @@
 @Fit.controller "LikeFormCtrl", [
-	'$scope',
-	'$routeParams',
-	'LikeService',
-	'Common',
+	'$scope', '$routeParams', 'LikeService', 'Common',
 	($scope, $routeParams, LikeService, Common) ->
 		$scope.like = []
 
@@ -13,10 +10,14 @@
 
 		$scope.destroyLike = (medium) ->
 			for i, like of medium.likes
-				if parseInt(like, 10) == Common.get_current_user().id then $scope.like = parseInt(like, 10)
+				if like.user_id == Common.get_current_user().id then $scope.like = like.user_id
 
-			new LikeService(id: $routeParams.id, like_id: $scope.like).$destroy(( (response) ->
-				for i, like of medium.likes
-					if parseInt(like, 10) == $scope.like then medium.likes.splice(i, 1)
-			))
+			new LikeService(
+				id: $routeParams.id,
+				like_id: $scope.like
+			).$delete(
+				(response) ->
+					for i, like of medium.likes
+						if like.user_id == $scope.like then medium.likes.splice(i, 1)
+			)
 ]

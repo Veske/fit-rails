@@ -20,7 +20,7 @@
 			</div>
 
 			<div class="row">
-				<div id="likes" ng-controller="LikeFormCtrl" ng-init="init()">
+				<div id="likes" ng-controller="LikeFormCtrl">
 					<div ng-switch="userHasLiked">
 						<div ng-switch-when="false">
 							<div ng-include="templates[2].url"></div>
@@ -38,8 +38,8 @@
 				</div>
 
 				<div class="medium-view-comments" ng-include="templates[0].url"></div>
-				<div class="medium-view-comments-new" ng-include="templates[1].url" ng-controller="CommentsFormCtrl"
-				     ng-init="init()"></div>
+				<div class="medium-view-comments-new" ng-include="templates[1].url"
+				     ng-controller="CommentsFormCtrl"></div>
 			</div>
 		</div>
 	</div>

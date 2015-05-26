@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	include Relationship, Avatar
+	include Relationship, Avatar, LikeRedis
 
 	enum role: [:user, :moderator, :admin]
 	validates :name, presence: true, length: {maximum: 50}

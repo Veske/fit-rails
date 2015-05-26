@@ -1,29 +1,15 @@
-angular.module('Fit')
-.factory 'UserService', [
-	'$resource',
-	'$http',
-	'$routeParams',
-	'Common',
+@Fit.factory 'UserService', [
+	'$resource', '$http', '$routeParams', 'Common',
 	($resource, $http, $routeParams, Common) ->
-		class UserService
-			constructor: (errorHandler) ->
-				@service = $resource '/users/:id/:option.json', {},
-					'query':    { method: 'GET', isArray: false },
-					'create':   { method: 'POST' },
-					'update':   { method: 'PATCH'},
-					'save':     { method: 'POST' },
-					'avatar':   { method: 'POST' }
-
-				@errorHandler = errorHandler
-
-				defaults = $http.defaults.headers
-				defaults.patch = defaults.patch || {}
-				defaults.patch['Content-Type'] = 'application/json'
-
-			all: ($scope) -> @service.query((
-				(response)->
-					$scope.users = response.users
-			), @errorHandler)
+		$resource '/users/:id/:options.json',
+			{
+				id: '@id',
+				options: '@options'
+			},
+			{
+				'query': {isArray: false},
+				'avatar': {method: 'POST'}
+			}
 
 			find: (userId, $scope) ->
 				@service.get {id: userId}, (
