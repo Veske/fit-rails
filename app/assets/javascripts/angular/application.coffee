@@ -9,9 +9,7 @@
 # Include all Angular modules
 @Fit = angular.module('Fit', [
 	'ngRoute',
-	'ngResource',
-	'growlNotifications',
-	'angularFileUpload'
+	'ngResource'
 ])
 
 # Set metadata for $httpProvider

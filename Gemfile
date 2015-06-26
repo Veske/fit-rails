@@ -6,22 +6,20 @@ ruby '2.2.0'
 gem 'rails', '4.2.0'
 
 # Gems for assets
-gem 'purecss-rails', '~>0.6.0'
-gem 'bootstrap-sass', '~> 3.3.4.1'
 gem 'sass-rails', '~> 5.0.3'
 gem 'coffee-rails'
-gem 'jquery-rails'
-gem 'angular-file-upload-rails'
 gem 'sprockets'
-gem 'angularjs-rails', '~> 1.3.15'
 
 # Database gems
 gem 'pg'
+gem 'schema_plus'
 gem 'redis'
 
 # Rails server
 gem 'passenger'
 
+# Common gems
+gem 'quiet_assets'
 gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.2.11'
@@ -36,10 +34,18 @@ gem 'active_model_serializers', '~> 0.9.3'
 group :development do
 	gem 'better_errors'
 	gem 'binding_of_caller', :platforms=>[:mri_21]
-	gem 'quiet_assets'
 	gem 'rails_layout'
 end
 
 group :production do
 	gem 'rails_12factor'
+end
+
+# Included web assets required by the project
+source 'https://rails-assets.org' do
+	gem 'rails-assets-bootstrap', '~> 3.3.5'
+	gem 'rails-assets-purecss', '~> 0.6.0'
+	gem 'rails-assets-angular', '~> 1.4.1'
+	gem 'rails-assets-angular-route', '~> 1.4.1'
+	gem 'rails-assets-angular-resource', '~> 1.4.1'
 end
