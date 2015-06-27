@@ -6,7 +6,7 @@
 		$scope.newLike = (medium) ->
 			LikeService.like({id: $routeParams.id, user_id: Common.get_current_user.id},
 				(response) ->
-					medium.likes.push(response.id)
+					medium.likes.push(user_id: response.id)
 			)
 
 		$scope.destroyLike = (medium) ->

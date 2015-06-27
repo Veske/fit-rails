@@ -1,10 +1,43 @@
-<div class="authform" ng-init="init()">
-	<div ng-if="notify">
-		<growl-notification>
-			{{ message }}
-		</growl-notification>
-	</div>
+<div class="form-canvas" ng-init="init()">
+	<form class="login-form">
+		<input id="user_email"
+		       type="email"
+		       class="form-input"
+		       placeholder="Enter your email"
+		       autofocus="autofocus"
+		       name="user[email]"
+		       ng-model="email"
+		       autocomplete="on"/>
 
+		<input id="user_password"
+		       type="password"
+		       class="form-input"
+		       ng-model="password"
+		       name="user[password]"
+		       placeholder="Password"
+		       autocomplete="off"/>
+		<input type="submit" value="Login" ng-click="sign_in(email, password, remember_me)"/>
+
+		<div class="pure-g bottom-form">
+			<div class="pure-u-1-3">
+				<label for="user_remember_me">Remember me</label>
+			</div>
+
+			<div class="pure-u-1-3">
+				<input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me" ng-model="remember_me"/>
+			</div>
+
+			<div class="pure-u-1-3">
+				<a href="">Lost your password?</a>
+			</div>
+		</div>
+	</form>
+</div>
+
+
+<!--
+
+<div class="authform" ng-init="init()">
 	<h3>Sign in</h3>
 	<form>
 		<div class="form-group">
@@ -21,10 +54,8 @@
 
 		<button name="commit" class="button right" ng-click="sign_in(email, password, remember_me)">Sign in</button>
 		<div class="checkbox" style="width:150px">
-			<label>
-				<input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me" ng-model="remember_me">
-				Remember me
-			</label>
+
 		</div>
 	</form>
 </div>
+-->

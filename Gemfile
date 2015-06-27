@@ -44,7 +44,7 @@ end
 # Included web assets required by the project
 source 'https://rails-assets.org' do
 	gem 'rails-assets-bootstrap', '~> 3.3.5'
-	gem 'rails-assets-purecss', '~> 0.6.0'
+	gem 'rails-assets-pure', '~> 0.6.0'
 	gem 'rails-assets-angular', '~> 1.4.1'
 	gem 'rails-assets-angular-route', '~> 1.4.1'
 	gem 'rails-assets-angular-resource', '~> 1.4.1'

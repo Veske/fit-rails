@@ -126,7 +126,7 @@ GEM
     rails-assets-bootstrap (3.3.5)
       rails-assets-jquery (>= 1.9.1)
     rails-assets-jquery (2.1.4)
-    rails-assets-purecss (0.6.0)
+    rails-assets-pure (0.6.0)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.6)
@@ -252,7 +252,7 @@ DEPENDENCIES
   rails-assets-angular-resource (~> 1.4.1)!
   rails-assets-angular-route (~> 1.4.1)!
   rails-assets-bootstrap (~> 3.3.5)!
-  rails-assets-purecss (~> 0.6.0)!
+  rails-assets-pure (~> 0.6.0)!
   rails_12factor
   rails_layout
   redis

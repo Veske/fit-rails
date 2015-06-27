@@ -22,8 +22,7 @@ angular.module('Fit')
 			login: ($scope, newUser) ->
 				new @service(user: newUser).$save {param: 'sign_in'},
 					(data) ->
-						if data.error then Common.flashNotification($scope, data.error)
-						if data.user then Common.update_current_user(data.user) && $window.location.href = '/'
+						if data then Common.update_current_user(data.user) && $window.location.href = '/'
 					, @errorHandler
 
 			logout: ($scope, user) ->
