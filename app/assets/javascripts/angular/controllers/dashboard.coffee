@@ -6,16 +6,16 @@ angular.module('Fit')
 		$scope.feed = []
 
 		initData = ->
-			new FeedService().$query(
+			FeedService.query(
 				(response) ->
-					$scope.feed = response.media
+					$scope.feed = response
 				(error) ->
 # Handle error
 			)
 
-			new UserService().$query(
+			UserService.query(
 				(response) ->
-					$scope.users = response.users
+					$scope.users = response
 			)
 
 		$scope.select_medium = (medium) ->

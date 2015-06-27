@@ -6,7 +6,7 @@
 		$scope.likes = []
 		$scope.avatar = []
 		$scope.userHasLiked = 'false'
-		$scope.current_user = []
+		$scope.current_user = Common.get_current_user().id
 
 		$scope.$watch "likes", ((newVal) ->
 			match = 0
@@ -29,17 +29,15 @@
 			user_service = new UserService(serverErrorHandler)
 			user_service.set_avatar($routeParams.id, $scope)
 
-		# Function that is ran upon page load to initialize variables
 		query_medium = ->
-			$scope.current_user = Common.get_current_user().id
-			new MediumService(id: $routeParams.id).$get(
+			MediumService.get({id: $routeParams.id},
 				(response) ->
-					$scope.medium = response.medium
-					$scope.avatar = response.medium.user.avatar
-					$scope.comments = response.medium.comments
-					$scope.likes = response.medium.likes
+					$scope.medium = response
+					$scope.avatar = response.user.avatar
+					$scope.comments = response.comments
+					$scope.likes = response.likes
 				(error) ->
-					console.log(error)
+# Deal with error
 			)
 
 		$scope.templates = [

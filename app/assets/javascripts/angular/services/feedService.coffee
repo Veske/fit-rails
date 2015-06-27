@@ -6,6 +6,6 @@
 				id: '@id'
 			},
 			{
-				query: {isArray: false}
+				query: {isArray: true}
 			}
 ]

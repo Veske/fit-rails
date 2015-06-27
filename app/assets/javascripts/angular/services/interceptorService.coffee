@@ -1,7 +1,5 @@
 @Fit.factory 'InterceptorService', [
-	'$q',
-	'$rootScope',
-	'$location'
+	'$q', '$rootScope', '$location'
 	($q, $rootScope, $location) ->
 
 		# We intercept requests that get a 401 - unauthorized response, and redirect the user

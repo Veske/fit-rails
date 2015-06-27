@@ -1,11 +1,13 @@
-@Fit.factory 'MediumService', [
+@Fit.service 'MediumService', [
 	'$resource', '$http', '$routeParams',
 	($resource, $http, $routeParams) ->
-		$resource '/media/:id.json',
-			{
-				id: '@id'
+		$resource '/media/:id.json', {id: '@id'}, {
+			query: {
+				isArray: true
 			},
-			{
-				query: {isArray: false}
+			get: {
+				method: 'GET',
+				isArray: false
 			}
+		}
 ]

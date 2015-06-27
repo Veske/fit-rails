@@ -7,7 +7,7 @@
 				options: '@options'
 			},
 			{
-				'query': {isArray: false},
+				'query': {isArray: true},
 				'avatar': {method: 'POST'}
 			}
 

@@ -7,7 +7,7 @@ class MediumSerializer < ActiveModel::Serializer
                :image_video_thumb_url,
                :image_video_big_url
 
-	#has_many :comments
+	has_many :comments
 	has_many :likes, each_serializer: LikeSerializer
 	has_one :user, serializer: UserSimpleSerializer
 
