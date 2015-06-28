@@ -2,3 +2,8 @@
 .main {
 	z-index: 1;
 }
+
+// Color placeholders in input forms
+input {
+	@include placeholder(gray, 16px);
+}

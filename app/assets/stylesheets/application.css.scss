@@ -2,7 +2,8 @@
 @import "bootstrap";
 @import "pure";
 @import "angular-ui";
-@import "application/base";
-@import "application/framework_and_overrides";
+
 @import "application/modules/*";
+@import "application/base";
 @import "application/partials/*";
+@import "application/framework_and_overrides";

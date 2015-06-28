@@ -41,7 +41,7 @@ angular.module('Fit')
 					$window.location.href = '/'
 			)
 
-		$scope.create = (isValid) ->
+		$scope.create = (isValid, param) ->
 			$scope.submitted = true
 			if isValid
 				UserService.create_user(user: {
@@ -52,8 +52,8 @@ angular.module('Fit')
 				}, submit: 'Sign up', (response)->
 					console.log(response)
 				)
-				console.log(isValid)
-#@userService.createUser(user, $scope)
 			else
+# bad input
+
 
 ]

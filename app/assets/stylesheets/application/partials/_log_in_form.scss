@@ -39,8 +39,6 @@
 			&:focus {
 				border: 2px solid #1abc9d
 			}
-			@include placeholder(gray, 16px);
-
 		}
 		input[type="submit"] {
 			display: block;

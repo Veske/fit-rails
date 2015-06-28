@@ -1,11 +1,8 @@
-<div ng-if="notify">
-	<growl-notification>
-		{{ message }}
-	</growl-notification>
-</div>
-
-<form novalidate class="simple-form">
-	<label for="count">Text:</label>
-	<input type="text" name="text" ng-model="text">
-	<button ng-click="newComment(text, medium)" class="button-xs">Comment</button>
+<form ng-controller="CommentsFormCtrl" name="commentForm" class="simple-form"
+      ng-submit="newComment(commentForm.$valid, medium)" novalidate>
+	<input type="text"
+	       name="text"
+	       ng-model="text"
+	       placeholder="Comment this..."
+	       required/>
 </form>
