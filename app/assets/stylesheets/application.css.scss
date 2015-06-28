@@ -1,6 +1,8 @@
-/*
- *= require_self
- *= require bootstrap
- *= require pure
- *= require_tree .
- */
+@import "compass";
+@import "bootstrap";
+@import "pure";
+@import "angular-ui";
+@import "application/base";
+@import "application/framework_and_overrides";
+@import "application/modules/*";
+@import "application/partials/*";

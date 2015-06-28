@@ -1,44 +1,17 @@
-<% if user_signed_in? %>
-    <%# navigation styled for Bootstrap 3.0 %>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <b><a href="/" class="navbar-brand">Brand name</a></b>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <%= render 'layouts/navigation_links' %>
-                </ul>
-            </div>
+<div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+    <% if user_signed_in? %>
+        <div class="profile-picture">
+            <!--<img class="pure-img" src="{{ current_user.avatar.image_video_thumb_url }}" href="#">-->
+            <img class="pure-img" src="default-avatar.png" href="#">
         </div>
-    </nav>
-<% else %>
-    <%# Navigation bar for non signed_in users %>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <b><a href="#" class="navbar-brand">Brand name</a></b>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/users/sign_in">Sign in</a></li>
-                    <li><a href="/users/sign_up">Sign up</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-<% end %>
+
+        <a href="#" ng-click="sign_out()" ng-controller="SessionCtrl" class="sign-out">Sign out</a>
+    <% end %>
+
+    <a class="pure-menu-heading" href="/">F i t t e r</a>
+</div>
+
+
+
 
 

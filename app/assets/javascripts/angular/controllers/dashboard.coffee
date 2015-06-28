@@ -10,7 +10,6 @@ angular.module('Fit')
 				(response) ->
 					$scope.feed = response
 				(error) ->
-# Handle error
 			)
 
 			UserService.query(
