@@ -1,6 +1,6 @@
 header .home-menu {
 	z-index: 2;
-	background-color: #43c6db;
+	background-color: $main-blue-color;
 	height: 55px;
 	font-family: "Myriad Pro";
 	font-size: 25px;
@@ -13,16 +13,13 @@ header .home-menu {
 			text-decoration: none;
 			cursor: pointer;
 		}
-
 	}
-
 	.sign-out {
 		text-decoration: none;
 		cursor: hand;
 	}
-
 	.profile-picture {
-		background: $background-color;
+		background: $user-avatar-bg-color;
 		z-index: 3;
 		margin-top: 0.5em;
 		margin-left: 20%;

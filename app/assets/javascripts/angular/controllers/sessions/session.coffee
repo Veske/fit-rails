@@ -4,14 +4,7 @@ angular.module('Fit')
 	($scope, $location, $http, UserService, Common, SessionService, $window) ->
 		serverErrorHandler = Common.serverErrorHandler
 		$scope.remember_me = false
-		$scope.email = []
-		$scope.password = []
-		$scope.message = []
-		$scope.sessionService = []
 		$scope.current_user = []
-
-		$scope.init = ->
-			@userService = new UserService(serverErrorHandler)
 
 		$scope.init_current_user = (user) ->
 			$scope.current_user = user
@@ -19,21 +12,19 @@ angular.module('Fit')
 
 
 		$scope.sign_in = (isValid) ->
-			$scope.submitted = true
-			if isValid
-				SessionService.login({param: 'sign_in'}, user: {email: $scope.email, password: $scope.password},
-				(response)->
-					if response.error
-						console.log(response.error)
-					else
-						Common.update_current_user(response)
-						$window.location.href = '/'
-				)
+			console.log($scope.user)
+			if $scope.submitted == true
+				$scope.submitted = false
 			else
+				$scope.submitted = true
 
+			if isValid
+				session = new SessionService({param: 'sign_in'})
+				session.email = $scope.user.email
+				session.password = $scope.user.password
+				session.$login()
 
 		$scope.sign_out = ->
-			console.log(Common.get_current_user())
 			SessionService.logout({param: 'sign_out'}, {user: Common.get_current_user()}, (response)->
 				if response.error
 					console.log(response.error)
@@ -44,16 +35,10 @@ angular.module('Fit')
 		$scope.create = (isValid, param) ->
 			$scope.submitted = true
 			if isValid
-				UserService.create_user(user: {
-					name: $scope.name,
-					email: $scope.email,
-					password: $scope.password,
-					password_confirmation: $scope.password_confirmation
-				}, submit: 'Sign up', (response)->
-					console.log(response)
-				)
-			else
-# bad input
-
-
+				user = new UserService()
+				user.name = $scope.user.name
+				user.email = $scope.user.email
+				user.password = $scope.user.password
+				user.password_confirmation = $scope.user.password_confirmation
+				user.$create_user()
 ]

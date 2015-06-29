@@ -1,39 +1,40 @@
 <div class="form-canvas" ng-init="init()">
-	<form name="signInForm" class="login-form" ng-submit="sign_in(signInForm.$valid)" novalidate>
+	<form name="signInForm" ng-submit="sign_in(signInForm.$valid)" novalidate>
 		<a href="/users/sign_up" class="sign-up">Sign up</a>
 
-		<div class="form-group"
-		     ng-class="{ 'has-error' : ((signInForm.email.$invalid || !signInForm.email.$pristine) && submitted) }">
+		<div>
 			<input id="user_email"
-			       type="email"
+			       ng-model="user.email"
 			       class="form-input"
+			       ng-class="{ 'has-error' : ((signInForm.email.$invalid && signInForm.email.$pristine) && submitted) }"
+			       type="email"
 			       placeholder="Enter your email"
 			       autofocus="autofocus"
-			       name="user[email]"
-			       ng-model="email"
+			       name="email"
 			       autocomplete="on"
 			       required/>
 
-			<p ng-show="signInForm.email.$invalid" class="help-block">Please enter a valid email.</p>
+			<p ng-show="(!signInForm.email.$valid && signInForm.email.$pristine) && submitted"
+			   class="help-block">Please enter a valid email.</p>
 		</div>
 
-		<div class="form-group"
-		     ng-class="{ 'has-error' : ((signInForm.password.$invalid || !signInForm.password.$pristine) && submitted) }">
+		<div>
 			<input id="user_password"
-			       type="password"
+			       ng-model="user.password"
 			       class="form-input"
-			       ng-model="password"
-			       name="user[password]"
+			       ng-class="{ 'has-error' : ((signInForm.password.$invalid && signInForm.password.$pristine) && submitted) }"
+			       type="password"
+			       name="password"
 			       placeholder="Password"
 			       autocomplete="off"
 			       required/>
 
-			<p ng-show="signInForm.password.$pristine" class="help-block">Please enter a password.</p>
+			<p ng-show="signInForm.password.$pristine && submitted" class="help-block">Please enter a password.</p>
 		</div>
 
-		<input type="submit" value="Login"/>
+		<input type="submit" value="Login" class="submit"/>
 
-		<div class="pure-g bottom-form">
+		<div class="pure-g form-footer">
 			<div class="pure-u-1-3">
 				<label for="user_remember_me">Remember me</label>
 			</div>

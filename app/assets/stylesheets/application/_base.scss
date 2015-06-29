@@ -1,9 +1,17 @@
 // Base css code
+body {
+	background-color: $page-background-color;
+}
+
 .main {
 	z-index: 1;
+	padding-left: 5em;
+	padding-right: 5em;
 }
 
 // Color placeholders in input forms
 input {
 	@include placeholder(gray, 16px);
 }
+
+

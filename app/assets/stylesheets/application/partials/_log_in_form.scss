@@ -1,87 +1,85 @@
 // Style for log-in form
-.form-canvas {
-	background: #f5f5f5;
+div.form-canvas {
+	//background: #f5f5f5;
 	padding-top: 5em;
 	min-height: 500px;
 	width: 100%;
-	.login-form {
-		.sign-up {
-			margin: 0 auto;
-			max-width: 350px;
-			text-align: right;
+
+	input.form-input {
+		display: block;
+		width: 22em;
+		height: 35px;
+		margin: 1em auto;
+		padding: 5px;
+		font-size: 16px;
+		//background-color: $input-bg-color;
+		border: 2px solid $input-border-color;
+		transition: all 0.3s ease;
+		@include border-radius(5px);
+		&:focus {
+			border: 2px solid $main-blue-color
+		}
+	}
+	input.has-error {
+		border: 2px solid $input-border-error-color;
+		&:focus {
+			border: 2px solid $input-border-error-color;
+		}
+	}
+	input.submit {
+		display: block;
+		background: $main-blue-color;
+		width: 356px;
+		padding: 12px;
+		cursor: pointer;
+		color: $input-border-color;
+		border: 0;
+		margin: 1em auto;
+		font-size: 17px;
+		transition: all 0.3s ease;
+		@include border-radius(5px);
+
+		&:hover {
+			background: $main-blue-color-light;
+		}
+	}
+	.form-footer {
+		width: 356px;
+		margin: 2em auto;
+		input, label {
+			max-width: 118px;
+			display: block;
+			text-align: left;
+		}
+		input {
+			float: left;
+		}
+		a {
+			max-width: 118px;
+			text-align: center;
 			font-family: Arial, sans-serif;
 			color: gray;
 			display: block;
 			text-decoration: none;
 			transition: all 0.3s ease;
-			font-size: 16px;
+			font-size: 12px;
 			&:hover {
-				color: #1abc9d;
+				color: $main-blue-color;
 			}
 		}
-		.has-error .form-input {
-			border: 2px solid $input-border-error-color;
-			&:focus {
-				border: 2px solid $input-border-error-color;
-			}
+	}
+	a.sign-up {
+		margin: 0 auto;
+		max-width: 350px;
+		text-align: right;
+		font-family: Arial, sans-serif;
+		color: gray;
+		display: block;
+		text-decoration: none;
+		transition: all 0.3s ease;
+		font-size: 16px;
+		&:hover {
+			color: $main-blue-color;
 		}
-		.form-input {
-			display: block;
-			width: 350px;
-			height: 35px;
-			margin: 1em auto;
-			background: $input-border-color;
-			padding: 5px;
-			font-size: 16px;
-			border: 2px solid $input-border-color;
-			transition: all 0.3s ease;
-			@include border-radius(5px);
-			&:focus {
-				border: 2px solid #1abc9d
-			}
-		}
-		input[type="submit"] {
-			display: block;
-			background: #1abc9d;
-			width: 356px;
-			padding: 12px;
-			cursor: pointer;
-			color: $input-border-color;
-			border: 0;
-			margin: 1em auto;
-			font-size: 17px;
-			transition: all 0.3s ease;
-			@include border-radius(5px);
-
-			&:hover {
-				background: #09cca6
-			}
-		}
-		.bottom-form {
-			width: 356px;
-			margin: 2em auto;
-			input, label {
-				max-width: 118px;
-				display: block;
-				text-align: left;
-			}
-			input {
-				float: left;
-			}
-			a {
-				max-width: 118px;
-				text-align: center;
-				font-family: Arial, sans-serif;
-				color: gray;
-				display: block;
-				text-decoration: none;
-				transition: all 0.3s ease;
-				font-size: 12px;
-				&:hover {
-					color: #1abc9d;
-				}
-			}
-		}
-
 	}
 }
