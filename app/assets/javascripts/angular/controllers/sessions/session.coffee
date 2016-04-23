@@ -10,7 +10,6 @@ angular.module('Fit')
 			$scope.current_user = Auth.currentUser()
 
 		$scope.sign_in = (isValid) ->
-			console.log($scope.user)
 			if $scope.submitted == true
 				$scope.submitted = false
 			else
