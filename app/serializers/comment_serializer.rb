@@ -1,8 +1,10 @@
 class CommentSerializer < ActiveModel::Serializer
+
 	attributes :id,
 	           :text,
-	           :user_id,
-	           :medium_id
+	           :medium_id,
+	           :user
 
-	has_one :user
+	has_one :medium
+	has_one :user, serializer: UserSimpleSerializer
 end

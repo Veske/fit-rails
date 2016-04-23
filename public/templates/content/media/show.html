@@ -1,4 +1,4 @@
-<div class="container container-medium-view" ng-init="init()">
+<div class="container container-medium-view">
 	<div class="row">
 		<div class="col-md-6 medium-view-row">
 			<img ng:src="{{ medium.image_video_croppable_url }}" alt="{{ medium.text }}" />
@@ -6,21 +6,21 @@
 
 		<div class="col-md-6 medium-view-row">
 			<div class="row">
-				<p>{{ medium.text }} by</p>
-
 				<div ng-if="avatar">
 					<img ng-src="{{ avatar.image_video_thumb_url }}" alt="{{ avatar.text }}" class="thumbnail"
 					     align="left"/>
 				</div>
 
 				<div ng-if="!avatar">
-					<img src="default-avatar.png" alt="default avatar" class="thumbnail">
+					<img src="default-avatar.png" alt="default avatar" class="thumbnail" align="left">
 				</div>
 				<a href="/users/{{ medium.user.id }}">{{ medium.user.name }}</a>
+
+				<p>{{ medium.text }}</p>
 			</div>
 
 			<div class="row">
-				<div id="likes" ng-controller="LikeFormCtrl" ng-init="init()">
+				<div id="likes" ng-controller="LikeFormCtrl">
 					<div ng-switch="userHasLiked">
 						<div ng-switch-when="false">
 							<div ng-include="templates[2].url"></div>
@@ -38,8 +38,7 @@
 				</div>
 
 				<div class="medium-view-comments" ng-include="templates[0].url"></div>
-				<div class="medium-view-comments-new" ng-include="templates[1].url" ng-controller="CommentsFormCtrl"
-				     ng-init="init()"></div>
+				<div class="medium-view-comments-new" ng-include="templates[1].url"></div>
 			</div>
 		</div>
 	</div>

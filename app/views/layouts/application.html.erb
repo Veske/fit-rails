@@ -2,33 +2,25 @@
 <html lang="en" ng-app="Fit">
 <head>
     <base href="/">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= content_for?(:title) ? yield(:title) : "Example" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Example" %>">
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
 </head>
 
-
-<%#  Load current user into js variable for global use %>
-<% if current_user %>
-    <script>
-	    var current_user = <%=raw current_user.to_json %>
-    </script>
-<% end %>
-
 <body>
 	<%# Load current user into Angular session service %>
-	<div ng-controller="SessionCtrl" ng-init="init_current_user(<%= current_user.to_json %>)"></div>
+	<div ng-controller="SessionCtrl" ng-init="init_current_user(<%= current_user.to_json %>)">
 	<header>
 	    <%= render 'layouts/navigation' %>
 	</header>
 
 	<main role="main">
-	    <%= render 'layouts/messages' %>
 	    <%= yield %>
 	</main>
+	</div>
+	<%= javascript_include_tag 'application' %>
 </body>
 </html>

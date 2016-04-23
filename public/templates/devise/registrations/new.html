@@ -1,28 +1,82 @@
-<div ng-init="init()" class="authform container">
-	<h3>New user</h3>
+<div class="form-canvas" ng-init="init()">
+	<form name="userCreateForm" ng-submit="create(userCreateForm.$valid)" novalidate>
+		<a href="/users/sign_in" class="sign-up">Sign in</a>
 
-	<form>
-		<div class="form-group">
-			<a href="/users/sign_in" class="right">Sign in</a>
-			<label>Name</label>
-			<input type="text" name="name" ng-model="user.name" autofocus="true" class="form-control">
+		<div>
+			<input id="name"
+			       type="text"
+			       class="form-input"
+			       placeholder="Name"
+			       autofocus="autofocus"
+			       name="name"
+			       autocomplete="on"
+			       ng-model="user.name"
+			       ng-class="{ 'has-error' : userCreateForm.name.$pristine && submitted }"
+			       required>
+
+			<p ng-show="userCreateForm.name.$pristine && submitted"
+			   class="help-block">Please enter a name.</p>
 		</div>
 
-		<div class="form-group">
-			<label>Email</label>
-			<input type="email" name="email" ng-model="user.email" class="form-control">
+
+		<div>
+			<input id="email"
+			       type="email"
+			       class="form-input"
+			       placeholder="Email"
+			       name="email"
+			       ng-model="user.email"
+			       ng-class="{ 'has-error' : ((userCreateForm.email.$invalid && userCreateForm.email.$pristine) && submitted) }"
+			       autocomplete="on"
+			       required/>
+
+			<p ng-show="(!userCreateForm.email.$valid && userCreateForm.email.$pristine) && submitted"
+			   class="help-block">Please enter a valid email.</p>
 		</div>
 
-		<div class="form-group">
-			<label>Password</label>
-			<input type="password" name="password" ng-model="user.password" class="form-control">
+		<div>
+			<input id="password"
+			       ng-model="user.password"
+			       class="form-input"
+			       ng-class="{ 'has-error' : ((userCreateForm.password.$invalid && userCreateForm.password.$pristine) && submitted) }"
+			       type="password"
+			       name="password"
+			       placeholder="Password"
+			       autocomplete="off"
+			       required/>
+
+			<p ng-show="userCreateForm.password.$pristine && submitted"
+			   class="help-block">Please enter a password.</p>
 		</div>
 
-		<div class="form-group">
-			<label>Password confirmation</label>
-			<input type="password" name="password_confirmation" ng-model="user.password_confirmation"
-			       class="form-control">
+		<div>
+			<input id="password_confirmation"
+			       ng-model="user.password_confirmation"
+			       class="form-input"
+			       ng-class="{ 'has-error' : ((userCreateForm.password_confirmation.$invalid && userCreateForm.password_confirmation.$pristine) && submitted) }"
+			       type="password"
+			       name="password_confirmation"
+			       placeholder="Password confirmation"
+			       required/>
+
+			<p ng-show="userCreateForm.password_confirmation.$pristine && submitted"
+			   class="help-block">Please confirm your password.</p>
 		</div>
-		<button class="button" ng-click="create(user)">Register</button>
+
+		<input class="submit" type="submit" value="Login"/>
+
+		<div class="pure-g form-footer">
+			<div class="pure-u-1-3">
+				<label for="user_remember_me">Remember me</label>
+			</div>
+
+			<div class="pure-u-1-3">
+				<input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me" ng-model="remember_me"/>
+			</div>
+
+			<div class="pure-u-1-3">
+				<a href="/users/password/new">Lost your password?</a>
+			</div>
+		</div>
 	</form>
 </div>

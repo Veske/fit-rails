@@ -1,4 +1,5 @@
 class Comment < ActiveRecord::Base
+
 	belongs_to :user
 	belongs_to :medium
 
@@ -19,5 +20,21 @@ class Comment < ActiveRecord::Base
 	def check_bad_words
 		bad_words ||= File.read('lib/lexicon/badwords.txt').split
 		errors.add :text, "#{text} is a protected word. Please try another." if bad_words.include? text
+	end
+
+	def image_video_file_name
+		#lplp
+	end
+
+	def image_video_croppable_url
+		#image_video.url(:croppable)
+	end
+
+	def image_video_thumb_url
+		#image_video.url(:thumb)
+	end
+
+	def image_video_big_url
+		#image_video.url(:big)
 	end
 end

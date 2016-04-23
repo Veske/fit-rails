@@ -1,4 +1,4 @@
-<div class="container" ng-init="init()">
+<div class="container">
     <div ng-if="notify">
         <growl-notification>
             {{ message }}
@@ -12,7 +12,7 @@
 	    </td>
 	    <td>
 		    <form novalidate class="simple-form">
-			    <label for="count">Role:</label>
+			    <label>Role:</label>
 			    <select ng-model="selectedRole" ng-options="role.name for role in roles">
 				    <option value=""> Current role: {{ user.role }} </option>
 			    </select>

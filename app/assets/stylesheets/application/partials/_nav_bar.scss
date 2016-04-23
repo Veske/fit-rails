@@ -1,0 +1,38 @@
+header .home-menu {
+	z-index: 2;
+	background-color: $main-blue-color;
+	height: 55px;
+	font-family: "Myriad Pro";
+	font-size: 25px;
+	font-weight: bold;
+
+	.pure-menu-heading {
+		margin-left: 30%;
+		padding-top: 15px;
+		&:hover {
+			text-decoration: none;
+			cursor: pointer;
+		}
+	}
+	.sign-out {
+		text-decoration: none;
+		cursor: hand;
+	}
+	.profile-picture {
+		background: $user-avatar-bg-color;
+		z-index: 3;
+		margin-top: 0.5em;
+		margin-left: 20%;
+		position: fixed;
+		height: 100px;
+		width: 100px;
+		border-radius: 20px;
+		border: 8px solid #ffffff;
+		.pure-img {
+			border-radius: 10px;
+		}
+		.pure-img-scrolled {
+			height: 50px;
+		}
+	}
+}

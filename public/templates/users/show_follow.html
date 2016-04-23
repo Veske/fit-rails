@@ -1,9 +1,7 @@
-<div class="container" ng-init="init()">
+<div class="container">
 	<h1>{{ user.name }} Relationships</h1>
 
 	<div ng-repeat="user in users">
 		User name: <a href="/users/{{ user.id }}">{{ user.name }}</a>
 	</div>
 </div>
-
-

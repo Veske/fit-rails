@@ -1,27 +1,21 @@
-angular.module('Fit')
-.controller "LikeFormCtrl", [
-	'$scope',
-	'$routeParams',
-	'$http',
-	'LikeService',
-	'Common',
-	($scope, $routeParams, $http, LikeService, Common) ->
+@Fit.controller "LikeFormCtrl", [
+	'$scope', '$routeParams', 'LikeService', 'Common',
+	($scope, $routeParams, LikeService, Common) ->
 		$scope.like = []
 
-		$scope.init = ->
-			@likeService = new LikeService(serverErrorHandler)
-
 		$scope.newLike = (medium) ->
-			@likeService.create(medium, {'user_id': Common.get_current_user().id})
+			LikeService.like({id: $routeParams.id, user_id: Common.get_current_user.id},
+				(response) ->
+					medium.likes.push(user_id: response.id)
+			)
 
 		$scope.destroyLike = (medium) ->
-			for key, like of medium.likes
-				if like.user_id == Common.get_current_user().id then $scope.like = like
-			@likeService.delete($scope.like, medium, $routeParams.id)
+			for i, like of medium.likes
+				if like.user_id == Common.get_current_user().id then $scope.like = like.user_id
 
-		serverErrorHandler = ->
-			alert("There was a server error, please reload the page and try again.")
-
-		successHandler = (like, medium) ->
-			medium.likes.push(like)
+			LikeService.unlike({id: $routeParams.id, like_id: $scope.like},
+				(response) ->
+					for i, like of medium.likes
+						if like.user_id == $scope.like then medium.likes.splice(i, 1)
+			)
 ]

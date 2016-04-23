@@ -3,7 +3,8 @@ class Content::LikesController < ApplicationController
 
 	def create
 		current_user.like!(params[:medium_id])
-		render json: 201
+		like = current_user
+		render json: like, status: 201
 	end
 
 	def destroy

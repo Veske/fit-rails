@@ -1,4 +1,4 @@
-<div ng-init="init()">
+<div>
 	<div ng-if="user.avatar">
 		<img ng-src="{{ user.avatar.image_video_thumb_url }}" alt="{{ user.avatar.text }}" class="thumbnail"/>
 	</div>
@@ -26,7 +26,7 @@
 		</a>
 	</div>
 
-	<div class="follow-form" ng-controller="FollowFormCtrl" ng-init="init()">
+<div class="follow-form" ng-controller="FollowFormCtrl">
 		<div ng-if="is_following">
 			<form>
 				<button class="btn btn-primary" ng-click="unFollow(user, followers)">Unfollow</button>

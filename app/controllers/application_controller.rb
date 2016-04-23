@@ -8,22 +8,11 @@ class ApplicationController < ActionController::Base
 
 	def go_back
 		#Attempt to redirect
-		redirect_to :back, :alert => "Access denied."
+		redirect_to :back, :alert => 'Access denied.'
 
 		#Catch exception and redirect to root
 		rescue ActionController::RedirectBackError
-		redirect_to root_path, :alert => "Access denied."
-	end
-
-	# Uses serializer to format data to json, when a proper serializer exists
-	def _render_with_renderer_json(json, options)
-		serializer = build_json_serializer(json, options)
-
-		if serializer
-			super(serializer, options)
-		else
-			super(json, options)
-		end
+		redirect_to root_path, :alert => 'Access denied.'
 	end
 
 	private

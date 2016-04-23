@@ -1,9 +1,9 @@
-module Like
+module LikeRedis
 	extend ActiveSupport::Concern
 
 	# ========= LIKE ============
-	# Methods that help forming likes with users and aid with
-	# queries involving likes between users
+	# Methods that help forming likes with media and aid with
+	# queries involving likes between media
 	#
 	# Likes use Redis. We add new like with sadd:
 	#
@@ -14,19 +14,19 @@ module Like
 	#  :likes is a medium with an ID, that can have many likers with user ID's
 	#
 
-	# Like a user
+	# Like a medium
 	def like!(medium_id)
 		$redis.sadd(redis_like_key(:likes, medium_id), self.id)
 	end
 
-	# Unlike a user
+	# Unlike a medium
 	def unlike!(medium_id)
 		$redis.srem(redis_like_key(:likes, medium_id), self.id)
 	end
 
-	# Users that self likes
-	def likes
-		user_ids = $redis.smembers("medium:#{self.id}:#{:likes}")
+	# Likes for self
+	def get_likes
+		$redis.smembers("medium:#{self.id}:#{:likes}")
 	end
 
 	# Helper method to generate redis keys

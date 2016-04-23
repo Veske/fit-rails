@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
-	include Relationship, Like, Avatar
+	include Relationship, Avatar, LikeRedis
 
 	enum role: [:user, :moderator, :admin]
 	validates :name, presence: true, length: {maximum: 50}
-	after_initialize :set_default_role, :if => :new_record?
+	after_initialize :set_default_role, if: :new_record?
 
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable
@@ -29,5 +29,9 @@ class User < ActiveRecord::Base
 	def feed
 		user_ids = $redis.smembers(self.redis_relationship_key(:following)) << id
 		Medium.includes([{comments: :user}, :user]).where(user_id: user_ids)
+	end
+
+	def get_avatar
+		Medium.find(self.current_avatar)[0]
 	end
 end

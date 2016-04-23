@@ -1,21 +1,17 @@
-angular.module('Fit')
-.controller "CommentsFormCtrl", [
-	'$scope',
-	'$routeParams',
-	'CommentService',
-	'Common',
+@Fit.controller 'CommentsFormCtrl', [
+	'$scope', '$routeParams', 'CommentService', 'Common',
 	($scope, $routeParams, CommentService, Common) ->
-		$scope.notify = false
+		$scope.text = []
 
-		$scope.init = ->
-			@commentService = new CommentService($routeParams.id, serverErrorHandler)
+		$scope.newComment = (isValid, medium) ->
+			if isValid
+				comment = new CommentService({medium_id: medium.id})
+				comment.text = $scope.text
+				comment.user_id = Common.get_current_user().id
+				comment.$save()
+				medium.comments.push(comment)
+				$scope.text = []
+				$scope.commentForm.$setPristine();
+				$scope.commentForm.$setUntouched();
 
-		$scope.newComment = (text, medium) ->
-			@commentService.create({ text: text, user_id: Common.get_current_user().id }, successHandler, medium, $scope)
-
-		successHandler = (comment, medium) ->
-			medium.comments.push(comment)
-
-		serverErrorHandler = ->
-			alert("There was a server error, please reload the page and try again.")
 ]

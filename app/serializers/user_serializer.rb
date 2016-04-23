@@ -1,13 +1,14 @@
 class UserSerializer < ActiveModel::Serializer
-    include Avatar
 
 	attributes :id,
                :name,
                :email,
-               :role,
-               :avatar
+               :role
+
+	has_many :media
+	has_one :avatar, serializer: AvatarSerializer
 
     def avatar
-        Medium.find(self.user_avatar)[0]
+		object.get_avatar
     end
 end
