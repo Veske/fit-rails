@@ -1,15 +1,13 @@
 angular.module('Fit')
 .controller "SessionCtrl", [
-	'$scope', '$location', '$http', 'UserService', 'Common', 'SessionService', '$window'
-	($scope, $location, $http, UserService, Common, SessionService, $window) ->
+	'$scope', '$location', '$http', 'UserService', 'Common', 'SessionService', '$window', 'Auth'
+	($scope, $location, $http, UserService, Common, SessionService, $window, Auth) ->
 		serverErrorHandler = Common.serverErrorHandler
 		$scope.remember_me = false
 		$scope.current_user = []
 
 		$scope.init_current_user = (user) ->
-			$scope.current_user = user
-			Common.update_current_user(user)
-
+			$scope.current_user = Auth.currentUser()
 
 		$scope.sign_in = (isValid) ->
 			console.log($scope.user)
@@ -19,17 +17,13 @@ angular.module('Fit')
 				$scope.submitted = true
 
 			if isValid
-				session = new SessionService({param: 'sign_in'})
-				session.email = $scope.user.email
-				session.password = $scope.user.password
-				session.$login()
+				Auth.login($scope.user).then((user) ->
+					console.log(user)
+				)
 
 		$scope.sign_out = ->
-			SessionService.logout({param: 'sign_out'}, {user: Common.get_current_user()}, (response)->
-				if response.error
-					console.log(response.error)
-				else
-					$window.location.href = '/'
+			Auth.logout().then((user) ->
+				console.log("Loggded out")
 			)
 
 		$scope.create = (isValid, param) ->

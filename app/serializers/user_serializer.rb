@@ -5,7 +5,7 @@ class UserSerializer < ActiveModel::Serializer
                :email,
                :role
 
-    has_many :media, :comments
+	has_many :media
 	has_one :avatar, serializer: AvatarSerializer
 
     def avatar

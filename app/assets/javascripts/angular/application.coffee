@@ -9,7 +9,8 @@
 # Include all Angular modules
 @Fit = angular.module('Fit', [
 	'ngRoute',
-	'ngResource'
+	'ngResource',
+	'Devise'
 ])
 
 # Set metadata for $httpProvider

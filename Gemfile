@@ -2,15 +2,15 @@ source 'http://rubygems.org'
 
 # Environment versions. These versions will be used for main development
 # Make sure your own environment contains the same versions of Ruby and Ruby on Rails
-ruby '2.2.2'
-gem 'rails', '4.2.3'
+ruby '2.3.0'
+gem 'rails', '4.2.6'
 
 # Gems for assets
-gem 'sass-rails', '~> 5.0.1'
+gem 'sass-rails'
 gem 'coffee-rails'
 gem 'sprockets'
-gem 'compass', '1.0.3'
-gem 'compass-rails', '2.0.4'
+gem 'compass'
+gem 'compass-rails'
 
 # Database gems
 gem 'pg'
@@ -22,10 +22,10 @@ gem 'passenger'
 
 # Common gems
 gem 'quiet_assets'
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 gem 'turbolinks'
-gem 'jbuilder', '~> 2.2.11'
-gem 'sdoc', '~> 0.4.1', group: :doc
+gem 'jbuilder'
+gem 'sdoc', group: :doc
 gem 'devise'
 gem 'paperclip'
 gem 'active_model_serializers', '~> 0.10.0.rc2'
