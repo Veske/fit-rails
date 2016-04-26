@@ -4,8 +4,8 @@ Fit-rails application
 Environment
 --------------
 
-**Ruby**:  2.2.0
-**Rails**: 4.2.0
+**Ruby**:  2.3.0
+**Rails**: 4.2.6
 
 Required programs
 --------------

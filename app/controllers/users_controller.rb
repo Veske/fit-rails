@@ -85,7 +85,7 @@ class UsersController < ApplicationController
 		end
 
 		def secure_params
-			if current_user && current_user.admin?
+			if current_user&.admin?
 				params.require(:user).permit(:role, :name, :email, :password, :password_confirmation, :current_password)
 			else
 				params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password)
