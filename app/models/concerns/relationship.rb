@@ -5,14 +5,14 @@ module Relationship
 	# Methods that help forming relationships with users and aid with
 	# queries involving relationships between users
 	#
-	# Relationship use Redis. We add new relationships with sadd:
+	# Relationships use Redis. We add new relationships with sadd:
 	#
 	#   sadd:	Add member to the set stored at key. If member is already a member of this set,
-	#           no operation is performed. If key does not exist, a new set is created with
-	#           member as its sole member.
+	#           	no operation is performed. If key does not exist, a new set is created with
+	#           	member as its sole member.
 
 	# Follow a user
-	# TODO: No need for excess database queries, use like.rb as an example to use just one user querie
+	# TODO: No need for excess database queries, use like.rb as an example to use just one user query
 	def follow!(user)
 		# TODO: throw error when redis transaction fails
 		unless self.id == user.id

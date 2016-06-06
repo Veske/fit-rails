@@ -22,4 +22,3 @@
 		$httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
 		$httpProvider.interceptors.push 'InterceptorService'
 ]
-
